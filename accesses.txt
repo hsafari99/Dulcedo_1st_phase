@@ -1,0 +1,66 @@
+
+****************************************************************************************
+
+PAGES WEB PUBLIQUES
+
+****************************************************************************************
+
+Le formulaire d'applicant app
+http://s381680469.onlinehome.us/dulcedo_application_form/
+
+Le formulaire d'applicant app - backend
+http://s381680469.onlinehome.us/dulcedo_application_form/index.php?p=user.connect
+user: admin
+password: admin
+
+Model search app - backend
+http://s381680469.onlinehome.us/dulcedo_modelsearch/?p=admin.login&msg=noevent
+user: admin
+password: admin
+
+
+****************************************************************************************
+
+APPLICATIONS INTERNES
+
+****************************************************************************************
+
+http://s381680469.onlinehome.us/dulcedo_application_form/  
+
+SFTP
+Protocol: SFTP
+Server / Host: home381680452.1and1-data.host
+Port: 22
+User name: u65373896-daf
+Password: @7/e!6'hF|L?=?p
+
+Base de donées:
+Description: Dulcedo internal application form (2017)
+Host name: db667818472.db.1and1.com
+Port: 3306
+Database Name: db667818472
+User name: dbo667818472
+Password: D5Uph=crER=4
+
+****************************************************************************************
+
+APPLICATIONS LORS D'ÉVÉNEMENTS
+
+****************************************************************************************
+
+http://s381680469.onlinehome.us/dulcedo_modelsearch/?p=admin.login&msg
+
+SFTP
+Protocol: SFTP
+Server / Host: home381680452.1and1-data.host
+Port: 22
+User name: u65373896-msa
+Password: K4Csdc$v_22%3
+
+Base de donées:
+Description: db682016881 (Model Search Application)
+Host name: db682016881.db.1and1.com
+Port: 3306
+Database Name: db682016881
+User name: dbo682016881
+Password: c6q%7Mv?j6A?
