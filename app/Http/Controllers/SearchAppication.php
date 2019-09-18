@@ -24,12 +24,56 @@ class SearchAppication extends Controller
         ]);
     }
 
+    //This function will return the application information through the Ajax to the modal
+    public function getApplicationById(Request $request){
+        $app_id = $request->input('application_id');
+        
+        $app_info = [
+            'scout_id' => Application::where("_id", $app_id)->first()['scout_id'],
+            'votes' => Application::where("_id", $app_id)->first()['votes'],
+            'step_id' => Application::where("_id", $app_id)->first()['step_id'],
+            'source_id' => Application::where("_id", $app_id)->first()['source_id'],
+            'source_note' => Application::where("_id", $app_id)->first()['source_note'],
+            'event_id' => Application::where("_id", $app_id)->first()['event_id'],
+            'office_id' => Application::where("_id", $app_id)->first()['office_id'],
+            'gender' => Application::where("_id", $app_id)->first()['gender'],
+            'eye_color' => Application::where("_id", $app_id)->first()['eye_color'],
+            'hair_color' => Application::where("_id", $app_id)->first()['hair_color'],
+            'height' => Application::where("_id", $app_id)->first()['height'],
+            'waist' => Application::where("_id", $app_id)->first()['waist'],
+            'bust' => Application::where("_id", $app_id)->first()['bust'],
+            'hips' => Application::where("_id", $app_id)->first()['hips'],
+            'neck' => Application::where("_id", $app_id)->first()['neck'],
+            'sleeve' => Application::where("_id", $app_id)->first()['sleeve'],
+            'dress' => Application::where("_id", $app_id)->first()['dress'],
+            'shoe' => Application::where("_id", $app_id)->first()['shoe'],
+            'inseam' => Application::where("_id", $app_id)->first()['inseam'],
+            'networks' => Application::where("_id", $app_id)->first()['networks'],
+            'answers' => Application::where("_id", $app_id)->first()['answers'],
+            'contact_id' => Application::where("_id", $app_id)->first()['contact_id'],
+            'guardian_id' => Application::where("_id", $app_id)->first()['guardian_id'],
+            'guardian_relation' => Application::where("_id", $app_id)->first()['guardian_relation'],
+            'citizenships' => Application::where("_id", $app_id)->first()['citizenships'],
+            'can_work_in' => Application::where("_id", $app_id)->first()['can_work_in'],
+            'note' => Application::where("_id", $app_id)->first()['note'],
+            'updated_at' => Application::where("_id", $app_id)->first()['updated_at'],
+            'created_at' => Application::where("_id", $app_id)->first()['created_at'],
+        ];
+        $myJSON = json_encode($app_info);
+        echo ($myJSON);
+    }
+
     //This function will return the scount information through the Ajax to the modal
     public function getEventById(Request $request){
         $application_id = $request->input('application_id');
-
-        //Application::find("_id", [$application_id])->event()->name;
-        echo (Application::find("_id", [$application_id]));
+        $event = [
+            'name'          => Application::find($application_id)->event->name,
+            'description'   => Application::find($application_id)->event->description,
+            'creation_date' => Application::find($application_id)->event->created_at,
+            'last_update'   => Application::find($application_id)->event->updated_at,
+        ];
+        $myJSON = json_encode($event);
+        echo ($myJSON);
 
     }
 
@@ -62,9 +106,14 @@ class SearchAppication extends Controller
        }
     }
 
-    //This function with search the contacts database for extracting the reults matching the given 
-    //search criterias. It will return the array of the contactsIDs 
+
+    /**
+    This function with search the contacts database for extracting the reults matching the given 
+    search criterias. It will return the array of the contactsIDs 
+    */
     public function searchApplication(Request $request){
+        // $app_id = $request->input('firstName');
+        // dd(Application::find('5d7f969512b9ae0d94004bf2')->event->name);
         // dd(Step::all());
         
         $firstname = $request->input('firstName');

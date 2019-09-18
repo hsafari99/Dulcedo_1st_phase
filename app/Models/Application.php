@@ -37,4 +37,9 @@ class Application extends Model
     public function network() {
         return $this->embedsMany('App\Models\Network');
     }
+
+    public function event()
+    {
+        return $this->belongsTo('App\Models\Event');
+    }
 }

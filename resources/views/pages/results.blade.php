@@ -38,12 +38,8 @@
                                         <td width='18%' name='{{ $pplication['applicationId'] }}' class= 'event align-middle'>{{ $pplication['event_name'] }}</td>
                                         <td width='18%' class= 'align-middle'>{{ $pplication['applicationStatus'] }}</td>
                                         <td width='28%'  class= 'align-middle'>
-                                        <button type="button" class="btn btn-warning m-1 px-3" data-toggle="modal" data-target="#myModal">
-                                                Edit
-                                        </button> 
-                                        <button type="button" class="btn btn-danger m-1 px-2" data-toggle="modal" data-target="#myModal">
-                                                Delete
-                                        </button>
+                                        <button type="button" class="btn btn-warning m-1 px-3 editBtn" name="{{ $pplication['applicationId'] }}">Edit</button> 
+                                        <button type="button" class="btn btn-danger m-1 px-2 deleteBtn" name="{{ $pplication['applicationId'] }}">Delete</button>
                                         </td>
                                 </tr>
                         </table>
@@ -88,18 +84,9 @@ $('.applicant').click(function(e){
         }  
     });
 });
-$('document').ready(function(){
-        $('#crossbtn').click(function(){
-                $('#myModal').fadeOut(3000);   
-        });
 
-        $('#closebtn').click(function(){
-                $('#myModal').hide(3000);    
-        });  
-});
-
-// ======================================= >> SCOUT SECTION << ======================================= 
-// Retrieve the scout information through the Ajax and populate the relevant modal
+// ======================================= >> Event SECTION << ======================================= 
+// Retrieve the event information through the Ajax and populate the relevant modal
 $('.event').click(function(e){
     var event =  $(e.target).attr('name');
 
@@ -113,15 +100,90 @@ $('.event').click(function(e){
            application_id: event     
         } , 
         success: function(result){
-            console.log((result));    
+                var test = JSON.parse(result);
+                $('#ModalEventName').text(test.name);  
+                $('#ModalEventDesc').text(test.description);
+                $('#ModalEventCrAt').text(test.creation_date);
+                $('#ModalEventlstUpAt').text(test.last_update);
+
+                $('#eventModal').show();
+
         }  
     });
 });
-$('document').ready(function(){
- 
+
+
+// ======================================= >> Application SECTION << ======================================= 
+// Retrieve the application information through the Ajax and populate the relevant modal and enable the user
+//  to edit the contents.
+$('.editBtn').click(function(e){
+    var application =  $(e.target).attr('name');
+
+    $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/application",
+        method: 'POST',
+        data: {
+           application_id: application     
+        } , 
+        success: function(result){
+                var test = JSON.parse(result);
+                $('#scoutedBy').val(test.scout_id);  
+                // $('#ModalEventDesc').text(test.description);
+                // $('#ModalEventCrAt').text(test.creation_date);
+                // $('#ModalEventlstUpAt').text(test.last_update);
+
+                $('#appModal').show();
+
+        }  
+    });    
+
 });
 
+$('document').ready(function(){
+        $('.crossbtn').click(function(){
+                $('#myModal').fadeOut(3000);
+                $('#eventModal').fadeOut(3000);   
+        });
+
+        $('.closebtn').click(function(){
+                $('#myModal').hide(3000); 
+                $('#eventModal').hide(3000);   
+        });  
+});
 </script>
+
+{{--  <!-- The Modal for showing the application information and let the user modify it. -->  --}}
+<div class="modal" id="appModal">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-info">
+        <h5 class="modal-title">Editing the application information</h5>
+        <button type="button" class="close notEdit" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;">
+        <form>
+           <div class="input-group mb-3">
+               <div class="input-group-prepend">
+                   <span class="input-group-text">Scouted By:</span>
+               </div>
+               <input type="text" class="form-control" value="test" id="scoutedBy" disabled>
+           </div>     
+        </form>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer bg-info">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {{--  =========================================>> Modals <<=========================================  --}}
 {{--  <!-- The Modal for showing the application (talent) information-->  --}}
 <div class="modal" id="myModal">
@@ -131,7 +193,7 @@ $('document').ready(function(){
       <!-- Modal Header -->
       <div class="modal-header bg-info">
         <h5 class="modal-title">Applicant Information</h5>
-        <button type="button" class="close" data-dismiss="modal"  id="crossbtn">&times;</button>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
       </div>
       <!-- Modal body -->
       <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;">
@@ -150,11 +212,37 @@ $('document').ready(function(){
 
       <!-- Modal footer -->
       <div class="modal-footer bg-info">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" id="closebtn">Close</button>
+        <button type="button" class="btn btn-danger closebtn" data-dismiss="modal">Close</button>
       </div>
 
     </div>
   </div>
 </div>
 
+{{--  <!-- The Modal for showing the event information-->  --}}
+<div class="modal" id="eventModal">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-info">
+        <h5 class="modal-title">Event Information</h5>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;">
+        <div class="font-weight-bold pl-2">Event Name: <span id='ModalEventName' class="font-weight-normal"></span></div>
+        <div class="font-weight-bold pl-2">Description: <p id='ModalEventDesc' class="font-weight-normal d-inline"></p></div>
+        <div class="font-weight-bold pl-2">Date of Creation: <span id='ModalEventCrAt' class="font-weight-normal"></span></div>
+        <div class="font-weight-bold pl-2">Last Update: <span id='ModalEventlstUpAt' class="font-weight-normal"></span></div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer bg-info">
+        <button type="button" class="btn btn-danger closebtn" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 @endSection
