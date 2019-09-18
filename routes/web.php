@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/applicant', 'SearchAppication@getContactById');
     Route::post('/event', 'SearchAppication@getEventById');
     Route::get('/results', 'SearchAppication@showResults');
+    Route::post('/application', 'SearchAppication@getApplicationById');
 });
 
 //routes for the admins
