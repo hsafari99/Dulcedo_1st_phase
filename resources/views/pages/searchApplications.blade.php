@@ -27,14 +27,14 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
 				</div>
-				<input type="text" class="form-control" name="firstName">
+				<input type="text" class="form-control" name="firstName" id="firstname">
             </div>
             {{--  Search By Last Name  --}}
             <div class="input-group mb-2">
 				<div class="input-group-prepend">
 					<span class="input-group-text d-block new_talent_subscription_form">Last Name:</span>
 				</div>
-				<input type="text" class="form-control" name="lastName">
+				<input type="text" class="form-control" name="lastName" id="lastname">
             </div>
             {{--  Search By Email  --}}
             <div class="input-group mb-2">
@@ -104,5 +104,38 @@
     
 </div>
 
+
+<script>
+
+//Retrieve the list of the firstnames match what is types in the firstname input tag
+$('document').ready(function(){
+   $('#firstname').keydown(function(e){
+      if ($('#firstname').empty()) {
+         var test = $('#firstname').val();
+         var arlene2 = new Array("First element", "Second", "Last");
+
+         $('#firstname').text(arlene2);
+
+      //    $.ajax({
+      //    headers: {
+      //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //    },
+      //    url: "/getValues",
+      //    method: 'POST',
+      //    data: {
+      //       application_id: test     
+      //    } , 
+      //    success: function(result){
+
+
+      //    }  
+      // });
+      }
+   });
+
+});
+
+
+</script>
 
 @endsection

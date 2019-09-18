@@ -129,14 +129,65 @@ $('.editBtn').click(function(e){
            application_id: application     
         } , 
         success: function(result){
-                var test = JSON.parse(result);
-                $('#scoutedBy').val(test.scout_id);  
-                // $('#ModalEventDesc').text(test.description);
-                // $('#ModalEventCrAt').text(test.creation_date);
-                // $('#ModalEventlstUpAt').text(test.last_update);
-
-                $('#appModal').show();
-
+          var test = JSON.parse(result);
+          
+          $('#scoutedBy').text(test.scout_id);  
+          $('#votes').text(test.votes);
+          $('#stepId').text(test.step_id);
+          $('#source').text(test.source_id);
+          $('#source_note').text(test.source_note);
+          $('#eventID').text(test.event_id);
+          $('#officeID').text(test.office_id);
+          $('#gender').text(test.gender == 'f'? 'Female': 'Male');
+          $('#eye_color').text(test.eye_color);
+          $('#hair_color').text(test.hair_color);
+          $('#height').text(test.height);
+          $('#waist').text(test.waist);
+          $('#bust').text(test.bust);
+          $('#hips').text(test.hips);
+          $('#neck').text(test.neck);
+          $('#sleeve').text(test.sleeve);
+          $('#dress').text(test.dress);
+          $('#shoe').text(test.shoe);
+          $('#inseam').text(test.inseam);
+          $.each(test.networks, function(index, value){
+            var fontAwsome;
+              switch (value.toLowerCase()) {
+                case 'youtube':
+                  fontAwsome = '<i style="font-size: 25px;" class="fab fa-youtube-square text-danger"></i>';
+                break;
+                case 'tweeter':
+                  fontAwsome = '<i style="font-size: 25px;" class="fab fa-twitter-square text-info"></i>';
+                break;
+                case 'instagram':
+                  fontAwsome = '<i style="font-size: 25px;" class="fab fa-instagram text-danger"></i>';
+                break;
+                case 'linkedin':
+                  fontAwsome = '<i style="font-size: 25px;" class="fab fa-linkedin text-info"></i>';
+                break;
+                case 'facebook':
+                  fontAwsome = '<i style="font-size: 25px;" class="fab fa-facebook-square text-info"></i>';
+                break;
+                default:
+                  fontAwsome = '<i style="font-size: 25px;" class="fas fa-question-circle text-danger"></i>';
+                  break;
+              }
+              $('#networks').children('ul').append("<li>"+fontAwsome+" "+value+"</li>");    
+          });
+          $.each(test.answers, function(index, value){
+            $('#answers').children('ul').append("<li>"+value+"</li>");    
+          });
+          $('#contact_id').text(test.contact_id);
+          $('#guardian_id').text(test.guardian_id);
+          $('#guardian_relation').text(test.guardian_relation);
+          $.each(test.citizenships, function(index, value){
+            $('#citizenships').children('ul').append("<li><i  style='font-size: 25px;' class='fas fa-flag text-warning'></i>"+" "+value+"</li>");    
+          });
+          $('#can_work_in').text(test.can_work_in);
+          $('#note').text(test.note);
+          $('#updated_at').text((test.updated_at).substring(0,10));
+          $('#created_at').text((test.created_at).substring(0,10));
+          $('#appModal').show();
         }  
     });    
 
@@ -145,16 +196,19 @@ $('.editBtn').click(function(e){
 $('document').ready(function(){
         $('.crossbtn').click(function(){
                 $('#myModal').fadeOut(3000);
-                $('#eventModal').fadeOut(3000);   
+                $('#eventModal').fadeOut(3000);
+                $('#appModal').fadeOut(3000);     
         });
 
         $('.closebtn').click(function(){
                 $('#myModal').hide(3000); 
-                $('#eventModal').hide(3000);   
+                $('#eventModal').hide(3000); 
+                $('#appModal').hide(3000);  
         });  
 });
 </script>
 
+{{--  =========================================>> Modals <<=========================================  --}}
 {{--  <!-- The Modal for showing the application information and let the user modify it. -->  --}}
 <div class="modal" id="appModal">
   <div class="modal-dialog" style="overflow-y: initial !important;">
@@ -163,28 +217,135 @@ $('document').ready(function(){
       <!-- Modal Header -->
       <div class="modal-header bg-info">
         <h5 class="modal-title">Editing the application information</h5>
-        <button type="button" class="close notEdit" data-dismiss="modal">&times;</button>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
       </div>
       <!-- Modal body -->
       <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;">
-        <form>
-           <div class="input-group mb-3">
-               <div class="input-group-prepend">
-                   <span class="input-group-text">Scouted By:</span>
-               </div>
-               <input type="text" class="form-control" value="test" id="scoutedBy" disabled>
-           </div>     
-        </form>
+        <div class="row">
+          <div class="col font-weight-bold">Scout_id:</div>
+          <div class="col" id="scoutedBy"></div>
+        </div> {{--  Scout ID --}}
+        <div class="row">
+          <div class="col font-weight-bold">Votes:</div>
+          <div class="col" id="votes"></div>
+        </div> {{--  Votes --}}
+        <div class="row">
+          <div class="col font-weight-bold">Status:</div>
+          <div class="col" id="stepId"></div>
+        </div> {{--  Step --}}
+        <div class="row">
+          <div class="col font-weight-bold">Source:</div>
+          <div class="col" id="source"></div>
+        </div> {{-- Source --}}
+        <div class="row">
+          <div class="col font-weight-bold">Source Note:</div>
+          <div class="col" id="source_note"></div>
+        </div> {{--  Source Note --}}
+        <div class="row">
+          <div class="col font-weight-bold">Event:</div>
+          <div class="col" id="eventID"></div>
+        </div>{{--  Event name --}}
+        <div class="row">
+          <div class="col font-weight-bold">Office:</div>
+          <div class="col" id="officeID"></div>
+        </div>{{--  Office --}}
+        <div class="row">
+          <div class="col font-weight-bold">Gender:</div>
+          <div class="col" id="gender"></div>
+        </div>{{--  Gender --}}
+        <div class="row">
+          <div class="col font-weight-bold">Eye Color:</div>
+          <div class="col" id="eye_color"></div>
+        </div>{{--  eye_color --}}
+        <div class="row">
+          <div class="col font-weight-bold">Hair Color:</div>
+          <div class="col" id="hair_color"></div>
+        </div>{{--  hair_color --}}
+        <div class="row">
+          <div class="col font-weight-bold">Height:</div>
+          <div class="col" id="height"></div>
+        </div> {{--  height --}}       
+        <div class="row">
+          <div class="col font-weight-bold">Waist:</div>
+          <div class="col" id="waist"></div>
+        </div>{{--  waist --}}
+        <div class="row">
+          <div class="col font-weight-bold">Bust:</div>
+          <div class="col" id="bust"></div>
+        </div>{{--  bust --}}
+        <div class="row">
+          <div class="col font-weight-bold">Hips:</div>
+          <div class="col" id="hips"></div>
+        </div>{{--  hips --}}
+        <div class="row">
+          <div class="col font-weight-bold">Neck:</div>
+          <div class="col" id="neck"></div>
+        </div>{{--  neck --}}
+        <div class="row">
+          <div class="col font-weight-bold">Sleeve:</div>
+          <div class="col" id="sleeve"></div>
+        </div>{{--  sleeve --}}
+        <div class="row">
+          <div class="col font-weight-bold">Dress:</div>
+          <div class="col" id="dress"></div>
+        </div>{{--  dress --}}
+        <div class="row">
+          <div class="col font-weight-bold">Shoe:</div>
+          <div class="col" id="shoe"></div>
+        </div>{{--  shoe --}}
+        <div class="row">
+          <div class="col font-weight-bold">Inseam:</div>
+          <div class="col" id="inseam"></div>
+        </div>{{--  inseam --}}
+        <div class="row">
+          <div class="col font-weight-bold">Networks:</div>
+          <div class="col" id="networks"><ul></ul></div>
+        </div>{{--  networks --}}
+        <div class="row">
+          <div class="col font-weight-bold">Answers:</div>
+          <div class="col" id="answers"><ul></ul></div>
+        </div>{{--  answers --}}
+        <div class="row">
+          <div class="col font-weight-bold">Contact:</div>
+          <div class="col" id="contact_id"></div>
+        </div>{{--  contact_id --}}
+        <div class="row">
+          <div class="col font-weight-bold">Guardian:</div>
+          <div class="col" id="guardian_id"></div>
+        </div>{{--  guardian_id --}}
+        <div class="row">
+          <div class="col font-weight-bold">Guardian Relation:</div>
+          <div class="col" id="guardian_relation"></div>
+        </div>{{--  guardian_relation --}}
+        <div class="row">
+          <div class="col font-weight-bold">Citizenships:</div>
+          <div class="col" id="citizenships"><ul></ul></div>
+        </div>{{--  citizenships --}}
+        <div class="row">
+          <div class="col font-weight-bold">Work Permit:</div>
+          <div class="col" id="can_work_in"></div>
+        </div>{{--  can_work_in --}}
+        <div class="row">
+          <div class="col font-weight-bold">Remarks:</div>
+          <div class="col" id="note"></div>
+        </div>{{--  note --}}
+        <div class="row">
+          <div class="col font-weight-bold">Last Update:</div>
+          <div class="col" id="updated_at"></div>
+        </div>{{--  updated_at --}}
+        <div class="row">
+          <div class="col font-weight-bold">Created at:</div>
+          <div class="col" id="created_at"></div>
+        </div>{{--  created_at --}}
       </div>
       <!-- Modal footer -->
       <div class="modal-footer bg-info">
-        <button type="button" class="btn btn-warning" data-dismiss="modal">Save Changes</button>
+        <button type="button" class="btn btn-danger closebtn" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-{{--  =========================================>> Modals <<=========================================  --}}
 {{--  <!-- The Modal for showing the application (talent) information-->  --}}
 <div class="modal" id="myModal">
   <div class="modal-dialog" style="overflow-y: initial !important;">
