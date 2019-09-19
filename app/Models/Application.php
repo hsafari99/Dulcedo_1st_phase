@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Application extends Model
 {
+    use SoftDeletes;
+
     public function step()
     {
         return $this->belongsTo('App\Models\Step');

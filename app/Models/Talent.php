@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 class Talent extends Eloquent
 {
-    // use SoftDeletes;
+    use SoftDeletes;
 
     public function applications() {
         return $this->hasMany('App\Models\Application');

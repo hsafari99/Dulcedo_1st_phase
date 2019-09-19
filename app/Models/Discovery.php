@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Discovery extends Model
 {
+    use SoftDeletes;
+
     public function scout() {
         return $this->belongsTo('App\Models\User');
     }
