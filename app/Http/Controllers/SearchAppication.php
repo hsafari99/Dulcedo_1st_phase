@@ -7,6 +7,8 @@ use App\Models\Application as Application;
 use App\Models\Contact as Contact;
 use App\Models\Country as Country;
 use App\Models\Event as Event;
+use App\Models\Network as Network;
+use App\Models\Source as Source;
 use App\Models\Step as Step;
 use App\Models\User as User;
 use Illuminate\Http\Request;
@@ -66,14 +68,18 @@ class SearchAppication extends Controller
     public function getApplicationById(Request $request)
     {
         $app_id = $request->input('application_id');
-
+        $networks = Application::where("_id", $app_id)->first()['networks'];
+        $guardian_id = Application::where("_id", $app_id)->first()['guardian_id'];
+        foreach ($networks as $network) {
+            $networkList[] = Network::where("_id", $network)->first()['name'];
+        }
         $app_info = [
             'scout_id' => Application::where("_id", $app_id)->first()['scout_id'],
             'votes' => Application::where("_id", $app_id)->first()['votes'],
-            'step_id' => Application::where("_id", $app_id)->first()['step_id'],
-            'source_id' => Application::where("_id", $app_id)->first()['source_id'],
+            'step_id' => Application::find($app_id)->step->en,
+            'source_id' => Application::find($app_id)->source->en,
             'source_note' => Application::where("_id", $app_id)->first()['source_note'],
-            'event_id' => Application::where("_id", $app_id)->first()['event_id'],
+            'event_id' => Application::find($app_id)->Event->name,
             'office_id' => Application::where("_id", $app_id)->first()['office_id'],
             'gender' => Application::where("_id", $app_id)->first()['gender'],
             'eye_color' => Application::where("_id", $app_id)->first()['eye_color'],
@@ -87,10 +93,10 @@ class SearchAppication extends Controller
             'dress' => Application::where("_id", $app_id)->first()['dress'],
             'shoe' => Application::where("_id", $app_id)->first()['shoe'],
             'inseam' => Application::where("_id", $app_id)->first()['inseam'],
-            'networks' => Application::where("_id", $app_id)->first()['networks'],
+            'networks' => $networkList,
             'answers' => Application::where("_id", $app_id)->first()['answers'],
-            'contact_id' => Application::where("_id", $app_id)->first()['contact_id'],
-            'guardian_id' => Application::where("_id", $app_id)->first()['guardian_id'],
+            'contact_id' => Application::find($app_id)->contact->firstname . " " . Application::find($app_id)->contact->lastname,
+            'guardian_id' => Contact::where("_id", $guardian_id)->first()['firstname'] . " " . Contact::where("_id", $guardian_id)->first()['lastname'],
             'guardian_relation' => Application::where("_id", $app_id)->first()['guardian_relation'],
             'citizenships' => Application::where("_id", $app_id)->first()['citizenships'],
             'can_work_in' => Application::where("_id", $app_id)->first()['can_work_in'],
