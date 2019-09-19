@@ -1,51 +1,51 @@
 {{--  php section for calculation of the number of the result  --}}
 <?php $counter = 0; 
-        foreach ($contactIDs as $contact):
-                $counter += count($contact['appsInfo']);
-        endforeach;     
+  foreach ($contactIDs as $contact):
+          $counter += count($contact['appsInfo']);
+  endforeach;     
 ?>
 
 
 @extends('layouts.main')
 
 @section('title')
-        Search Results
+  Search Results
 @endsection
 
 @section('content')
-<div class="p-2 bg-info rounded shadow row mt-3">
-        <div class="col">
-        <span class="font-weight-bold">Total number of results: </span>
-        <span class=" font-weight-bold text-danger">{{ $counter }} applications</span>
-        <h5 class="pt-3">Please click on each applicant and event for having more information</h5>
-        </div>
-</div>
-        @foreach ($contactIDs as $contact)
-        @foreach ($contact['appsInfo'] as $pplication)
-                <div class="container border border-dark rounded p-1 my-4 text-center shadow bg-light">
-                        <h4 class="text-dark my-3 ">Application ID: {{ $pplication['applicationId'] }}</h4>
-                        <table class="table table-striped table-bordered table-hover thead-dark table-responsive">
-                                <tr>
-                                        <th width='18%'>Applicant</th>
-                                        <th width='18%'>Scout</th>
-                                        <th width='18%'>Event</th>
-                                        <th width='18%'>Status</th>
-                                        <th width='28%'>Actions</th>
-                                </tr>
-                                <tr>
-                                        <td width='18%' name='{{ $contact['id'] }}' class= 'applicant align-middle'>{{ $contact['firstname'] }} {{ $contact['lastname'] }}</td>
-                                        <td width='18%' class= 'align-middle'>{{ $pplication['scoutedBy'] }}</td>
-                                        <td width='18%' name='{{ $pplication['applicationId'] }}' class= 'event align-middle'>{{ $pplication['event_name'] }}</td>
-                                        <td width='18%' class= 'align-middle'>{{ $pplication['applicationStatus'] }}</td>
-                                        <td width='28%'  class= 'align-middle'>
-                                        <button type="button" class="btn btn-warning m-1 px-3 editBtn" name="{{ $pplication['applicationId'] }}">Edit</button> 
-                                        <button type="button" class="btn btn-danger m-1 px-2 deleteBtn" name="{{ $pplication['applicationId'] }}">Delete</button>
-                                        </td>
-                                </tr>
-                        </table>
-                </div>
-        @endforeach
-        @endforeach  
+  <div class="p-2 bg-info rounded shadow row mt-3">
+    <div class="col">
+    <span class="font-weight-bold">Total number of results: </span>
+    <span class=" font-weight-bold text-danger">{{ $counter }} applications</span>
+    <h5 class="pt-3">Please click on each applicant and event for having more information</h5>
+    </div>
+  </div>
+  @foreach ($contactIDs as $contact)
+    @foreach ($contact['appsInfo'] as $pplication)
+      <div class="container border border-dark rounded p-1 my-4 text-center shadow bg-light">
+        <h4 class="text-dark my-3 ">Application ID: {{ $pplication['applicationId'] }}</h4>
+          <table class="table table-striped table-bordered table-hover thead-dark table-responsive">
+            <tr>
+              <th width='18%'>Applicant</th>
+              <th width='18%'>Scout</th>
+              <th width='18%'>Event</th>
+              <th width='18%'>Status</th>
+              <th width='28%'>Actions</th>
+            </tr>
+            <tr>
+              <td width='18%' name='{{ $contact['id'] }}' class= 'applicant align-middle'>{{ $contact['firstname'] }} {{ $contact['lastname'] }}</td>
+              <td width='18%' class= 'align-middle'>{{ $pplication['scoutedBy'] }}</td>
+              <td width='18%' name='{{ $pplication['applicationId'] }}' class= 'event align-middle'>{{ $pplication['event_name'] }}</td>
+              <td width='18%' class= 'align-middle'>{{ $pplication['applicationStatus'] }}</td>
+              <td width='28%'  class= 'align-middle'>
+              <button type="button" class="btn btn-warning m-1 px-3 editBtn" name="{{ $pplication['applicationId'] }}">Edit</button> 
+              <button type="button" class="btn btn-danger m-1 px-2 deleteBtn" name="{{ $pplication['applicationId'] }}">Delete</button>
+              </td>
+            </tr>
+          </table>
+      </div>
+    @endforeach
+  @endforeach  
 <a href="/home" class="btn btn-info mt-5"><i class="fas fa-home"></i>  <span class="font-weight-bold"> Back to home</span></a>
 <script>
 // =========================== >> APPLICANT SECTION (Talent/Contact) << =========================== 
