@@ -7,7 +7,6 @@ use App\Models\Application as Application;
 use App\Models\Contact as Contact;
 use App\Models\Country as Country;
 use App\Models\Event as Event;
-use App\Models\Network as Network;
 use App\Models\Step as Step;
 use App\Models\User as User;
 use Illuminate\Http\Request;
@@ -24,26 +23,57 @@ class SearchAppication extends Controller
         ]);
     }
 
+    //This function will return the results based on application status
+    public function getApplicationByStatus(Request $request)
+    {
+        $status = $request->input('status');
+        if ($status !== 'NA' || is_null($status)) {
+            $contactIDs = [];
+            $applications = Application::where("step_id", $status)->get();
+
+            foreach ($applications as $application) {
+                $id = $application['contact_id'];
+                $firstname = Contact::where('_id', $id)->first()->firstname;
+                $lastname = Contact::where('_id', $id)->first()->lastname;
+                $contactIDs[] = [
+                    'id' => $id,
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'appsInfo' => $this->getApplicationsByTalent($id),
+                ];
+            }
+            return View::make('pages/results', compact('contactIDs'));
+        } else {
+            return back()->withErrors(['No status is selected... Please try again']);
+        }
+    }
+
+    //This function will return the list of application statuses for showing in the select
+    //Related to search by application status
+    public function getApplicationStatusList()
+    {
+        $list = Step::all();
+
+        foreach ($list as $key => $step) {
+            $steps[$step['_id']] = $step['en'];
+        }
+
+        $myJSON = json_encode($steps);
+        echo ($myJSON);
+    }
+
     //This function will return the application information through the Ajax to the modal
     public function getApplicationById(Request $request)
     {
         $app_id = $request->input('application_id');
-        $networks = Application::where("_id", $app_id)->first()['networks'];
-        $countries = Application::where("_id", $app_id)->first()['citizenships'];
-        $guardian_id = Application::where("_id", $app_id)->first()['guardian_id'];
-        foreach ($networks as $network) {
-            $networks_names[] = Network::where("_id", $network)->first()['name'];
-        }
-        foreach ($countries as $country) {
-            $country_Names[] = Country::where("_id", $country)->first()['en'];
-        }
+
         $app_info = [
             'scout_id' => Application::where("_id", $app_id)->first()['scout_id'],
             'votes' => Application::where("_id", $app_id)->first()['votes'],
-            'step_id' => Application::find($app_id)->step->en,
-            'source_id' => Application::find($app_id)->source->en,
+            'step_id' => Application::where("_id", $app_id)->first()['step_id'],
+            'source_id' => Application::where("_id", $app_id)->first()['source_id'],
             'source_note' => Application::where("_id", $app_id)->first()['source_note'],
-            'event_id' => Application::find($app_id)->event->name,
+            'event_id' => Application::where("_id", $app_id)->first()['event_id'],
             'office_id' => Application::where("_id", $app_id)->first()['office_id'],
             'gender' => Application::where("_id", $app_id)->first()['gender'],
             'eye_color' => Application::where("_id", $app_id)->first()['eye_color'],
@@ -57,12 +87,12 @@ class SearchAppication extends Controller
             'dress' => Application::where("_id", $app_id)->first()['dress'],
             'shoe' => Application::where("_id", $app_id)->first()['shoe'],
             'inseam' => Application::where("_id", $app_id)->first()['inseam'],
-            'networks' => $networks_names,
+            'networks' => Application::where("_id", $app_id)->first()['networks'],
             'answers' => Application::where("_id", $app_id)->first()['answers'],
-            'contact_id' => Application::find($app_id)->contact->firstname . " " . Application::find($app_id)->contact->lastname,
-            'guardian_id' => Contact::where("_id", $guardian_id)->first()['firstname'] . " " . Contact::where("_id", $guardian_id)->first()['lastname'],
+            'contact_id' => Application::where("_id", $app_id)->first()['contact_id'],
+            'guardian_id' => Application::where("_id", $app_id)->first()['guardian_id'],
             'guardian_relation' => Application::where("_id", $app_id)->first()['guardian_relation'],
-            'citizenships' => $country_Names,
+            'citizenships' => Application::where("_id", $app_id)->first()['citizenships'],
             'can_work_in' => Application::where("_id", $app_id)->first()['can_work_in'],
             'note' => Application::where("_id", $app_id)->first()['note'],
             'updated_at' => Application::where("_id", $app_id)->first()['updated_at'],
@@ -118,13 +148,13 @@ class SearchAppication extends Controller
     }
 
     /**
-    This function with search the contacts database for extracting the results matching the given
-    search criteria. It will return the array of the contactsIDs
+    This function with search the contacts database for extracting the reults matching the given
+    search criterias. It will return the array of the contactsIDs
      */
     public function searchApplication(Request $request)
     {
         // $app_id = $request->input('firstName');
-        //dd(Application::find('5d7f969512b9ae0d94004bf2')->guardian); //Flossie Medhurst
+        // dd(Application::find('5d7f969512b9ae0d94004bf2')->event->name);
         // dd(Step::all());
 
         $firstname = $request->input('firstName');
