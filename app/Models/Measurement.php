@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Measurement extends Model
 {
+ use SoftDeletes;
 
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Source extends Model
 {
+    use SoftDeletes;
+
     public function discoveries()
     {
         return $this->hasMany('App\Models\Discovery');

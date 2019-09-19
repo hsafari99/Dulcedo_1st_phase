@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Step extends Model
 {
+    use SoftDeletes;
+
     public function applications() {
         return $this->hasMany('App\Models\Application');
     }
