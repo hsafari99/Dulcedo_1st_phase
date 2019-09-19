@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('pages.all.home');
     });
+    //homepage controls
+    Route::post('/getRelevantApplications', 'homeController@show');
 
     //Search for applications
     Route::get('/searchApplications', 'SearchAppication@show');

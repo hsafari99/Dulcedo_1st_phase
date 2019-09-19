@@ -210,7 +210,6 @@ $('.deleteBtn').click(function(e, test=1){
              application_id: application     
           } , 
           success: function(result){
-            console.log(result);
             if (result === "Deleted Successfully") {
               $('#resultCounter').text(parseInt($('#resultCounter').text()) - 1); 
               $('#confirmModal').hide();
