@@ -6,7 +6,8 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class Answer extends Model
 {
-    public function question() {
+    public function question()
+    {
         return $this->belongsTo('App\Models\Question');
     }
 }

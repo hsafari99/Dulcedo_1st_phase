@@ -25,11 +25,45 @@ class SearchAppication extends Controller
         ]);
     }
 
+    //This function will return the results based on the event name
+    public function getApplicationByEvent(Request $request)
+    {
+        $event = $request->input('eventName');
+        if (!is_null($event) && $event != "") {
+            $contactIDs = [];
+            $events = Event::where('name', 'regex', new \MongoDB\BSON\Regex($this->regexGenerator($event)))->get();
+            foreach ($events as $event) {
+                $event_id = $event['_id'];
+                $temp[] = Application::where("event_id", $event_id)->get();
+                for ($i = 0; $i < Application::where("event_id", $event_id)->count(); $i++) {
+                    if (!is_null(Application::where("event_id", $event_id)->get()[$i])) {
+                        $applications[] = Application::where("event_id", $event_id)->get()[$i];
+                    }
+                }
+            }
+
+            foreach ($applications as $application) {
+                $id = $application['contact_id'];
+                $firstname = Contact::where('_id', $id)->first()->firstname;
+                $lastname = Contact::where('_id', $id)->first()->lastname;
+                $contactIDs[] = [
+                    'id' => $id,
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'appsInfo' => $this->getApplicationsByTalent($id),
+                ];
+            }
+            return View::make('pages/results', compact('contactIDs'));
+        } else {
+            return back()->withErrors(['Event Name is Empty, Please try again...']);
+        }
+    }
+
     //This function will return the results based on application status
     public function getApplicationByStatus(Request $request)
     {
         $status = $request->input('status');
-        if ($status !== 'NA' || is_null($status)) {
+        if ($status !== 'null' && !is_null($status)) {
             $contactIDs = [];
             $applications = Application::where("step_id", $status)->get();
 
@@ -70,9 +104,14 @@ class SearchAppication extends Controller
         $app_id = $request->input('application_id');
         $networks = Application::where("_id", $app_id)->first()['networks'];
         $guardian_id = Application::where("_id", $app_id)->first()['guardian_id'];
+        $countries = Application::where("_id", $app_id)->first()['citizenships'];
         foreach ($networks as $network) {
             $networkList[] = Network::where("_id", $network)->first()['name'];
         }
+        foreach ($countries as $country) {
+            $countryList[] = Country::where("_id", $country)->first()['en'];
+        }
+
         $app_info = [
             'scout_id' => Application::where("_id", $app_id)->first()['scout_id'],
             'votes' => Application::where("_id", $app_id)->first()['votes'],
@@ -98,7 +137,7 @@ class SearchAppication extends Controller
             'contact_id' => Application::find($app_id)->contact->firstname . " " . Application::find($app_id)->contact->lastname,
             'guardian_id' => Contact::where("_id", $guardian_id)->first()['firstname'] . " " . Contact::where("_id", $guardian_id)->first()['lastname'],
             'guardian_relation' => Application::where("_id", $app_id)->first()['guardian_relation'],
-            'citizenships' => Application::where("_id", $app_id)->first()['citizenships'],
+            'citizenships' => $countryList,
             'can_work_in' => Application::where("_id", $app_id)->first()['can_work_in'],
             'note' => Application::where("_id", $app_id)->first()['note'],
             'updated_at' => Application::where("_id", $app_id)->first()['updated_at'],
