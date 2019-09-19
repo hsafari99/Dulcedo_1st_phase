@@ -25,6 +25,20 @@ class SearchAppication extends Controller
         ]);
     }
 
+    //This function will delete an application. It will find the application by the passed application ID
+    public function deleteApplication(Request $request)
+    {
+        $application_id = $request->input("application_id");
+
+        if (isset(Application::where("_id", $application_id)->first()['deleted_at'])) {
+            echo "already removed";
+        } else {
+            Application::where("_id", $application_id)->first()->delete();
+            echo "Deleted Successfully";
+        }
+
+    }
+
     //This function will return the results based on the event name
     public function getApplicationByEvent(Request $request)
     {
@@ -68,15 +82,17 @@ class SearchAppication extends Controller
             $applications = Application::where("step_id", $status)->get();
 
             foreach ($applications as $application) {
-                $id = $application['contact_id'];
-                $firstname = Contact::where('_id', $id)->first()->firstname;
-                $lastname = Contact::where('_id', $id)->first()->lastname;
-                $contactIDs[] = [
-                    'id' => $id,
-                    'firstname' => $firstname,
-                    'lastname' => $lastname,
-                    'appsInfo' => $this->getApplicationsByTalent($id),
-                ];
+                if (!$application->trashed()) {
+                    $id = $application['contact_id'];
+                    $firstname = Contact::where('_id', $id)->first()->firstname;
+                    $lastname = Contact::where('_id', $id)->first()->lastname;
+                    $contactIDs[] = [
+                        'id' => $id,
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'appsInfo' => $this->getApplicationsByTalent($id),
+                    ];
+                }
             }
             return View::make('pages/results', compact('contactIDs'));
         } else {
