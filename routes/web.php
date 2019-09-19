@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 //routes for login, password_reset, verify_mail and ask for password_reset
 Auth::routes();
@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/event', 'SearchAppication@getEventById');
     Route::get('/results', 'SearchAppication@showResults');
     Route::post('/application', 'SearchAppication@getApplicationById');
+    Route::post('/getStatusList', 'SearchAppication@getApplicationStatusList');
+    Route::post('/searchStatus', 'SearchAppication@getApplicationByStatus');
+    Route::post('/searchEvent', 'SearchAppication@getApplicationByEvent');
 });
 
 //routes for the admins
@@ -54,17 +57,17 @@ Route::middleware(['auth', 'grantaccess:admin'])->group(function () {
 });
 
 //routes for the headbookers
-Route::middleware(['auth', 'grantaccess:headbooker'])->group(function () { });
+Route::middleware(['auth', 'grantaccess:headbooker'])->group(function () {});
 
 //routes for the bookers
-Route::middleware(['auth'/*, 'grantaccess:booker'*/])->group(function () {
+Route::middleware(['auth' /*, 'grantaccess:booker'*/])->group(function () {
 
     //get photos and measurements for the applicants
     Route::get('/invite/{id}/measurements', 'MeasurementsController@index');
 });
 
 //routes for the headscouts
-Route::middleware(['auth', 'grantaccess:headscout'])->group(function () { });
+Route::middleware(['auth', 'grantaccess:headscout'])->group(function () {});
 
 //routes for the scouts
 Route::middleware(['auth', 'grantaccess:scout'])->group(function () {
