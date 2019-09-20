@@ -252,7 +252,7 @@ class SearchAppication extends Controller
         return View::make('pages/results', compact('contactIDs'));
     }
 
-    //function which will check the fields and create the suitable regex geenerator for each field.
+    //function which will check the fields and create the suitable regex generator for each field.
     public function regexGenerator(string $variable = null)
     {
         is_null($variable) ? $variable = '' : '';

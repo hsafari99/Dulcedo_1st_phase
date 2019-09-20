@@ -77,8 +77,21 @@ $('document').ready(function(){
       },
       url: "/test",
       method: 'POST',
+      data:{
+        fname: firstName,
+        lname: lastName,
+        email: email
+      },
       success: function(result){
-        console.log('come back successfully...');
+        console.log(jQuery.type(result));
+        if (jQuery.type(result) === 'JSON') {
+          var test = JSON.parse(result);
+          console.log(test);
+        }else{
+          console.log(result);
+        }
+        
+        
       }        
     });
   });
