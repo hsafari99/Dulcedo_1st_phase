@@ -44,6 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/searchStatus', 'SearchAppication@getApplicationByStatus');
     Route::post('/searchEvent', 'SearchAppication@getApplicationByEvent');
     Route::post('/deleteApplication', 'SearchAppication@deleteApplication');
+
+    //Create new application (profile)
+    Route::get('/createApplication', 'applicationController@showform');
+    Route::post('/registerApplication', 'applicationController@registerApplication');
+    Route::post('/test', 'applicationController@searchContact');
 });
 
 //routes for the admins
