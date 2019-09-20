@@ -68,9 +68,9 @@ $('document').ready(function(){
   });
   $("#search").click(function(e){
     e.preventDefault();
-    var firstName = ($('input[name="firstName"]').val() === null || $('input[name="firstName"]').val() === '')? 'NA' :  $('input[name="firstName"]').val();
-    var lastName = ($('input[name="lastName"]').val() === null || $('input[name="lastName"]').val() === '')? 'NA' :  $('input[name="lastName"]').val();
-    var email = ($('input[name="email"]').val() === null || $('input[name="email"]').val() === '')? 'NA' :  $('input[name="email"]').val();
+    var firstName = $('input[name="firstName"]').val();
+    var lastName = $('input[name="lastName"]').val();
+    var email = $('input[name="email"]').val();
     $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -83,19 +83,51 @@ $('document').ready(function(){
         email: email
       },
       success: function(result){
-        console.log(jQuery.type(result));
-        if (jQuery.type(result) === 'JSON') {
           var test = JSON.parse(result);
-          console.log(test);
-        }else{
-          console.log(result);
-        }
-        
-        
+
+          $('#listContent').children().remove();
+          if (test.length == 0) {
+            $('#listContent').append("<span class='text-danger font-weight-bold'>No Contact Found with Given Criteria...</span>");
+          }else{
+            $.each(test, function (index, value) { 
+              var t = value._id;
+              $('#listContent').append("<button onClick='test()' class='border rounded bg-info my-2 p-2 results w-100' style='cursor:pointer;' "+
+                                        "id='"+value._id+"'>Full Name: "+
+                                        "<span class='font-weight-bold'>"+value.firstname+" "+value.lastname+"</span>"+
+                                        "<br/>Email: <span class='font-weight-bold'>"+value.email+
+                                        "</span></button onClick='test()'>");
+            });            
+          }
+          $('#contactResult').show();
       }        
     });
   });
+});
+function test(){
+  console.log($(this).attr('id'));
+}
 
+$('document').ready(function(){
+        $('.crossbtn').click(function(){
+                $('#contactResult').fadeOut(1000);   
+        });
 });
 </script>
+
+{{--  The Modal for showing the contact Search results --}}
+<div class="modal" id="contactResult">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-success">
+        <h5 class="modal-title">List of contacts match your search criteria</h5>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;" id="listContent">
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
