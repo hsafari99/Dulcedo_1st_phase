@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', function () {
         return view('pages.all.home');
     });
+    //homepage controls
+    Route::post('/getRelevantApplications', 'homeController@show');
 
     //Search for applications
     Route::get('/searchApplications', 'SearchAppication@show');
@@ -41,6 +43,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/getStatusList', 'SearchAppication@getApplicationStatusList');
     Route::post('/searchStatus', 'SearchAppication@getApplicationByStatus');
     Route::post('/searchEvent', 'SearchAppication@getApplicationByEvent');
+    Route::post('/deleteApplication', 'SearchAppication@deleteApplication');
+
+    //Create new application (profile)
+    Route::get('/createApplication', 'applicationController@showform');
+    Route::post('/registerApplication', 'applicationController@registerApplication');
+    Route::post('/test', 'applicationController@searchContact');
 });
 
 //routes for the admins

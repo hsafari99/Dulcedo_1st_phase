@@ -16,13 +16,13 @@
 <div class="p-2 bg-info rounded shadow row mt-3">
         <div class="col">
         <span class="font-weight-bold">Total number of results: </span>
-        <span class=" font-weight-bold text-danger">{{ $counter }} applications</span>
+        <span class=" font-weight-bold text-danger" id="resultCounter">{{ $counter }}</span><span class=" font-weight-bold text-danger"> applications</span>
         <h5 class="pt-3">Please click on each applicant and event for having more information</h5>
         </div>
 </div>
         @foreach ($contactIDs as $contact)
         @foreach ($contact['appsInfo'] as $pplication)
-                <div class="container border border-dark rounded p-1 my-4 text-center shadow bg-light">
+                <div class="container border border-dark rounded p-1 my-4 text-center shadow bg-light" id="{{ $pplication['applicationId'] }}">
                         <h4 class="text-dark my-3 ">Application ID: {{ $pplication['applicationId'] }}</h4>
                         <table class="table table-striped table-bordered table-hover thead-dark table-responsive">
                                 <tr>
@@ -38,8 +38,8 @@
                                         <td width='18%' name='{{ $pplication['applicationId'] }}' class= 'event align-middle'>{{ $pplication['event_name'] }}</td>
                                         <td width='18%' class= 'align-middle'>{{ $pplication['applicationStatus'] }}</td>
                                         <td width='28%'  class= 'align-middle'>
-                                        <button type="button" class="btn btn-warning m-1 px-3 editBtn" name="{{ $pplication['applicationId'] }}">Edit</button> 
-                                        <button type="button" class="btn btn-danger m-1 px-2 deleteBtn" name="{{ $pplication['applicationId'] }}">Delete</button>
+                                          <button type="button" class="btn btn-warning m-1 px-3 editBtn" name="{{ $pplication['applicationId'] }}">Edit</button> 
+                                          <button type="button" class="btn btn-danger m-1 px-2 deleteBtn" name="{{ $pplication['applicationId'] }}">Delete</button>
                                         </td>
                                 </tr>
                         </table>
@@ -193,11 +193,42 @@ $('.editBtn').click(function(e){
 
 });
 
+// ======================================= >> Soft Delete SECTION << ======================================= 
+// This part will soft delete the application
+$('.deleteBtn').click(function(e, test=1){
+    var target = e.target;
+    var application =  $(e.target).attr('name');
+    $('#confirmModal').show();
+    $('#confirm').click(function (target){
+      $.ajax({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          url: "/deleteApplication",
+          method: 'POST',
+          data: {
+             application_id: application     
+          } , 
+          success: function(result){
+            if (result === "Deleted Successfully") {
+              $('#resultCounter').text(parseInt($('#resultCounter').text()) - 1); 
+              $('#confirmModal').hide();
+              $('#'+application).hide(3000);
+            }else{
+              $('#confirmModal').hide();
+              return;
+            }
+          }        
+      });    
+    });
+});
+
 $('document').ready(function(){
         $('.crossbtn').click(function(){
                 $('#myModal').fadeOut(3000);
                 $('#eventModal').fadeOut(3000);
-                $('#appModal').fadeOut(3000);     
+                $('#appModal').fadeOut(3000); 
+                $('#confirmModal').fadeOut(1000);    
         });
 
         $('.closebtn').click(function(){
@@ -401,6 +432,33 @@ $('document').ready(function(){
       <!-- Modal footer -->
       <div class="modal-footer bg-info">
         <button type="button" class="btn btn-danger closebtn" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{{-- The Modal for showing the delete confirmation --}}
+<div class="modal" id="confirmModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-danger">
+        <h4 class="modal-title">Deleting...</h4>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <strong>you sure you want to delete this application?</strong></br> 
+        Please click the <span><mark class="text-danger font-weight-bold">button</mark></span> for complete deleting the application or 
+        click the <span><mark class="text-danger font-weight-bold">'X'</mark></span> at the top for cancelation the request. 
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirm">Delete</button>
       </div>
 
     </div>

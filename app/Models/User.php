@@ -12,6 +12,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Eloquent implements AuthenticatableContract, CanResetPasswordContract
 {
+    use SoftDeletes;
+
     use AuthenticableTrait;
     use Notifiable;
     use CanResetPassword;
