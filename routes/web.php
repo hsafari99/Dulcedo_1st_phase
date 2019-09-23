@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/createApplication', 'applicationController@showform');
     Route::post('/registerApplication', 'applicationController@registerApplication');
     Route::post('/test', 'applicationController@searchContact');
+    Route::post('/populate', 'applicationController@populateData');
+    Route::post('/getCountries', 'applicationController@getCountries');
 });
 
 //routes for the admins
