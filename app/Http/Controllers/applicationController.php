@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact as Contact;
+use App\Models\Country as Country;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class applicationController extends Controller
 {
+    //This function will return the array of countries through AJAX
+    public function getCountries(Request $request)
+    {
+        $countries = Country::all();
+
+        $myJSON = json_encode($countries);
+        echo ($myJSON);
+    }
+
     //This function will direct user to new application form
     public function showform()
     {
@@ -20,6 +30,17 @@ class applicationController extends Controller
     public function registerApplication(Request $request)
     {
         echo "Application recorder :)";
+    }
+
+    //This function will return the contact information based on the receive contact_id from AJAX request.
+    public function populateData(Request $request)
+    {
+        $contact_id = $request->input('contact_id');
+
+        $contactInfo = Contact::where("_id", $contact_id)->first();
+
+        $myJSON = json_encode($contactInfo);
+        echo ($myJSON);
     }
 
     //This function will respond to the AJAX for returning the list of the contact match the
@@ -34,8 +55,8 @@ class applicationController extends Controller
             ->where('email', 'regex', new \MongoDB\BSON\Regex($this->regexGenerator($email)))
             ->get();
 
-            $myJSON = json_encode($contacts);
-            echo ($myJSON);
+        $myJSON = json_encode($contacts);
+        echo ($myJSON);
     }
 
     //function which will check the fields and create the suitable regex generator for each field.

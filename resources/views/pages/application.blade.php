@@ -1,3 +1,4 @@
+<?php use Illuminate\Support\Facades\Config as Config; ?>
 @extends('layouts.main')
 
 @section('title')
@@ -5,7 +6,7 @@
 @endsection
 
 @section('content')
-<label style="cursor: pointer;" for="loadContact">
+<label style="cursor: pointer;" for="loadContact" class="pl-4">
   <input type="checkbox" class="form-check-input" id="loadContact">
     <span class="font-weight-bold text-danger">
       Not a New applicant? Please click here to load the information
@@ -40,21 +41,83 @@
     </fieldset>
 </div>
 
-
+{{-- FORM REGISTRING THE APPLICATION (MAIN FORM) --}}
 <form action="/registerApplication" enctype="multipart/form-data" method="POST">
   @csrf
+  {{-- FIELD FOR PERSONAL INFORMATION (could be populated by previous form) --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
-  <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Personal Information</legend>
-  <div class="input-group">
-    <div class="input-group-prepend">
-      <span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
+    <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Personal Information</legend>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
+      </div>
+      <input type="text" class="form-control" name="fName" id="fName">
     </div>
-    <input type="text" class="form-control" name="firstName" value=" {{ old('firstName') }}">
-  </div>
-    <div  class="mb-3 pl-3"><span class='text-danger'>{{ $errors->first('firstName') }}</span></div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Last Name:</span>
+      </div>
+      <input type="text" class="form-control" name="lName" id="lName">
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Email:</span>
+      </div>
+      <input type="text" class="form-control" name="email" id="email">
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Phone:</span>
+      </div>
+      <input type="text" name="phone" list="phoneList" class="form-control" placeholder="Please select a number from list or add new phone number"/>
+        <datalist id="phoneList"></datalist>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Adress:</span>
+      </div>
+      <input type="text" name="address" id="address" class="form-control"/>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">City:</span>
+      </div>
+      <input type="text" name="city" id="city" class="form-control"/>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Postal Code:</span>
+      </div>
+      <input type="text" name="postal" id="postal" class="form-control"/>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Country:</span>
+      </div>
+      <select name="country" id="country" class="form-control"></select>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Birth Date:</span>
+      </div>
+      <input type="date" name="dob" id="dob" class="form-control"/>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">SIN no.:</span>
+      </div>
+      <input type="text" name="sin" id="sin" class="form-control"/>
+    </div>
+  </fieldset>
+
+  {{-- FIELD FOR SETTING THE SCOUT INFO --}}
+  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+    <legend class="w-50 pl-2"><i class="fas fa-address-book text-success" style="font-size: 25px;"></i>  Scout Information</legend>
+    
   </fieldset>
 </form>
 
+{{-- PART for setting the Scout Information --}}
 
 <script>
 $('document').ready(function(){
@@ -91,11 +154,11 @@ $('document').ready(function(){
           }else{
             $.each(test, function (index, value) { 
               var t = value._id;
-              $('#listContent').append("<button onClick='test()' class='border rounded bg-info my-2 p-2 results w-100' style='cursor:pointer;' "+
+              $('#listContent').append("<button onClick='test(this)' class='border rounded bg-info my-2 p-2 results w-100' style='cursor:pointer;' "+
                                         "id='"+value._id+"'>Full Name: "+
                                         "<span class='font-weight-bold'>"+value.firstname+" "+value.lastname+"</span>"+
                                         "<br/>Email: <span class='font-weight-bold'>"+value.email+
-                                        "</span></button onClick='test()'>");
+                                        "</span></button>");
             });            
           }
           $('#contactResult').show();
@@ -103,8 +166,55 @@ $('document').ready(function(){
     });
   });
 });
-function test(){
-  console.log($(this).attr('id'));
+function test(e){
+  var id = e.id;
+  var countries;
+  $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "/getCountries",
+      method: 'POST',
+      success: function(result){
+        var test = JSON.parse(result);
+        countries = test;
+      }        
+    });
+  $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "/populate",
+      method: 'POST',
+      data:{
+        contact_id : id
+      },
+      success: function(result){
+        $('#contactResult').hide();
+        $('#searchContact').hide();
+        $('#loadContact'). prop("checked", false);
+        
+        var test = JSON.parse(result);
+        $("#fName").val(test.firstname);
+        $("#lName").val(test.lastname);
+        $("#email").val(test.email);
+        $.each(test.phone, function(index, value){
+          $('#phoneList').append("<option value='"+value+"' selected>"+value+"</option>");
+        });
+        $("#address").val(test.address);
+        $("#city").val(test.city);
+        $("#postal").val(test.postal);
+        $.each(countries, function(index, value){
+          if (value._id == test.country_id) {
+            $('#country').append('<option value="'+value._id+'" selected>'+value.en+'</option>');
+          }else{
+            $('#country').append('<option value="'+value._id+'">'+value.en+'</option>');
+          }
+        });
+        $("#dob").val(test.birthdate);
+        $("#sin").val(test.sin);
+      }        
+    });
 }
 
 $('document').ready(function(){
