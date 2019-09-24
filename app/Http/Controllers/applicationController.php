@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Contact as Contact;
 use App\Models\Country as Country;
+use App\Models\Event as Event;
 use App\Models\Source as Source;
 use App\Models\User as User;
 use Illuminate\Http\Request;
@@ -13,15 +14,27 @@ use Illuminate\Support\Facades\View;
 class applicationController extends Controller
 {
 
+    // This function will return the search result of the Event to UI through AJAX
+    public function getEvents(Request $request)
+    {
+        $event = $request->input('event');
+
+        $eventList = Event::where('name', 'regex', new \MongoDB\BSON\Regex($this->regexGenerator($event)))->get();
+        $myJSON = json_encode($eventList);
+        echo ($myJSON);
+    }
+
     //This function return the list of the sources an applicant may apply to the form through the AJAX
-    public function getSources(Request $request){
+    public function getSources(Request $request)
+    {
         $sources = Source::all();
 
         $myJSON = json_encode($sources);
         echo ($myJSON);
     }
     //This function will return the list of the scouts in a specific office through AJAX
-    public function getScoutList(Request $request){
+    public function getScoutList(Request $request)
+    {
         $office_id = $request->input('office_id');
 
         $scoutList = User::where('office_id', $office_id)->whereIn('roles', ['scout'])->get();

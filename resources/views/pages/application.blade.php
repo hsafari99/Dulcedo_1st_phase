@@ -161,22 +161,148 @@
   </fieldset>
 
   {{-- ============================================================================ --}}
-  {{-- FIELD FOR SETTING THE SCOUT INFO --}}
-    <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
-    <legend class="w-50 pl-2"><i class="fab fa-hubspot text-danger" style="font-size: 25px;"></i>  Source Information</legend>
+  {{-- FIELD FOR SETTING THE EVENT INFO --}}
+  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+    <legend class="w-50 pl-2"><i class="fas fa-calendar-alt text-danger" style="font-size: 25px;"></i>  Event Information</legend>
     <div class="input-group my-1">
       <div class="input-group-prepend">
-        <span class="input-group-text d-block new_talent_subscription_form">Source:</span>
+        <span class="input-group-text d-block new_talent_subscription_form">Event ID:</span>
       </div>
-      <select class="form-control" name="source" id="source">
-        <option selected disabled>Please select the source...</option>
-      </select>
+      <input type="text" name="event" id="event" class="form-control" placeholder="Please search the event by name to find the ID...">
     </div>
     <div class="input-group my-1">
+      <span class="btn btn-info w-100" onclick="eventSearchs()"><i class="fas fa-search text-danger" style="font-size: 20px;"></i>  Find Event</span>
+    </div>
+    <div class="input-group my-1">
+      <label style="cursor: pointer;" for="loadContact" class="pl-4">
+        <input type="checkbox" class="form-check-input" id="chkbox" onchange="activate()">
+        <span class="font-weight-bold text-secondary">
+          Search Again
+        </span>
+      </label>
+    </div>
+  </fieldset>
+
+    {{-- ============================================================================ --}}
+  {{-- FIELD FOR SETTING THE PhYSICAL and SHAPE INFO --}}
+    <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+    <legend class="w-50 pl-2"><i class="fas fa-id-card-alt text-info" style="font-size: 25px;"></i>  Physical Information</legend>
+    
+    <div class="input-group my-1">
       <div class="input-group-prepend">
-        <span class="input-group-text d-block new_talent_subscription_form">Remarks:</span>
+        <span class="input-group-text d-block new_talent_subscription_form">Office:</span>
       </div>
-      <textarea class="form-control" name="source_note" id="source_note"></textarea>
+      <select class="form-control scoutedBy" name="app_office">
+        <option selected disabled>Please select the office creating the application</option>
+        <option value="Montreal office">Montreal Office</option>
+      </select>
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Gender:</span>
+      </div>
+      <div class="form-control row m-0">
+        <label style="cursor: pointer;" for="male" class="col d-inline">
+          <input type="radio" class="form-check-input" id="male" name="gender" value="m">
+            <span class="font-weight-bold text-secondary">
+              Male
+            </span>
+        </label>
+        <label style="cursor: pointer;" for="female" class="col d-inline">
+          <input type="radio" class="form-check-input" id="female" name="gender" value="f">
+            <span class="font-weight-bold text-secondary">
+              Female
+            </span>
+        </label>
+        <label style="cursor: pointer;" for="other" class="col d-inline">
+          <input type="radio" class="form-check-input" id="other" name="gender" value="NA">
+            <span class="font-weight-bold text-secondary">
+              Other
+            </span>
+        </label>
+      </div>
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Eye Color:</span>
+      </div>
+      <input type="text" name="eye_color" class="form-control" list="eye_colors" placeholder="Please select the eye color from the list or add your own...">
+      <datalist id="eye_colors">
+        <option value="Blue">
+        <option value="Brown">
+        <option value="Black">
+        <option value="Green">
+        <option value="Hazel ">
+        <option value="Gray ">
+        <option value="Amber ">
+      </datalist>
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Hair Color:</span>
+      </div>
+      <input type="text" name="hair_color" list="hair_colors" class="form-control" placeholder="Please search the hair color from the list or add your own...">
+        <datalist id="hair_colors">
+          <option value="Black">
+          <option value="Brown">
+          <option value="Blond">
+          <option value="Red">
+          <option value="White ">
+          <option value="Gray ">
+        </datalist>
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend" onclick="convertLength()" style="cursor: pointer;">
+        <span class="input-group-text d-block new_talent_subscription_form"><i class="fas fa-info-circle text-dark" data-toggle="tooltip" title="Please click to convert cm to ft!"></i> Height:</span>
+      </div>
+      <select class="form-control" name="height_feet" id="height_feet">
+        <option value="" selected disabled>Select Feet</option>
+        <option value="3" id='3ft'>3 feet</option>
+        <option value="4" id='4ft'>4 feet</option>
+        <option value="5" id='5ft'>5 feet</option>
+        <option value="6" id='6ft'>6 feet</option>
+        <option value="7" id='7ft'>7 feet</option>
+      </select>
+      <select class="form-control" name="height_inches" id="height_inches">
+        <option value="" selected disabled>Select Inches</option>
+        <option value="0" id='0in'>0 inch</option>
+        <option value="1" id='1in'>1 inch</option>
+        <option value="2" id='2in'>2 inches</option>
+        <option value="3" id='3in'>3 inches</option>
+        <option value="4" id='4in'>4 inches</option>
+        <option value="5" id='5in'>5 inches</option>
+        <option value="6" id='6in'>6 inches</option>
+        <option value="7" id='7in'>7 inches</option>
+        <option value="8" id='8in'>8 inches</option>
+        <option value="9" id='9in'>9 inches</option>
+        <option value="10" id='10in'>10 inches</option>
+        <option value="11" id='11in'>11 inches</option>
+      </select>
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend" style="cursor: pointer;" onclick="cmToInches('waist')">
+        <span class="input-group-text d-block new_talent_subscription_form"><i class="fas fa-info-circle text-dark" data-toggle="tooltip" title="Please click to convert cm to ft!"></i> Waist:</span>
+      </div>
+      <input type="number" name="waist" class="form-control" placeholder="Please enter the size in inches">
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend" style="cursor: pointer;" onclick="cmToInches('bust')">
+        <span class="input-group-text d-block new_talent_subscription_form"><i class="fas fa-info-circle text-dark" data-toggle="tooltip" title="Please click to convert cm to ft!"></i> Bust:</span>
+      </div>
+      <input type="number" name="bust" class="form-control" placeholder="Please enter the size in inches">
+    </div>
+
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Event ID:</span>
+      </div>
+      <input type="text" name="event" id="event" class="form-control" placeholder="Please search the event by name to find the ID...">
     </div>
   </fieldset>
 </form>
@@ -195,7 +321,6 @@ $('document').ready(function(){
     success: function(result){
       var test = JSON.parse(result);
       $.each(test, function(index, value){
-        console.log(value);
         $('#source').append('<option value="'+value._id+'">'+value.en+'</option>');
       }); 
     }        
@@ -332,9 +457,81 @@ function officeChanged(e){
   });
 }
 
+function eventSearchs(){
+    $.ajax({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: "/getEvents",
+    method: 'POST',
+    data:{
+      event: $('#event').val()
+    },
+    success: function(result){
+      var test = JSON.parse(result);
+        $('#events').children().remove();
+        if (test.length == 0) {
+          $('#events').append("<span class='text-danger font-weight-bold'>No event matches with Given Criteria...</span>");
+        }else{
+          $.each(test, function (index, value) {
+            $('#events').append("<button onClick='addEvent(this)' class='border rounded bg-info my-2 p-2 results w-100' style='cursor:pointer;' "+
+                                "id='"+value._id+"'>Event Name: "+
+                                "<span class='font-weight-bold text-warning'>"+value.name+"</span>"+
+                                "<br/>Description: <span class='font-weight-bold text-warning'>"+value.description+
+                                "</span></button>");
+          });            
+        }
+        $('#eventSearch').show();
+    }        
+  });
+}
+
+function addEvent(e){
+  $('#event').val(e.id);
+  $('#event').prop("disabled", true);
+  $('#eventSearch').hide();
+}
+
+function activate(){
+  $('#event').prop("disabled", false);
+  $('#event').val("");
+  $('#chkbox').prop("checked", false);
+}
+
+function convertLength(){
+  $('#heightConverter').show();
+}
+
+function calculateFT(){
+  var cm = $("input[name='number']").val();
+  //30.48 is the cm to in convesion factor
+  // 2.54 is cm to in conversion factor
+  var ft = Math.floor(cm/30.48);
+  var inch = Math.ceil((cm - (ft * 30.48))/2.54);
+
+  $("#"+ft+"ft").prop("selected", true);
+  $("#"+inch+"in").prop("selected", true);
+  $('#heightConverter').hide();
+}
+
+function cmToInches(test){
+  $("input[name='cmNumber']").val(0);
+  $('#cmToInches').show();
+  $("input[name='cmNumber']").attr('id', test);
+}
+
+function convertcmToInches(){
+  var cm = $("input[name='cmNumber']").val();
+  // 2.54 is cm to in conversion factor
+  var inch = (cm/2.54).toFixed(2);
+  var name = $("input[name='cmNumber']").attr('id');
+  $("input[name='"+name+"']").val(inch);
+  $('#cmToInches').hide();
+}
+
 $('document').ready(function(){
         $('.crossbtn').click(function(){
-                $('#contactResult').fadeOut(1000);   
+                $('.modal').fadeOut(1000);
         });
 });
 $('document').ready(function(){
@@ -348,6 +545,54 @@ $('document').ready(function(){
 });
 </script>
 
+{{--  The Modal for showing the cm to inches converter --}}
+<div class="modal" id="cmToInches">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-info">
+        <h5 class="modal-title">Cm To Inches converter</h5>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;">
+        <div class="input-group my-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text d-block new_talent_subscription_form">Length in Cm:</span>
+          </div>
+          <input type="number" name="cmNumber" class="form-control" placeholder="Please enter the length in centi meters..." onchange="convertcmToInches()">
+        </div>
+        <span class="btn btn-info w-100 my-2">Convert</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{--  The Modal for showing the height converter --}}
+<div class="modal" id="heightConverter">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-info">
+        <h5 class="modal-title">Height converter</h5>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;">
+        <div class="input-group my-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text d-block new_talent_subscription_form">Height in Cm:</span>
+          </div>
+          <input type="number" name="number" class="form-control" placeholder="Please enter the height in centi meters..." onchange="calculateFT()">
+        </div>
+        <span class="btn btn-info w-100 my-2">Convert</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 {{--  The Modal for showing the contact Search results --}}
 <div class="modal" id="contactResult">
   <div class="modal-dialog" style="overflow-y: initial !important;">
@@ -360,6 +605,23 @@ $('document').ready(function(){
       </div>
       <!-- Modal body -->
       <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;" id="listContent">
+      </div>
+    </div>
+  </div>
+</div>
+
+{{--  The Modal for showing the Event Search results --}}
+<div class="modal" id="eventSearch">
+  <div class="modal-dialog" style="overflow-y: initial !important;">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-info">
+        <h5 class="modal-title">List of events match your search criteria</h5>
+        <button type="button" class="close crossbtn" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body bg-light" style="max-height: 600px; overflow-y: auto;" id="events">
       </div>
     </div>
   </div>
