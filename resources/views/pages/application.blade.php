@@ -44,6 +44,7 @@
 {{-- FORM REGISTRING THE APPLICATION (MAIN FORM) --}}
 <form action="/registerApplication" enctype="multipart/form-data" method="POST">
   @csrf
+  {{-- ============================================================================ --}}
   {{-- FIELD FOR PERSONAL INFORMATION (could be populated by previous form) --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Personal Information</legend>
@@ -110,17 +111,95 @@
     </div>
   </fieldset>
 
+  {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE SCOUT INFO --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fas fa-address-book text-success" style="font-size: 25px;"></i>  Scout Information</legend>
-    
+    <label style="cursor: pointer;" for="ifScouted" class="pl-4">
+      <input type="checkbox" class="form-check-input" id="ifScouted">
+      <span class="font-weight-bold text-success">
+        Talent <u>NOT</u> Scouted:
+      </span>
+    </label>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Office:</span>
+      </div>
+      <select class="form-control scoutedBy" name="office" id="office" onChange="officeChanged(this)">
+        <option selected disabled>Please select the scout office</option>
+        <option value="Montreal office">Montreal Office</option>
+      </select>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Scouted By:</span>
+      </div>
+      <select class="form-control scoutedBy" name="scouted" id="scouted">
+        <option selected disabled>Please select the scout...</option>
+      </select>
+    </div>
+  </fieldset>
+
+    {{-- ============================================================================ --}}
+  {{-- FIELD FOR SETTING THE SOURCE INFO --}}
+  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+    <legend class="w-50 pl-2"><i class="fab fa-hubspot text-danger" style="font-size: 25px;"></i>  Source Information</legend>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Source:</span>
+      </div>
+      <select class="form-control" name="source" id="source">
+        <option selected disabled>Please select the source...</option>
+      </select>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Remarks:</span>
+      </div>
+      <textarea class="form-control" name="source_note" id="source_note"></textarea>
+    </div>
+  </fieldset>
+
+  {{-- ============================================================================ --}}
+  {{-- FIELD FOR SETTING THE SCOUT INFO --}}
+    <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+    <legend class="w-50 pl-2"><i class="fab fa-hubspot text-danger" style="font-size: 25px;"></i>  Source Information</legend>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Source:</span>
+      </div>
+      <select class="form-control" name="source" id="source">
+        <option selected disabled>Please select the source...</option>
+      </select>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Remarks:</span>
+      </div>
+      <textarea class="form-control" name="source_note" id="source_note"></textarea>
+    </div>
   </fieldset>
 </form>
 
 {{-- PART for setting the Scout Information --}}
 
 <script>
+var sources;
 $('document').ready(function(){
+  $.ajax({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: "/getSources",
+    method: 'POST',
+    success: function(result){
+      var test = JSON.parse(result);
+      $.each(test, function(index, value){
+        console.log(value);
+        $('#source').append('<option value="'+value._id+'">'+value.en+'</option>');
+      }); 
+    }        
+  });
   $("#searchContact").hide();
   $('#loadContact').change(function(){
       if (this.checked) {
@@ -217,10 +296,55 @@ function test(e){
     });
 }
 
+function officeChanged(e){
+  $('#office option').each(function(){
+    if($(this).is(':selected')){
+      var office = $(this).val();
+
+      $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "/getCountries",
+      method: 'POST',
+      success: function(result){
+        var test = JSON.parse(result);
+        countries = test;
+      }        
+    });
+  $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "/getScoutList",
+      method: 'POST',
+      data:{
+        office_id : office
+      },
+      success: function(result){
+        var test = JSON.parse(result);
+        $.each(test, function(index, value){
+          $('#scouted').append('<option value="'+value._id+'">'+value.firstname+" "+value.lastname+'</option>');
+        });
+      }        
+    });
+    }
+  });
+}
+
 $('document').ready(function(){
         $('.crossbtn').click(function(){
                 $('#contactResult').fadeOut(1000);   
         });
+});
+$('document').ready(function(){
+    $('#ifScouted').click(function(){
+      if($('#ifScouted').prop("checked") == true){
+        $(".scoutedBy").prop("disabled", true);
+      }else{
+        $(".scoutedBy").prop("disabled", false);
+      }  
+    });
 });
 </script>
 

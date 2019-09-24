@@ -5,11 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Contact as Contact;
 use App\Models\Country as Country;
+use App\Models\Source as Source;
+use App\Models\User as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class applicationController extends Controller
 {
+
+    //This function return the list of the sources an applicant may apply to the form through the AJAX
+    public function getSources(Request $request){
+        $sources = Source::all();
+
+        $myJSON = json_encode($sources);
+        echo ($myJSON);
+    }
+    //This function will return the list of the scouts in a specific office through AJAX
+    public function getScoutList(Request $request){
+        $office_id = $request->input('office_id');
+
+        $scoutList = User::where('office_id', $office_id)->whereIn('roles', ['scout'])->get();
+
+        $myJSON = json_encode($scoutList);
+        echo ($myJSON);
+    }
+
     //This function will return the array of countries through AJAX
     public function getCountries(Request $request)
     {
