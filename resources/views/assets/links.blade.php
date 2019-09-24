@@ -26,7 +26,7 @@
 
 {{-- SCOUT LINKS --}}
 @if (Auth::user()->hasAccess('scout'))
-	<li class="nav-item"><a href="/form" class="text-left nav-link">New Talent</a></li>
+	<li class="nav-item"><a href="/form" class="text-left nav-link">New Contact</a></li>
     <li class="nav-item"><a href="/searchApplications" class="text-left nav-link">Search Applications</a></li>
     <li class="nav-item"><a href="/createApplication" class="text-left nav-link">Create New Application</a></li>
 @endif
