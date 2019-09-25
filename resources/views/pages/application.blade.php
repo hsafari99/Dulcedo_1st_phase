@@ -53,6 +53,7 @@
   {{-- FIELD FOR APPLICANT PERSONAL INFORMATION (could be populated by previous form) --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Personal Information</legend>
+    <input type="text" hidden name='id' id="id" value=''>
     <div class="input-group my-1">
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
@@ -100,7 +101,9 @@
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">Country:</span>
       </div>
-      <select name="country" id="country" class="form-control"></select>
+      <select name="country" id="country" class="form-control countries">
+        <option disabled selected>Select a country from the list</option>
+      </select>
     </div>
     <div class="input-group my-1">
       <div class="input-group-prepend">
@@ -120,6 +123,7 @@
   {{-- FIELD FOR GUARDIAN PERSONAL INFORMATION (could be populated by previous form) --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Guardian Information</legend>
+    <input type="text" hidden name='gid'  id="gid" value=''>
     <div class="input-group my-1">
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
@@ -167,7 +171,9 @@
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">Country:</span>
       </div>
-      <select name="gcountry" id="gcountry" class="form-control"></select>
+      <select name="gcountry" id="gcountry" class="form-control countries">
+        <option disabled selected>Select a country from the list</option>
+      </select>
     </div>
     <div class="input-group my-1">
       <div class="input-group-prepend">
@@ -180,6 +186,12 @@
         <span class="input-group-text d-block new_talent_subscription_form">SIN no.:</span>
       </div>
       <input type="text" name="gsin" id="gsin" class="form-control"/>
+    </div>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form" data-toggle="tooltip" title="Guardian- Applicant Family Relationship"><i class="fas fa-info-circle text-dark"></i>&nbsp Relation:</span>
+      </div>
+      <input type="text" name="guardian_relation" id="guardian_relation" class="form-control"/>
     </div>
   </fieldset>
 
@@ -257,7 +269,7 @@
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE PhYSICAL and SHAPE INFO --}}
-    <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fas fa-id-card-alt text-info" style="font-size: 25px;"></i>  Physical Information</legend>
     
     <div class="input-group my-1">
@@ -426,6 +438,12 @@
       <input type="number" name="inseam" class="form-control" placeholder="Please enter the size in inches">
     </div> 
 
+  </fieldset>
+
+  {{-- ============================================================================ --}}
+  {{-- FIELD FOR SETTING THE SOCIAL MEDIAS APPLICANT IS ACTIVE ON --}}
+  <fieldset class="border border-dark rounded p-3 my-3 shadow">
+    <legend class="w-50 pl-2"><i class="fas fa-thumbs-up text-success" style="font-size: 25px;"></i>  Social Medias</legend>
     <div class="input-group my-1">
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">Networks:</span>
@@ -441,26 +459,168 @@
         </tr>
       </table>
     </div>
-    
-    <div class="input-group my-1">
-      <div class="input-group-prepend">
-        <span class="input-group-text d-block new_talent_subscription_form">Event ID:</span>
+  </fieldset>
+
+  {{-- ============================================================================ --}}
+  {{-- FIELD FOR SETTING THE APPLICANT ANSWERS TO CERTAIN QUESTIONS --}}
+  <fieldset class="border border-dark rounded p-3 my-3 shadow">
+    <legend class="w-50 pl-2"><i class="fas fa-question-circle text-dark" style="font-size: 25px;"></i>  Questions & Answers</legend>
+    <div class="d-flex flex-row justify-content-between w-100">
+      <div class=" my-auto">
+        <span class="bg-warning p-2">
+          Question 
+          <span class="font-weight-bold text-danger" id="currentCounter">
+          </span> 
+          of 
+          <span class="font-weight-bold text-danger pr-2" id="totalCounter">
+          </span>
+        </span>
       </div>
-      <input type="text" name="event" id="event" class="form-control" placeholder="Please search the event by name to find the ID...">
+      <div class=" my-auto">
+        <span class="bg-info p-2">
+          Language: 
+          <input type="radio" name="language" value="english" onchange="changeLanguage(this)" checked>English
+          <input type="radio" name="language" value="french" onchange="changeLanguage(this)">French
+        </span>
+      </div>
+      <div>
+        <span class="btn btn-dark" style="cursor:pointer;" onclick="goToEnd()"><i class="fas fa-fast-forward text-light" style="font-size:20px;"></i>&nbsp End</span>
+      </div>
+    </div>
+    <div class="input-group mb-1 mt-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Questions:</span>
+      </div>
+      <span class="form-control btn btn-info" style="cursor:pointer;" onclick="addQuestion()"><i class="fas fa-hand-point-down text-dark" style="font-size:25px;"></i>Show Next Question</span>
+    </div>
+    <div class="input-group my-1" id="questionsBoard">
     </div>
   </fieldset>
+
+  {{-- ============================================================================ --}}
+  {{-- FIELD FOR SETTING THE APPLICANT CITIZENSHIPS --}}
+  <fieldset class="border border-dark rounded p-3 my-3 shadow">
+    <legend class="w-50 pl-2"><i class="fas fa-globe-americas text-success" style="font-size: 25px;"></i>&nbsp &nbsp  Citizenships</legend>
+    <label> Please select max. 3 countries you have citizenship or work permit</label>
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form">Citizenships:</span>
+      </div>
+      <select name="country1" class="form-control countries">
+        <option disabled selected>Country 1</option>
+      </select>
+      <select name="country2" class="form-control countries">
+        <option disabled selected>Country 2</option>
+      </select>
+      <select name="country3" class="form-control countries">
+        <option disabled selected>Country 3</option>
+      </select>
+    </div>
+  </fieldset>
+
+  {{-- ============================================================================ --}}
+  {{-- SECTION FOR PUTTING ANY COMMENT --}}
+  <div class="input-group my-1">
+      <div class="input-group-prepend align-middle">
+        <span class="input-group-text d-block new_talent_subscription_form">Remarks:</span>
+      </div>
+      <textarea type="text" name="notes"class="form-control"></textarea>
+  </div>
+
+  <div class="input-group my-1">
+    <input type="submit" value="APPLICATION SUBMIT" class="btn btn-success w-100">
+  </div>
 </form>
 
 {{-- PART for setting the Scout Information --}}
 
 <script>
+var countries;
 var sources;
 var networkCounter = 0;
 var role;
+var questions;
+var questionCounter = 0;
+var language = 'english';
+
+
 $('document').ready(function(){
+  getCountries();
   getSources();
   closeModal();
+  getQuestions();
 });
+
+//This function will populate all the countries in select 
+function populateCountries(countries){
+  $.each(countries, function(index, value){
+     $('.countries').append('<option value="'+value._id+'">'+value.en+'</option>');
+  });
+}
+
+//This function will just the page to the selected fieldset
+function goToEnd(){
+  $('select[name="country1"]').focus();
+}
+
+//This function will set the language of questions
+function changeLanguage(e){
+  language = $(e).val();
+}
+
+// This function will add another question in the question div until reaches end
+function addQuestion(){
+  var index = questionCounter;
+  ++questionCounter;
+  if(index < questions.length){
+    $('#currentCounter').text(questionCounter);
+    if(language == "english"){
+      var question = questions[index].en;
+      var message = "Please enter your repsonse here...";
+    }else{
+      var question = questions[index].fr;
+      var message = "Veuillez entrer votre réponse ici ...";
+    }
+    $('#questionsBoard').prepend('<div class="py-2 w-100">'+
+                                  '<span class="font-weight-bold font-italic badge badge-dark">Question:</span>'+
+                                  '<label>&nbsp &nbsp &nbsp'+question+'</label>'+
+                                  '<textarea name="'+questions[index]._id+'" class="w-100 px-2" rows="5" placeholder="'+message+'"></textarea>'+
+                                '</div>');
+  }
+}
+
+//This function will get the list of the countries through AJAX
+function getCountries(){
+  $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: "/getCountries",
+      method: 'POST',
+      success: function(result){
+        var test = JSON.parse(result);
+        countries = test;
+        populateCountries(countries);
+      }        
+  });
+}
+
+//This function will get all questions from the DAtabase Through the AJAX and save it in ann array
+function getQuestions(){
+  $.ajax({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
+    url: "/getQuestions",
+    method: 'POST',
+    success: function(result){
+      var test = JSON.parse(result);
+      questions = test;
+      $('#totalCounter').text(questions.length);
+      $('#currentCounter').text(questionCounter);
+    }        
+  });
+}
 
 //This function is for closing the modals
 function closeModal(){
@@ -527,41 +687,32 @@ function showContacts(){
 //This function will set contact search for populating the guardian
 function loadGuardianSearch(){
   if ($('#loadGuardian').prop("checked") == true) {
+    $('#loadContact').attr("disabled", true);
     $("#searchContact").attr("hidden",false);
     role = 'guardian';
   }else{
-      $("#searchContact").attr("hidden",true);
-      role = 'nothing';
+    $('#loadContact').attr("disabled", false);
+    $("#searchContact").attr("hidden",true);
+    role = 'nothing';
   }
 }
 
 //This function will show / hide the contact search
 function loadContactSearch(){
   if ($('#loadContact').prop("checked") == true) {
+      $('#loadGuardian').attr("disabled", true);
       $("#searchContact").attr("hidden",false);
       role = 'applicant';
     }else{
-       $("#searchContact").attr("hidden",true);
-       role = 'nothing';
+      $('#loadGuardian').attr("disabled", false);
+      $("#searchContact").attr("hidden",true);
+      role = 'nothing';
     }
 }
 
 //This function will populate the contact/guardian form based on the selected contact in modal and through the AJAX
-//It loads the list of the countries through AJAX too
 function test(e){
   var id = e.id;
-  var countries;
-  $.ajax({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      url: "/getCountries",
-      method: 'POST',
-      success: function(result){
-        var test = JSON.parse(result);
-        countries = test;
-      }        
-    });
   $.ajax({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -573,12 +724,16 @@ function test(e){
       },
       success: function(result){
         $('#contactResult').hide();
-        $('#searchContact').hide();
+        $("#searchContact").attr("hidden",true);
         $('#loadContact'). prop("checked", false);
-        
+        $('#loadGuardian').prop("checked", false);
+        $('#loadGuardian').attr("disabled", false);
+        $('#loadContact').attr("disabled", false);
+
         var test = JSON.parse(result);
         // for populating the applicant form
         if(role == 'applicant'){
+          $("#id").val(test._id);
           $("#fName").val(test.firstname);
           $("#lName").val(test.lastname);
           $("#email").val(test.email);
@@ -599,6 +754,7 @@ function test(e){
           $("#sin").val(test.sin);
           //for populating the Gurdian form
         }else{
+          $("#gid").val(test._id);
           $("#gfName").val(test.firstname);
           $("#glName").val(test.lastname);
           $("#gemail").val(test.email);

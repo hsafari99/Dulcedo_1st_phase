@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Contact as Contact;
 use App\Models\Country as Country;
 use App\Models\Event as Event;
+use App\Models\Question as Question;
 use App\Models\Source as Source;
 use App\Models\User as User;
 use Illuminate\Http\Request;
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\View;
 
 class applicationController extends Controller
 {
+
+    //This function will return the list of questions through AJAX
+    public function getQuestions(Request $request){
+        $questions = Question::all();
+
+        $myJSON = json_encode($questions);
+        echo ($myJSON);
+    }
 
     // This function will return the search result of the Event to UI through AJAX
     public function getEvents(Request $request)
@@ -62,7 +71,7 @@ class applicationController extends Controller
     //folder with the contact name
     public function registerApplication(Request $request)
     {
-        echo "Application recorder :)";
+        dd($request);
     }
 
     //This function will return the contact information based on the receive contact_id from AJAX request.
