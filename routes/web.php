@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/getScoutList', 'applicationController@getScoutList');
     Route::post('/getSources', 'applicationController@getSources');
     Route::post('/getEvents', 'applicationController@getEvents');
+    Route::post('/getQuestions', 'applicationController@getQuestions');
 });
 
 //routes for the admins
