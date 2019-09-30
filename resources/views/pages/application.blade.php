@@ -121,12 +121,6 @@
       </div>
       <input type="date" name="dob" id="dob" class="form-control"/>
     </div>
-    <div class="input-group my-1">
-      <div class="input-group-prepend">
-        <span class="input-group-text d-block new_talent_subscription_form">SIN no.:</span>
-      </div>
-      <input type="text" name="sin" id="sin" class="form-control"/>
-    </div>
   </fieldset>
 
     {{-- ============================================================================ --}}
@@ -134,6 +128,17 @@
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Guardian Information</legend>
     <input type="text" hidden name='gid' id="gid" class="form-control">
+    <div class="input-group my-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text d-block new_talent_subscription_form" data-toggle="tooltip" title="Guardian- Applicant Family Relationship"><i class="fas fa-info-circle text-dark"></i>&nbsp Relation:</span>
+      </div>
+      <select name="guardian_relation" id="guardian_relation" class="form-control">
+        <option value='' disabled selected>Please select one of the below options</option>
+        <option value='father'>Father</option>
+        <option value='mother'>Mother</option>
+        <option value='legal_guardian'>Legal Guardian</option>
+      </select>
+    </div>
     <div class="input-group my-1">
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
@@ -190,18 +195,6 @@
         <span class="input-group-text d-block new_talent_subscription_form">Birth Date:</span>
       </div>
       <input type="date" name="gdob" id="gdob" class="form-control"/>
-    </div>
-    <div class="input-group my-1">
-      <div class="input-group-prepend">
-        <span class="input-group-text d-block new_talent_subscription_form">SIN no.:</span>
-      </div>
-      <input type="text" name="gsin" id="gsin" class="form-control"/>
-    </div>
-    <div class="input-group my-1">
-      <div class="input-group-prepend">
-        <span class="input-group-text d-block new_talent_subscription_form" data-toggle="tooltip" title="Guardian- Applicant Family Relationship"><i class="fas fa-info-circle text-dark"></i>&nbsp Relation:</span>
-      </div>
-      <input type="text" name="guardian_relation" id="guardian_relation" class="form-control"/>
     </div>
   </fieldset>
 
@@ -278,7 +271,7 @@
   </fieldset>
 
     {{-- ============================================================================ --}}
-  {{-- FIELD FOR SETTING THE PhYSICAL and SHAPE INFO --}}
+  {{-- FIELD FOR SETTING THE PHYSICAL and SHAPE INFO --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fas fa-id-card-alt text-info" style="font-size: 25px;"></i>  Physical Information</legend>
     
@@ -363,18 +356,54 @@
       </select>
       <select class="form-control" name="height_inches" id="height_inches">
         <option value="" selected disabled>Select Inches</option>
-        <option value="0" id='0in'>0 inch</option>
-        <option value="1" id='1in'>1 inch</option>
-        <option value="2" id='2in'>2 inches</option>
-        <option value="3" id='3in'>3 inches</option>
-        <option value="4" id='4in'>4 inches</option>
-        <option value="5" id='5in'>5 inches</option>
-        <option value="6" id='6in'>6 inches</option>
-        <option value="7" id='7in'>7 inches</option>
-        <option value="8" id='8in'>8 inches</option>
-        <option value="9" id='9in'>9 inches</option>
-        <option value="10" id='10in'>10 inches</option>
-        <option value="11" id='11in'>11 inches</option>
+        <option value="0" id='004in'>0 inch</option>
+        <option value="0.25" id='014in'>&nbsp;&nbsp;&nbsp;&nbsp; 1/4 inch</option>
+        <option value="0.5" id='024in'>&nbsp;&nbsp;&nbsp;&nbsp; 1/2 inch</option>
+        <option value="0.75" id='034in'>&nbsp;&nbsp;&nbsp;&nbsp; 3/4 inch</option>
+        <option value="1" id='104in'>1 inch</option>
+        <option value="1.25" id='114in'>&nbsp;&nbsp;&nbsp;&nbsp; 1 1/4 inch</option>
+        <option value="1.5" id='124in'>&nbsp;&nbsp;&nbsp;&nbsp; 1 1/2 inch</option>
+        <option value="1.75" id='134in'>&nbsp;&nbsp;&nbsp;&nbsp; 1 3/4 inch</option>
+        <option value="2" id='204in'>2 inches</option>
+        <option value="2.25" id='214in'>&nbsp;&nbsp;&nbsp;&nbsp; 2 1/4 inch</option>
+        <option value="2.5" id='224in'>&nbsp;&nbsp;&nbsp;&nbsp; 2 1/2 inch</option>
+        <option value="2.75" id='234in'>&nbsp;&nbsp;&nbsp;&nbsp; 2 3/4 inch</option>
+        <option value="3" id='304in'>3 inches</option>
+        <option value="3.25" id='314in'>&nbsp;&nbsp;&nbsp;&nbsp; 3 1/4 inch</option>
+        <option value="3.5" id='324in'>&nbsp;&nbsp;&nbsp;&nbsp; 3 1/2 inch</option>
+        <option value="3.75" id='334in'>&nbsp;&nbsp;&nbsp;&nbsp; 3 3/4 inch</option>
+        <option value="4" id='404in'>4 inches</option>
+        <option value="4.25" id='414in'>&nbsp;&nbsp;&nbsp;&nbsp; 4 1/4 inch</option>
+        <option value="4.5" id='424in'>&nbsp;&nbsp;&nbsp;&nbsp; 4 1/2 inch</option>
+        <option value="4.75" id='434in'>&nbsp;&nbsp;&nbsp;&nbsp; 4 3/4 inch</option>
+        <option value="5" id='504in'>5 inches</option>
+        <option value="5.25" id='514in'>&nbsp;&nbsp;&nbsp;&nbsp; 5 1/4 inch</option>
+        <option value="5.5" id='524in'>&nbsp;&nbsp;&nbsp;&nbsp; 5 1/2 inch</option>
+        <option value="5.75" id='534in'>&nbsp;&nbsp;&nbsp;&nbsp; 5 3/4 inch</option>
+        <option value="6" id='604in'>6 inches</option>
+        <option value="6.25" id='614in'>&nbsp;&nbsp;&nbsp;&nbsp; 6 1/4 inch</option>
+        <option value="6.5" id='624in'>&nbsp;&nbsp;&nbsp;&nbsp; 6 1/2 inch</option>
+        <option value="6.75" id='634in'>&nbsp;&nbsp;&nbsp;&nbsp; 6 3/4 inch</option>
+        <option value="7" id='704in'>7 inches</option>
+        <option value="7.25" id='714in'>&nbsp;&nbsp;&nbsp;&nbsp; 7 1/4 inch</option>
+        <option value="7.5" id='724in'>&nbsp;&nbsp;&nbsp;&nbsp; 7 1/2 inch</option>
+        <option value="7.75" id='734in'>&nbsp;&nbsp;&nbsp;&nbsp; 7 3/4 inch</option>
+        <option value="8" id='804in'>8 inches</option>
+        <option value="8.25" id='814in'>&nbsp;&nbsp;&nbsp;&nbsp; 8 1/4 inch</option>
+        <option value="8.5" id='824in'>&nbsp;&nbsp;&nbsp;&nbsp; 8 1/2 inch</option>
+        <option value="8.75" id='834in'>&nbsp;&nbsp;&nbsp;&nbsp; 8 3/4 inch</option>
+        <option value="9" id='904in'>9 inches</option>
+        <option value="9.25" id='914in'>&nbsp;&nbsp;&nbsp;&nbsp; 9 1/4 inch</option>
+        <option value="9.5" id='924in'>&nbsp;&nbsp;&nbsp;&nbsp; 9 1/2 inch</option>
+        <option value="9.75" id='934in'>&nbsp;&nbsp;&nbsp;&nbsp; 9 3/4 inch</option>
+        <option value="10" id='1004in'>10 inches</option>
+        <option value="10.25" id='1014in'>&nbsp;&nbsp;&nbsp;&nbsp; 10 1/4 inch</option>
+        <option value="10.5" id='1024in'>&nbsp;&nbsp;&nbsp;&nbsp; 10 1/2 inch</option>
+        <option value="10.75" id='1034in'>&nbsp;&nbsp;&nbsp;&nbsp; 10 3/4 inch</option>
+        <option value="11" id='1104in'>11 inches</option>
+        <option value="11.25" id='1114in'>&nbsp;&nbsp;&nbsp;&nbsp; 11 1/4 inch</option>
+        <option value="11.5" id='1124in'>&nbsp;&nbsp;&nbsp;&nbsp; 11 1/2 inch</option>
+        <option value="11.75" id='1134in'>&nbsp;&nbsp;&nbsp;&nbsp; 11 3/4 inch</option>
       </select>
     </div>
 
@@ -503,8 +532,7 @@
       </div>
       <span class="form-control btn btn-info" style="cursor:pointer;" onclick="addQuestion()"><i class="fas fa-hand-point-down text-dark" style="font-size:25px;"></i>Show Next Question</span>
     </div>
-    <div class="input-group my-1" id="questionsBoard">
-    </div>
+    <div class="input-group my-1" id="questionsBoard"></div>
   </fieldset>
 
   {{-- ============================================================================ --}}
@@ -885,10 +913,13 @@ function calculateFT(){
   //30.48 is the cm to in convesion factor
   // 2.54 is cm to in conversion factor
   var ft = Math.floor(cm/30.48);
-  var inch = Math.ceil((cm - (ft * 30.48))/2.54);
-
+  var inch = Math.floor((cm - (ft * 30.48))/2.54);
+  var remainder = Math.floor(((cm - ((ft * 30.48) + (inch * 2.54)))/2.54)*4);
+  // console.log("feet: "+ft);
+  // console.log("Inches: "+inch);
+  // console.log("Remainder: "+remainder);
   $("#"+ft+"ft").prop("selected", true);
-  $("#"+inch+"in").prop("selected", true);
+  $("#"+inch+""+remainder+"4in").prop("selected", true);
   $('#heightConverter').hide();
 }
 
