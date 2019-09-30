@@ -6,6 +6,16 @@
 @endsection
 
 @section('content')
+{{-- showing the errors in the alert --}}
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <label style="cursor: pointer;" for="loadContact" class="pl-4">
   <input type="checkbox" class="form-check-input" id="loadContact" onchange="loadContactSearch()">
     <span class="font-weight-bold text-danger">
@@ -123,7 +133,7 @@
   {{-- FIELD FOR GUARDIAN PERSONAL INFORMATION (could be populated by previous form) --}}
   <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Guardian Information</legend>
-    <input type="text" hidden name='gid'  id="gid" value=''>
+    <input type="text" hidden name='gid' id="gid" class="form-control">
     <div class="input-group my-1">
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">First Name:</span>
@@ -372,7 +382,7 @@
       <div class="input-group-prepend" style="cursor: pointer;" onclick="cmToInches('waist')">
         <span class="input-group-text d-block new_talent_subscription_form"><i class="fas fa-info-circle text-dark" data-toggle="tooltip" title="Please click to convert cm to ft!"></i> Waist:</span>
       </div>
-      <input type="number" name="waist" class="form-control" placeholder="Please enter the size in inches">
+      <input type="number" name="waist" class="form-control" placeholder="Please enter the size in inches" value='30'>
     </div>
 
     <div class="input-group my-1">
@@ -418,14 +428,14 @@
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">Dress:</span>
       </div>
-      <input type="number" name="dress" class="form-control" min='0' max='20' step='2' placeholder="Please enter the Canadian base sizes...">
+      <input type="number" name="dress" class="form-control"placeholder="Please enter the Canadian base sizes...">
     </div>
 
     <div class="input-group my-1">
       <div class="input-group-prepend">
         <span class="input-group-text d-block new_talent_subscription_form">Shoe:</span>
       </div>
-      <input type="number" name="shoe" class="form-control" min='3.5' max='15.5' step='0.5' placeholder="Please enter the Canadian sizes...">
+      <input type="number" name="shoe" class="form-control" step="0.5" placeholder="Please enter the Canadian sizes...">
     </div>
 
     <div class="input-group my-1">
@@ -551,6 +561,10 @@ $('document').ready(function(){
   getQuestions();
 });
 
+function showresult(){
+  var test = $("input[name='waist']").val();
+  console.log("value: "+ test);
+}
 //This function will populate all the countries in select 
 function populateCountries(countries){
   $.each(countries, function(index, value){
@@ -774,6 +788,7 @@ function test(e){
           $("#gdob").val(test.birthdate);
           $("#gsin").val(test.sin);
         }
+        console.log(test._id);
       }        
     });
 }
@@ -848,7 +863,7 @@ function eventSearchs(){
 //This function will add the eventId to the form through the selected event in the modal and by AJAX
 function addEvent(e){
   $('#event').val(e.id);
-  $('#event').prop("disabled", true);
+  $('#event').prop("disabled", false);
   $('#eventSearch').hide();
 }
 
@@ -896,7 +911,6 @@ function convertcmToInches(){
 
 //This function will add a section for adding the network and username. It also allows user to remove the nwanted networks
 function addNetwork(){
-  console.log(networkCounter);
   $('#network').append('<tr>'+
                   '<td class="p-0"><input type="text" class="w-100 pt-2" name="network'+networkCounter+'"></td>'+
                   '<td class="p-0"><input type="text" class="w-100 pt-2" name="username'+networkCounter+'"></td>'+
@@ -907,7 +921,6 @@ function addNetwork(){
 
 //Thus function will remove the row that users wants to remove from networks section
 function removeMe(e){
-  console.log(e);
   $(e).parent().parent().remove();
 }
 

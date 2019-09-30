@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\applicationValidator;
 use App\Models\Contact as Contact;
 use App\Models\Country as Country;
 use App\Models\Event as Event;
@@ -69,9 +70,36 @@ class applicationController extends Controller
 
     //This function will record the new application in database and put the new photos in storage
     //folder with the contact name
-    public function registerApplication(Request $request)
-    {
-        dd($request);
+    public function registerApplication(applicationValidator $request)
+    {   
+        $scout_id = $request->input('scouted');
+        $step_id = (isset($scout_id) && !empty($scout_id))? 'SCT' : 'APP';
+        $source_id = $request->input('source');
+        $source_note = $request->input('source_note');
+        $event_id = $request->input('event');
+        $office_id = $request->input('app_office');
+        $gender = $request->input('gender');
+        $eye_color = $request->input('eye_color');
+        $hair_color = $request->input('hair_color');
+        $height = (int)($request->input('height_feet'))*12 + (int)($request->input('height_inches'));
+        $waist = (int)($request->input('waist'));
+        $bust = (int)($request->input('bust'));
+        $hips = (int)($request->input('hips'));
+        $neck = (int)($request->input('neck'));
+        $sleeve = (int)($request->input('sleeve'));
+        $dress = (int)($request->input('dress'));
+        $shoe = (int)($request->input('shoe'));
+        $inseam = (int)($request->input('inseam'));
+        $index = "goos";
+        for($i =0; $i<10; $i++){
+            $index = 'network'+$i 
+            $$index = $request->input($index);
+        }
+        $contact_id = $request->input('id');
+        $guardian_id = $request->input('gid');
+        $validated = $request->validated();
+        
+        dd($$index);
     }
 
     //This function will return the contact information based on the receive contact_id from AJAX request.
