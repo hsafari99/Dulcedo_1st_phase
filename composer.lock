@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64552ed49e86b56607a9d107c25ba532",
+    "content-hash": "ea4232d03141c34d67597319d3d863b8",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3801,6 +3801,63 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "laracasts/utilities",
+            "version": "3.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/PHP-Vars-To-Js-Transformer.git",
+                "reference": "490c6cf4d23c26c94e01867265c84921863a5f19"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/PHP-Vars-To-Js-Transformer/zipball/490c6cf4d23c26c94e01867265c84921863a5f19",
+                "reference": "490c6cf4d23c26c94e01867265c84921863a5f19",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.0|^6.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracasts\\Utilities\\JavaScript\\JavaScriptServiceProvider"
+                    ],
+                    "aliases": {
+                        "JavaScript": "Laracasts\\Utilities\\JavaScript\\JavaScriptFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Laracasts\\Utilities\\JavaScript\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Transform your PHP to JavaScript",
+            "keywords": [
+                "javascript",
+                "laravel"
+            ],
+            "time": "2019-09-04T12:55:27+00:00"
         },
         {
             "name": "mockery/mockery",

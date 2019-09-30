@@ -569,9 +569,9 @@
     <input type="submit" value="APPLICATION SUBMIT" class="btn btn-success w-100">
   </div>
 </form>
-
+<div id="test"></div>
 {{-- PART for setting the Scout Information --}}
-
+<script src="js/app.js"></script>
 <script>
 var countries;
 var sources;
