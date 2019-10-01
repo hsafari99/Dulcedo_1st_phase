@@ -27,8 +27,9 @@
 
 
     {{--  <!-- Added linkes by Hossein for implementing the REACT components in the applicaiton-->  --}}
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    {{-- Need to be changed to production during the deployment process --}}
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
     {{--  <!-- Added linkes by Hossein for implementing the REACT components in the applicaiton (BABEL references)-->  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
