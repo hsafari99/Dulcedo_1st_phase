@@ -66120,7 +66120,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/test */ "./resources/js/components/test.js");
+__webpack_require__(/*! ./components/ApplicationRegister */ "./resources/js/components/ApplicationRegister.js");
+
+__webpack_require__(/*! ./components/ApplicationRegisterForm */ "./resources/js/components/ApplicationRegisterForm.js");
 
 /***/ }),
 
@@ -66182,20 +66184,314 @@ if (token) {
 
 /***/ }),
 
-/***/ "./resources/js/components/test.js":
-/*!*****************************************!*\
-  !*** ./resources/js/components/test.js ***!
-  \*****************************************/
+/***/ "./resources/js/components/ApplicationRegister.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/ApplicationRegister.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Test; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ApplicationRegister; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ContactChecker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContactChecker */ "./resources/js/components/ContactChecker.js");
+/* harmony import */ var _SearchContact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SearchContact */ "./resources/js/components/SearchContact.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var ApplicationRegister =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ApplicationRegister, _Component);
+
+  function ApplicationRegister(props) {
+    var _this;
+
+    _classCallCheck(this, ApplicationRegister);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ApplicationRegister).call(this, props));
+    _this.state = {
+      applicantChecked: false,
+      applicantEnabled: false,
+      guardianChecked: false,
+      guardianEnabled: false,
+      isHidden: true
+    };
+    _this.changeStatus = _this.changeStatus.bind(_assertThisInitialized(_this));
+    _this.disableOther = _this.disableOther.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ApplicationRegister, [{
+    key: "changeStatus",
+    value: function changeStatus(event) {
+      var component = event.target.id;
+
+      if (component == 'applicant') {
+        this.setState(function (state, props) {
+          return {
+            applicantChecked: !state.applicantChecked
+          };
+        });
+        this.disableOther(component);
+      }
+
+      if (component == 'guardian') {
+        this.setState(function (state, props) {
+          return {
+            guardianChecked: !state.guardianChecked
+          };
+        });
+        this.disableOther(component);
+      }
+
+      this.setState(function (state, props) {
+        return {
+          isHidden: !state.isHidden
+        };
+      });
+    }
+  }, {
+    key: "disableOther",
+    value: function disableOther(component) {
+      if (component == 'applicant') {
+        if (!this.state.applicantChecked) {
+          this.setState({
+            guardianEnabled: true
+          });
+        } else {
+          this.setState({
+            guardianEnabled: false
+          });
+        }
+      }
+
+      if (component == 'guardian') {
+        if (!this.state.guardianChecked) {
+          this.setState({
+            applicantEnabled: true
+          });
+        } else {
+          this.setState({
+            applicantEnabled: false
+          });
+        }
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        changeStatus: this.changeStatus,
+        formDisplay: this.state.applicantChecked,
+        formEnabled: this.state.applicantEnabled,
+        isWho: "applicant"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        changeStatus: this.changeStatus,
+        formDisplay: this.state.guardianChecked,
+        formEnabled: this.state.guardianEnabled,
+        isWho: "guardian"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchContact__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        isHidden: this.state.isHidden
+      }));
+    }
+  }]);
+
+  return ApplicationRegister;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+if (document.getElementById('AppRegister')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ApplicationRegister, null), document.getElementById('AppRegister'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ApplicationRegisterForm.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/ApplicationRegisterForm.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ApplicationRegisterForm; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ContactChecker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ContactChecker */ "./resources/js/components/ContactChecker.js");
+/* harmony import */ var _SearchContact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SearchContact */ "./resources/js/components/SearchContact.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var ApplicationRegisterForm =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ApplicationRegisterForm, _Component);
+
+  function ApplicationRegisterForm(props) {
+    var _this;
+
+    _classCallCheck(this, ApplicationRegisterForm);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ApplicationRegisterForm).call(this, props));
+    _this.state = {
+      applicantChecked: false,
+      applicantEnabled: false,
+      guardianChecked: false,
+      guardianEnabled: false,
+      isHidden: true
+    };
+    _this.changeStatus = _this.changeStatus.bind(_assertThisInitialized(_this));
+    _this.disableOther = _this.disableOther.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ApplicationRegisterForm, [{
+    key: "changeStatus",
+    value: function changeStatus(event) {
+      var component = event.target.id;
+
+      if (component == 'applicant') {
+        this.setState(function (state, props) {
+          return {
+            applicantChecked: !state.applicantChecked
+          };
+        });
+        this.disableOther(component);
+      }
+
+      if (component == 'guardian') {
+        this.setState(function (state, props) {
+          return {
+            guardianChecked: !state.guardianChecked
+          };
+        });
+        this.disableOther(component);
+      }
+
+      this.setState(function (state, props) {
+        return {
+          isHidden: !state.isHidden
+        };
+      });
+    }
+  }, {
+    key: "disableOther",
+    value: function disableOther(component) {
+      if (component == 'applicant') {
+        if (!this.state.applicantChecked) {
+          this.setState({
+            guardianEnabled: true
+          });
+        } else {
+          this.setState({
+            guardianEnabled: false
+          });
+        }
+      }
+
+      if (component == 'guardian') {
+        if (!this.state.guardianChecked) {
+          this.setState({
+            applicantEnabled: true
+          });
+        } else {
+          this.setState({
+            applicantEnabled: false
+          });
+        }
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        changeStatus: this.changeStatus,
+        formDisplay: this.state.applicantChecked,
+        formEnabled: this.state.applicantEnabled,
+        isWho: "applicant"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        changeStatus: this.changeStatus,
+        formDisplay: this.state.guardianChecked,
+        formEnabled: this.state.guardianEnabled,
+        isWho: "guardian"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchContact__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        isHidden: this.state.isHidden
+      }));
+    }
+  }]);
+
+  return ApplicationRegisterForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+if (document.getElementById('AppRegister')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ApplicationRegisterForm, null), document.getElementById('AppRegister'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/ContactChecker.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/ContactChecker.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _SearchContact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchContact */ "./resources/js/components/SearchContact.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66217,32 +66513,202 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Test =
+var ContactChecker =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Test, _Component);
+  _inherits(ContactChecker, _Component);
 
-  function Test() {
-    _classCallCheck(this, Test);
+  function ContactChecker(props) {
+    _classCallCheck(this, ContactChecker);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(Test).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(ContactChecker).call(this, props));
   }
 
-  _createClass(Test, [{
+  _createClass(ContactChecker, [{
+    key: "handleChange",
+    value: function handleChange() {
+      this.props.changeStatus();
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: this.props.isWho,
+        className: "pl-4 showPointer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        checked: this.props.formDisplay,
+        disabled: this.props.formEnabled,
+        type: "checkbox",
+        className: "form-check-input",
+        id: this.props.isWho,
+        onChange: this.props.changeStatus
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "font-weight-bold text-danger"
+      }, "Not a New ", this.props.isWho, "? Please click here to load the information"));
     }
   }]);
 
-  return Test;
+  return ContactChecker;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
+/* harmony default export */ __webpack_exports__["default"] = (ContactChecker);
+
+/***/ }),
+
+/***/ "./resources/js/components/SearchContact.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/SearchContact.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-if (document.getElementById('test')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Test, null), document.getElementById('test'));
-}
+
+var SearchContact =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SearchContact, _Component);
+
+  function SearchContact(props) {
+    var _this;
+
+    _classCallCheck(this, SearchContact);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchContact).call(this, props));
+    _this.state = {
+      firstName: '',
+      lastName: '',
+      email: ''
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.showContacts = _this.showContacts.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(SearchContact, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "showContacts",
+    value: function showContacts(event) {//e.preventDefault();
+      //   var firstName = $('input[name="firstName"]').val();
+      //   var lastName = $('input[name="lastName"]').val();
+      //   var email = $('input[name="email"]').val();
+      //   $.ajax({
+      //     headers: {
+      //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //     },
+      //     url: "/test",
+      //     method: 'POST',
+      //     data:{
+      //       fname: firstName,
+      //       lname: lastName,
+      //       email: email
+      //     },
+      //     success: function(result){
+      //         var test = JSON.parse(result);
+      //         $('#listContent').children().remove();
+      //         if (test.length == 0) {
+      //           $('#listContent').append("<span class='text-danger font-weight-bold'>No Contact Found with Given Criteria...</span>");
+      //         }else{
+      //           $.each(test, function (index, value) { 
+      //             var t = value._id;
+      //             $('#listContent').append("<button onClick='test(this)' class='border rounded bg-info my-2 p-2 results w-100' style='cursor:pointer;' "+
+      //                                       "id='"+value._id+"'>Full Name: "+
+      //                                       "<span class='font-weight-bold'>"+value.firstname+" "+value.lastname+"</span>"+
+      //                                       "<br/>Email: <span class='font-weight-bold'>"+value.email+
+      //                                       "</span></button>");
+      //           });            
+      //         }
+      //         $('#contactResult').show();
+      //     }        
+      //   });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "searchContact",
+        hidden: this.props.isHidden
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
+        className: "border border-dark rounded p-3 my-3 shadow"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", {
+        className: "w-50 pl-2 pl-5"
+      }, "Search Contact"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group pt-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "First Name:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "firstName",
+        onChange: this.handleChange,
+        value: this.state.firstName
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group pt-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Last Name:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "form-control",
+        name: "lastName",
+        onChange: this.handleChange,
+        value: this.state.lastName
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group pt-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Email:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "email",
+        className: "form-control",
+        name: "email",
+        onChange: this.handleChange,
+        value: this.state.email
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group pt-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn btn-info w-100",
+        onClick: this.showContacts
+      }, "Search"))));
+    }
+  }]);
+
+  return SearchContact;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (SearchContact);
 
 /***/ }),
 

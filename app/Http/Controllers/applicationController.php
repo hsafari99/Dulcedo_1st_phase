@@ -298,7 +298,7 @@ class applicationController extends Controller
                 }
             }
         }
-        
+
         if(null !== $request->input('gid2')){
             $contact_id = $request->input('gid2');
             //getting the applicant information in case that it is not a registered applicant

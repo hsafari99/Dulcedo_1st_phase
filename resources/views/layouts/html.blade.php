@@ -73,6 +73,9 @@ h1, h2, h3, h4, h5 {
 .new_talent_subscription_form{
     width: 114px;
 }
+.showPointer{
+    cursor: pointer;
+}
 </style>
 <body>
     <div id="app">
