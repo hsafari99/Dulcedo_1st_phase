@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import SearchContact from './SearchContact';
 
 class ContactChecker extends Component{
         constructor(props){
