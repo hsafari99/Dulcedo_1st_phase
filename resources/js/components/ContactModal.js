@@ -1,55 +1,55 @@
-import React, {Component} from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import React, { Component } from "react";
+import { Modal, Button } from "react-bootstrap";
+import ModalResult from "./simpleComponents/ModalResult";
 
-class ContactModal extends Component{
-        constructor(props){
-                // var result = JSON.parse(this.props.list);
-                // console.log(result);
-                super(props);
-                this.state={
-                    showModal: this.props.hiding,
-                    hideDiv: true,
-                //     list : result    
-                }
-                this.close = this.close.bind(this);
-                this.showContacts = this.showContacts.bind(this);
-                this.retrieveContactId = this.retrieveContactId.bind(this);
-        }
+class ContactModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: true
+        };
+        this.close = this.close.bind(this);
+        this.showContacts = this.showContacts.bind(this);
+        this.retrieveContactId = this.retrieveContactId.bind(this);
+        this.passId = this.passId.bind(this);
+    }
 
-        close() {
-        this.setState({ hideDiv: false });
+    close() {
         this.setState({ showModal: false });
-        }
+    }
 
-        retrieveContactId(event){
-                console.log(event.target.name);
-        }
+    retrieveContactId(event) {
+        console.log(event.target.name);
+    }
 
-        showContacts(){
-                this.props.list.map((contact) => {
-                        <div className="bg-info" name={contact._id} key={contact._id} onClick={this.retrieveContactId}>
-                                <span className="font-weight-bold text-dark">Full Name:</span>{contact.firstname}&nbsp; &nbsp;{contact.lastname}
-                                <span className="font-weight-bold text-dark">Email: </span>{contact.email}
-                        </div>
-                });
-        }
+    showContacts() {
+        console.log("Here");
+        this.props.list.map(contact => { });
+    }
 
-        render() {
-                return (
-                <div>
-                        <Modal show={this.props.hiding && this.state.hideDiv} onHide={this.close}>
-                        <Modal.Header closeButton className="bg-success">
-                        <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body id="contactResult">
-                               {this.props.list.map((contact, index) => (<span key= {index}>test</span>))}
-                        </Modal.Body>
-                        </Modal>
-                </div>
-                );
-        }
+    passId(ID) {
+        this.props.getid(ID);
+    }
 
+    render() {
+        return (<Modal show={this.state.showModal} onHide={this.close} getid={this.passId}>
+            <Modal.Header closeButton className="bg-success" >
+                <Modal.Title > <h5>Search Results...</h5>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
+                {this.props.result.length == 0 ?
+                    <span className="text-danger" >
+                        No Result matches your criteria!
+                    </span> :
+                    this.props.result.map((contact, index) => <ModalResult
+                        id={contact._id}
+                        firstname={contact.firstname}
+                        lastname={contact.lastname}
+                        key={index}
+                        email={contact.email} />)}
+            </Modal.Body>
+        </Modal>);
+    }
 }
-
 export default ContactModal;
