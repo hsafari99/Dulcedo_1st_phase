@@ -4,6 +4,7 @@ import ContactChecker from "./ContactChecker";
 import ContactModal from "./ContactModal";
 import SearchContact from "./searchContact";
 import $ from "jquery";
+import Test from './simpleComponents/test';
 
 export default class ApplicationRegister extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class ApplicationRegister extends Component {
             guardianChecked: false,
             hideContactSearch: true,
             hideModal: true,
-            value: []
+            value: [],
         };
 
         this.changeStatus = this.changeStatus.bind(this);
@@ -121,7 +122,6 @@ export default class ApplicationRegister extends Component {
                     <ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />
                 )
             }
-
         </div>
         );
     }
