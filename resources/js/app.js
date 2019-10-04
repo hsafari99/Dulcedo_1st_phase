@@ -5,6 +5,16 @@
  */
 
 require('./bootstrap');
+require("react-bootstrap");
+
+//===================> Added By Hossein <=============================//
+/**
+* This import is for the bootstrap for the React 
+* It is referenced through the below website address:
+* https://react-bootstrap.github.io/getting-started/introduction/
+* I mainly add it for having Modal show in REACT
+*/
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
  * Next, we will create a fresh React component instance and attach it to
@@ -12,4 +22,5 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-require('./components/test');
+require('./components/ApplicationRegister');
+// require('./components/ApplicationRegisterForm');

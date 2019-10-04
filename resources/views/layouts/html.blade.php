@@ -73,6 +73,16 @@ h1, h2, h3, h4, h5 {
 .new_talent_subscription_form{
     width: 114px;
 }
+.showPointer{
+    cursor: pointer;
+}
+.modal-dialog{
+    overflow-y: initial !important;
+}
+.modal-body{
+    max-height: 600px; 
+    overflow-y: auto;
+}
 </style>
 <body>
     <div id="app">

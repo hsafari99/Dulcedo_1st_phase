@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+<div id="AppRegister"></div>
 {{-- showing the errors in the alert --}}
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -16,20 +17,20 @@
         </ul>
     </div>
 @endif
-<label style="cursor: pointer;" for="loadContact" class="pl-4">
+{{-- <label for="loadContact" class="pl-4 showPointer">
   <input type="checkbox" class="form-check-input" id="loadContact" onchange="loadContactSearch()">
     <span class="font-weight-bold text-danger">
       Not a New applicant? Please click here to load the information
     </span>
-</label>
-<label style="cursor: pointer;" for="loadGuardian" class="pl-4">
+</label> --}}
+{{-- <label style="cursor: pointer;" for="loadGuardian" class="pl-4">
   <input type="checkbox" class="form-check-input" id="loadGuardian" onchange="loadGuardianSearch()">
     <span class="font-weight-bold text-info">
       Not a New Guardian? Please click here to load the information
     </span>
-</label>
+</label> --}}
 {{-- FORM FOR LOADING THE ALREADY APPLIED CONTACT --}}
-<div id="searchContact" hidden>
+{{-- <div id="searchContact" hidden>
     <fieldset class="border border-dark rounded p-3 my-3 shadow">
     <legend class="w-50 pl-2 pl-5">Search Contact</legend>
     <div class="input-group pt-2">
@@ -54,14 +55,14 @@
       <span class="btn btn-info w-100" onclick="showContacts()">Search</span>
     </div>
     </fieldset>
-</div>
+</div> --}}
 
 {{-- FORM REGISTRING THE APPLICATION (MAIN FORM) --}}
 <form action="/registerApplication" enctype="multipart/form-data" method="POST">
   @csrf
   {{-- ============================================================================ --}}
   {{-- FIELD FOR APPLICANT PERSONAL INFORMATION (could be populated by previous form) --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
+  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Applicant">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Personal Information</legend>
     <input type="text" hidden name='id' id="id" value=''>
     <div class="input-group my-1">
@@ -125,7 +126,7 @@
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR GUARDIAN PERSONAL INFORMATION (could be populated by previous form) --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="badApplications">
+  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Guardian">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Guardian Information</legend>
     <input type="text" hidden name='gid' id="gid" class="form-control">
     <div class="input-group my-1">
@@ -569,7 +570,7 @@
     <input type="submit" value="APPLICATION SUBMIT" class="btn btn-success w-100">
   </div>
 </form>
-<div id="test"></div>
+
 {{-- PART for setting the Scout Information --}}
 <script src="js/app.js"></script>
 <script>
