@@ -80823,13 +80823,21 @@ function (_Component) {
     _this.disableOther = _this.disableOther.bind(_assertThisInitialized(_this));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.getInfo = _this.getInfo.bind(_assertThisInitialized(_this));
-    _this.retrieveId = _this.retrieveId.bind(_assertThisInitialized(_this));
+    _this.retrieveid = _this.retrieveid.bind(_assertThisInitialized(_this));
+    _this.resetModal = _this.resetModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ApplicationRegister, [{
-    key: "retrieveId",
-    value: function retrieveId(ID) {
+    key: "resetModal",
+    value: function resetModal() {
+      this.setState({
+        hideModal: true
+      });
+    }
+  }, {
+    key: "retrieveid",
+    value: function retrieveid(ID) {
       console.log(ID);
     }
   }, {
@@ -80939,8 +80947,9 @@ function (_Component) {
         setInputs: this.getInfo
       }), " ", this.state.hideModal ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
         result: this.state.value,
-        getid: this.retrieveId
-      }), " ");
+        getid: this.retrieveid,
+        hideModal: this.resetModal
+      }));
     }
   }]);
 
@@ -81077,43 +81086,39 @@ function (_Component) {
     _this.state = {
       showModal: true
     };
-    _this.close = _this.close.bind(_assertThisInitialized(_this));
-    _this.showContacts = _this.showContacts.bind(_assertThisInitialized(_this));
-    _this.retrieveContactId = _this.retrieveContactId.bind(_assertThisInitialized(_this));
-    _this.passId = _this.passId.bind(_assertThisInitialized(_this));
+    _this.close = _this.close.bind(_assertThisInitialized(_this)); // this.showContacts = this.showContacts.bind(this);
+    // this.retrieveContactId = this.retrieveContactId.bind(this);
+
+    _this.passid = _this.passid.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ContactModal, [{
     key: "close",
     value: function close() {
-      this.setState({
-        showModal: false
-      });
-    }
+      this.props.hideModal(); // this.setState({ showModal: false });
+    } // retrieveContactId(event) {
+    //     console.log(event.target.name);
+    // }
+    // showContacts() {
+    //     console.log("Here");
+    //     this.props.list.map(contact => { });
+    // }
+
   }, {
-    key: "retrieveContactId",
-    value: function retrieveContactId(event) {
-      console.log(event.target.name);
-    }
-  }, {
-    key: "showContacts",
-    value: function showContacts() {
-      console.log("Here");
-      this.props.list.map(function (contact) {});
-    }
-  }, {
-    key: "passId",
-    value: function passId(ID) {
+    key: "passid",
+    value: function passid(ID) {
       this.props.getid(ID);
+      console.log(ID);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
         show: this.state.showModal,
-        onHide: this.close,
-        getid: this.passId
+        onHide: this.close
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Header, {
         closeButton: true,
         className: "bg-success"
@@ -81125,7 +81130,9 @@ function (_Component) {
           firstname: contact.firstname,
           lastname: contact.lastname,
           key: index,
-          email: contact.email
+          email: contact.email,
+          receiveid: _this2.passid,
+          close: _this2.close
         });
       })));
     }
@@ -81363,23 +81370,23 @@ function (_Component) {
     _classCallCheck(this, ModalResult);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ModalResult).call(this, props));
-    _this.getid = _this.getid.bind(_assertThisInitialized(_this));
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ModalResult, [{
-    key: "getid",
-    value: function getid(event) {
-      //this.props.getid(event.target.name);
-      console.log(event.target.name);
+    key: "handleClick",
+    value: function handleClick(event) {
+      this.props.receiveid(event.target.name);
+      this.props.close(); // console.log(event.target.name);
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "bg-info m-1 p-1 showPointer",
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "bg-info my-1 p-1 showPointer w-100 align-left",
         name: this.props.id,
-        onClick: this.getid
+        onClick: this.handleClick
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bold text-dark"
       }, "Full Name:\xA0"), this.props.firstname, "\xA0", this.props.lastname, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {

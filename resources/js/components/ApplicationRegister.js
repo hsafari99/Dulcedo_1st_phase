@@ -20,10 +20,15 @@ export default class ApplicationRegister extends Component {
         this.disableOther = this.disableOther.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.getInfo = this.getInfo.bind(this);
-        this.retrieveId = this.retrieveId.bind(this);
+        this.retrieveid = this.retrieveid.bind(this);
+        this.resetModal = this.resetModal.bind(this);
     }
 
-    retrieveId(ID) {
+    resetModal() {
+        this.setState({ hideModal: true });
+    }
+
+    retrieveid(ID) {
         console.log(ID);
     }
 
@@ -113,9 +118,11 @@ export default class ApplicationRegister extends Component {
                 )
             } {this.state.hideModal ? (
                 "") : (
-                    <ContactModal result={this.state.value} getid={this.retrieveId} />
+                    <ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />
                 )
-            } </div>
+            }
+
+        </div>
         );
     }
 }

@@ -9,30 +9,32 @@ class ContactModal extends Component {
             showModal: true
         };
         this.close = this.close.bind(this);
-        this.showContacts = this.showContacts.bind(this);
-        this.retrieveContactId = this.retrieveContactId.bind(this);
-        this.passId = this.passId.bind(this);
+        // this.showContacts = this.showContacts.bind(this);
+        // this.retrieveContactId = this.retrieveContactId.bind(this);
+        this.passid = this.passid.bind(this);
     }
 
     close() {
-        this.setState({ showModal: false });
+        this.props.hideModal();
+        // this.setState({ showModal: false });
     }
 
-    retrieveContactId(event) {
-        console.log(event.target.name);
-    }
+    // retrieveContactId(event) {
+    //     console.log(event.target.name);
+    // }
 
-    showContacts() {
-        console.log("Here");
-        this.props.list.map(contact => { });
-    }
+    // showContacts() {
+    //     console.log("Here");
+    //     this.props.list.map(contact => { });
+    // }
 
-    passId(ID) {
+    passid(ID) {
         this.props.getid(ID);
+        console.log(ID);
     }
 
     render() {
-        return (<Modal show={this.state.showModal} onHide={this.close} getid={this.passId}>
+        return (<Modal show={this.state.showModal} onHide={this.close}>
             <Modal.Header closeButton className="bg-success" >
                 <Modal.Title > <h5>Search Results...</h5>
                 </Modal.Title>
@@ -47,7 +49,10 @@ class ContactModal extends Component {
                         firstname={contact.firstname}
                         lastname={contact.lastname}
                         key={index}
-                        email={contact.email} />)}
+                        email={contact.email}
+                        receiveid={this.passid}
+                        close={this.close}
+                    />)}
             </Modal.Body>
         </Modal>);
     }
