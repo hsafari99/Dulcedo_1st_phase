@@ -4,7 +4,7 @@ import ContactChecker from "./ContactChecker";
 import ContactModal from "./ContactModal";
 import SearchContact from "./searchContact";
 import $ from "jquery";
-import Test from './simpleComponents/test';
+import Contact from './simpleComponents/Contact';
 
 export default class ApplicationRegister extends Component {
     constructor(props) {
@@ -15,6 +15,10 @@ export default class ApplicationRegister extends Component {
             hideContactSearch: true,
             hideModal: true,
             value: [],
+            applicant: '',
+            applicant_fname: '',
+
+            guardian: [],
         };
 
         this.changeStatus = this.changeStatus.bind(this);
@@ -30,7 +34,8 @@ export default class ApplicationRegister extends Component {
     }
 
     retrieveid(ID) {
-        console.log(ID);
+        this.setState({ applicant: ID });
+        console.log("From App reg: " + ID);
     }
 
     getInfo(fname, lname, email) {
@@ -122,6 +127,13 @@ export default class ApplicationRegister extends Component {
                     <ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />
                 )
             }
+            {(this.state.applicant) ?
+                (
+                    <Contact applicant={this.state.applicant} />
+                ) : (
+                    <Contact applicant='NA' />
+                )}
+
         </div>
         );
     }

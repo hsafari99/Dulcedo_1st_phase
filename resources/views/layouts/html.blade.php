@@ -83,6 +83,9 @@ h1, h2, h3, h4, h5 {
     max-height: 600px; 
     overflow-y: auto;
 }
+.awsomeFonts{
+    font-size: 25px;
+}
 </style>
 <body>
     <div id="app">
