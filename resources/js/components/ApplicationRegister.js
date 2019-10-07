@@ -4,6 +4,8 @@ import ContactChecker from "./ContactChecker";
 import ContactModal from "./ContactModal";
 import SearchContact from "./searchContact";
 import $ from "jquery";
+import Contact from './simpleComponents/Contact';
+import Scout from './simpleComponents/ScoutPage';
 
 export default class ApplicationRegister extends Component {
     constructor(props) {
@@ -11,9 +13,36 @@ export default class ApplicationRegister extends Component {
         this.state = {
             applicantChecked: false,
             guardianChecked: false,
+            applicantIsScouted: false,
             hideContactSearch: true,
             hideModal: true,
-            value: []
+            office_id: '',
+            scout_id: '',
+            value: [],
+            applicant: '',
+            applicant_fname: '',
+            applicant_lname: '',
+            applicant_email: '',
+            applicant_phone: '',
+            applicant_address: '',
+            applicant_city: '',
+            applicant_postal: '',
+            applicant_country: '',
+            applicant_dob: '',
+            applicant_guardianId: '',
+            applicant_guardianRelation: '',
+            guardian: '',
+            guardian_fname: '',
+            guardian_lname: '',
+            guardian_email: '',
+            guardian_phone: '',
+            guardian_address: '',
+            guardian_city: '',
+            guardian_postal: '',
+            guardian_country: '',
+            guardian_dob: '',
+            guardian_guardianId: '',
+            guardian_guardianRelation: '',
         };
 
         this.changeStatus = this.changeStatus.bind(this);
@@ -22,6 +51,8 @@ export default class ApplicationRegister extends Component {
         this.getInfo = this.getInfo.bind(this);
         this.retrieveid = this.retrieveid.bind(this);
         this.resetModal = this.resetModal.bind(this);
+        this.setScoutOffice = this.setScoutOffice.bind(this);
+        this.setScoutId = this.setScoutId.bind(this);
     }
 
     resetModal() {
@@ -29,7 +60,13 @@ export default class ApplicationRegister extends Component {
     }
 
     retrieveid(ID) {
-        console.log(ID);
+
+        if (this.state.applicantChecked) {
+            this.setState({ applicant: ID });
+
+        } else if (this.state.guardianChecked) {
+            this.setState({ guardian: ID });
+        }
     }
 
     getInfo(fname, lname, email) {
@@ -100,6 +137,14 @@ export default class ApplicationRegister extends Component {
         }
     }
 
+    setScoutOffice(office) {
+        this.setState({ office_id: office });
+    }
+
+    setScoutId(scoutId) {
+        this.setState({ scout_id: scoutId });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -121,7 +166,11 @@ export default class ApplicationRegister extends Component {
                     <ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />
                 )
             }
-
+            <form action="/registerApplication" encType="multipart/form-data" method="POST">
+                <Contact contact={this.state.applicant} isWho='applicant' />
+                <Contact contact={this.state.guardian} isWho='guardian' />
+                <Scout isScouted={this.state.applicantIsScouted} getOffice={this.setScoutOffice} getScout={this.setScoutId} />
+            </form>
         </div>
         );
     }
@@ -133,5 +182,3 @@ if (document.getElementById("AppRegister")) {
         document.getElementById("AppRegister")
     );
 }
-
-//     <ContactModal firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} hiding={this.state.showModal} />
