@@ -6,6 +6,7 @@ import SearchContact from "./searchContact";
 import $ from "jquery";
 import Contact from './simpleComponents/Contact';
 import Scout from './simpleComponents/ScoutPage';
+import Source from './simpleComponents/Source';
 
 export default class ApplicationRegister extends Component {
     constructor(props) {
@@ -18,6 +19,8 @@ export default class ApplicationRegister extends Component {
             hideModal: true,
             office_id: '',
             scout_id: '',
+            source_id: '',
+            source_note: '',
             value: [],
             applicant: '',
             applicant_fname: '',
@@ -53,6 +56,8 @@ export default class ApplicationRegister extends Component {
         this.resetModal = this.resetModal.bind(this);
         this.setScoutOffice = this.setScoutOffice.bind(this);
         this.setScoutId = this.setScoutId.bind(this);
+        this.setSourceNote = this.setSourceNote.bind(this);
+        this.setSource = this.setSource.bind(this);
     }
 
     resetModal() {
@@ -145,6 +150,14 @@ export default class ApplicationRegister extends Component {
         this.setState({ scout_id: scoutId });
     }
 
+    setSourceNote(note) {
+        this.setState({ source_note: note });
+    }
+
+    setSource(source) {
+        this.setState({ source_id: source });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -170,6 +183,7 @@ export default class ApplicationRegister extends Component {
                 <Contact contact={this.state.applicant} isWho='applicant' />
                 <Contact contact={this.state.guardian} isWho='guardian' />
                 <Scout isScouted={this.state.applicantIsScouted} getOffice={this.setScoutOffice} getScout={this.setScoutId} />
+                <Source setSourceNote={this.setSourceNote} setSource={this.setSource} />
             </form>
         </div>
         );

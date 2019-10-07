@@ -230,7 +230,7 @@
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE SOURCE INFO --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fab fa-hubspot text-danger" style="font-size: 25px;"></i>  Source Information</legend>
     <div class="input-group my-1">
       <div class="input-group-prepend">
@@ -246,7 +246,7 @@
       </div>
       <textarea class="form-control" name="source_note" id="source_note"></textarea>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE EVENT INFO --}}

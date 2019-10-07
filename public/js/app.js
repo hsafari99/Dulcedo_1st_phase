@@ -80776,6 +80776,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./simpleComponents/Contact */ "./resources/js/components/simpleComponents/Contact.js");
 /* harmony import */ var _simpleComponents_ScoutPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./simpleComponents/ScoutPage */ "./resources/js/components/simpleComponents/ScoutPage.js");
+/* harmony import */ var _simpleComponents_Source__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./simpleComponents/Source */ "./resources/js/components/simpleComponents/Source.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -80805,6 +80806,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var ApplicationRegister =
 /*#__PURE__*/
 function (_Component) {
@@ -80824,6 +80826,8 @@ function (_Component) {
       hideModal: true,
       office_id: '',
       scout_id: '',
+      source_id: '',
+      source_note: '',
       value: [],
       applicant: '',
       applicant_fname: '',
@@ -80858,6 +80862,8 @@ function (_Component) {
     _this.resetModal = _this.resetModal.bind(_assertThisInitialized(_this));
     _this.setScoutOffice = _this.setScoutOffice.bind(_assertThisInitialized(_this));
     _this.setScoutId = _this.setScoutId.bind(_assertThisInitialized(_this));
+    _this.setSourceNote = _this.setSourceNote.bind(_assertThisInitialized(_this));
+    _this.setSource = _this.setSource.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -80984,6 +80990,20 @@ function (_Component) {
       });
     }
   }, {
+    key: "setSourceNote",
+    value: function setSourceNote(note) {
+      this.setState({
+        source_note: note
+      });
+    }
+  }, {
+    key: "setSource",
+    value: function setSource(source) {
+      this.setState({
+        source_id: source
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -81018,6 +81038,9 @@ function (_Component) {
         isScouted: this.state.applicantIsScouted,
         getOffice: this.setScoutOffice,
         getScout: this.setScoutId
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Source__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        setSourceNote: this.setSourceNote,
+        setSource: this.setSource
       })));
     }
   }]);
@@ -81879,6 +81902,118 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ScoutPage);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/Source.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/Source.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Source =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Source, _Component);
+
+  function Source(props) {
+    var _this;
+
+    _classCallCheck(this, Source);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Source).call(this, props));
+    _this.state = {
+      list: []
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.getSource = _this.getSource.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Source, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.props.setSourceNote(event.target.value);
+    }
+  }, {
+    key: "getSource",
+    value: function getSource(event) {
+      this.props.setSource(event.target.value);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
+        className: "border border-dark rounded p-3 my-3 shadow",
+        id: "scoutInfo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", {
+        className: "w-50 pl-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fab fa-hubspot text-danger awsomeFonts"
+      }), "Source Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Source:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "source",
+        id: "source",
+        defaultValue: "",
+        onChange: this.getSource
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        disabled: true
+      }, "Please select the source..."), this.state.list.map(function (source) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: source._id
+        }, source.en);
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Remarks:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "form-control",
+        name: "source_note",
+        id: "source_note",
+        onChange: this.handleChange,
+        value: this.state.value
+      })));
+    }
+  }]);
+
+  return Source;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Source);
 
 /***/ }),
 
