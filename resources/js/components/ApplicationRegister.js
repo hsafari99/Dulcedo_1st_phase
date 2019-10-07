@@ -161,7 +161,6 @@ export default class ApplicationRegister extends Component {
     }
 
     setEvent(id) {
-        console.log("Value: " + id);
         this.setState({ event_id: id });
     }
 

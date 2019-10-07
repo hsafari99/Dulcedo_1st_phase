@@ -81010,7 +81010,6 @@ function (_Component) {
   }, {
     key: "setEvent",
     value: function setEvent(id) {
-      console.log("Value: " + id);
       this.setState({
         event_id: id
       });
@@ -81651,6 +81650,9 @@ function (_Component) {
     key: "retrieveid",
     value: function retrieveid(id) {
       this.props.setEventId(id);
+      this.setState({
+        search: id
+      });
     }
   }, {
     key: "render",

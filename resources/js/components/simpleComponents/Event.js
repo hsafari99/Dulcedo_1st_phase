@@ -53,6 +53,8 @@ class Event extends Component {
 
         retrieveid(id) {
                 this.props.setEventId(id);
+                this.setState({ search: id });
+
         }
 
         render() {
