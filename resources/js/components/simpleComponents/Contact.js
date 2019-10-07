@@ -58,7 +58,7 @@ class Contact extends Component {
                                 <Input title="lastName" setValue={this.setValue} />
                                 <Input title="email" setValue={this.setValue} />
 
-                                <div className="input-group my-1">
+                                <div className="input-group pt-2">
                                         <div className="input-group-prepend">
                                                 <span className="input-group-text d-block new_talent_subscription_form">Phone:</span>
                                         </div>
@@ -77,7 +77,7 @@ class Contact extends Component {
                                 <Input title="city" setValue={this.setValue} />
                                 <Input title="postal" setValue={this.setValue} />
 
-                                <div className="input-group my-1">
+                                <div className="input-group pt-2">
                                         <div className="input-group-prepend">
                                                 <span className="input-group-text d-block new_talent_subscription_form">Country:</span>
                                         </div>
@@ -90,7 +90,7 @@ class Contact extends Component {
                                                 <option value='' disabled>Please select a country from the list</option>
                                         </select>
                                 </div>
-                                <div className="input-group my-1">
+                                <div className="input-group pt-2">
                                         <div className="input-group-prepend">
                                                 <span className="input-group-text d-block new_talent_subscription_form">Birth Date:</span>
                                         </div>

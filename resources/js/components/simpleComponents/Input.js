@@ -20,7 +20,15 @@ class Input extends Component {
                                 <div className="input-group-prepend">
                                         <span className="input-group-text d-block new_talent_subscription_form">{this.props.title}:</span>
                                 </div>
-                                <input type="text" className="form-control" id={this.props.title} name={this.props.title} value={this.state.value} onChange={this.handleChange} />
+                                <input
+                                        type="text"
+                                        className="form-control"
+                                        id={this.props.title}
+                                        name={this.props.title}
+                                        value={this.state.value}
+                                        onChange={this.handleChange}
+                                        placeholder={(this.props.placeholder) ? this.props.placeholder : ''}
+                                />
                         </div>
                 );
         }

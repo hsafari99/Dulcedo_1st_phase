@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button } from "react-bootstrap";
 import ModalResult from "./simpleComponents/ModalResult";
+import EventResult from "./simpleComponents/EventModalResult";
 
 class ContactModal extends Component {
     constructor(props) {
@@ -30,7 +31,6 @@ class ContactModal extends Component {
 
     passid(ID) {
         this.props.getid(ID);
-        console.log(ID);
     }
 
     render() {
@@ -44,15 +44,25 @@ class ContactModal extends Component {
                     <span className="text-danger" >
                         No Result matches your criteria!
                     </span> :
-                    this.props.result.map((contact, index) => <ModalResult
-                        id={contact._id}
-                        firstname={contact.firstname}
-                        lastname={contact.lastname}
-                        key={index}
-                        email={contact.email}
-                        receiveid={this.passid}
-                        close={this.close}
-                    />)}
+                    (this.props.showWhat == 'contact') ? (
+                        this.props.result.map((contact, index) => <ModalResult
+                            id={contact._id}
+                            firstname={contact.firstname}
+                            lastname={contact.lastname}
+                            key={index}
+                            email={contact.email}
+                            receiveid={this.passid}
+                            close={this.close}
+                        />)) : (
+                            this.props.result.map((event, index) => <EventResult
+                                id={event._id}
+                                name={event.name}
+                                desc={event.description}
+                                key={index}
+                                receiveid={this.passid}
+                                close={this.close}
+                            />)
+                        )}
             </Modal.Body>
         </Modal>);
     }
