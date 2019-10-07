@@ -17,8 +17,28 @@ export default class ApplicationRegister extends Component {
             value: [],
             applicant: '',
             applicant_fname: '',
-
-            guardian: [],
+            applicant_lname: '',
+            applicant_email: '',
+            applicant_phone: '',
+            applicant_address: '',
+            applicant_city: '',
+            applicant_postal: '',
+            applicant_country: '',
+            applicant_dob: '',
+            applicant_guardianId: '',
+            applicant_guardianRelation: '',
+            guardian: '',
+            guardian_fname: '',
+            guardian_lname: '',
+            guardian_email: '',
+            guardian_phone: '',
+            guardian_address: '',
+            guardian_city: '',
+            guardian_postal: '',
+            guardian_country: '',
+            guardian_dob: '',
+            guardian_guardianId: '',
+            guardian_guardianRelation: '',
         };
 
         this.changeStatus = this.changeStatus.bind(this);
@@ -34,8 +54,13 @@ export default class ApplicationRegister extends Component {
     }
 
     retrieveid(ID) {
-        this.setState({ applicant: ID });
-        console.log("From App reg: " + ID);
+
+        if (this.state.applicantChecked) {
+            this.setState({ applicant: ID });
+
+        } else if (this.state.guardianChecked) {
+            this.setState({ guardian: ID });
+        }
     }
 
     getInfo(fname, lname, email) {
@@ -127,12 +152,8 @@ export default class ApplicationRegister extends Component {
                     <ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />
                 )
             }
-            {(this.state.applicant) ?
-                (
-                    <Contact applicant={this.state.applicant} />
-                ) : (
-                    <Contact applicant='NA' />
-                )}
+            <Contact contact={this.state.applicant} isWho='applicant' />
+            <Contact contact={this.state.guardian} isWho='guardian' />
 
         </div>
         );

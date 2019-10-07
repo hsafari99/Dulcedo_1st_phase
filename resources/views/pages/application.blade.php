@@ -62,7 +62,7 @@
   @csrf
   {{-- ============================================================================ --}}
   {{-- FIELD FOR APPLICANT PERSONAL INFORMATION (could be populated by previous form) --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Applicant">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Applicant">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Personal Information</legend>
     <input type="text" hidden name='id' id="id" value=''>
     <div class="input-group my-1">
@@ -122,7 +122,7 @@
       </div>
       <input type="date" name="dob" id="dob" class="form-control"/>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR GUARDIAN PERSONAL INFORMATION (could be populated by previous form) --}}

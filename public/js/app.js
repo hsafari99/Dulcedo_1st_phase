@@ -80822,7 +80822,28 @@ function (_Component) {
       value: [],
       applicant: '',
       applicant_fname: '',
-      guardian: []
+      applicant_lname: '',
+      applicant_email: '',
+      applicant_phone: '',
+      applicant_address: '',
+      applicant_city: '',
+      applicant_postal: '',
+      applicant_country: '',
+      applicant_dob: '',
+      applicant_guardianId: '',
+      applicant_guardianRelation: '',
+      guardian: '',
+      guardian_fname: '',
+      guardian_lname: '',
+      guardian_email: '',
+      guardian_phone: '',
+      guardian_address: '',
+      guardian_city: '',
+      guardian_postal: '',
+      guardian_country: '',
+      guardian_dob: '',
+      guardian_guardianId: '',
+      guardian_guardianRelation: ''
     };
     _this.changeStatus = _this.changeStatus.bind(_assertThisInitialized(_this));
     _this.disableOther = _this.disableOther.bind(_assertThisInitialized(_this));
@@ -80843,10 +80864,15 @@ function (_Component) {
   }, {
     key: "retrieveid",
     value: function retrieveid(ID) {
-      this.setState({
-        applicant: ID
-      });
-      console.log("From App reg: " + ID);
+      if (this.state.applicantChecked) {
+        this.setState({
+          applicant: ID
+        });
+      } else if (this.state.guardianChecked) {
+        this.setState({
+          guardian: ID
+        });
+      }
     }
   }, {
     key: "getInfo",
@@ -80957,10 +80983,12 @@ function (_Component) {
         result: this.state.value,
         getid: this.retrieveid,
         hideModal: this.resetModal
-      }), this.state.applicant ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        applicant: this.state.applicant
-      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        applicant: "NA"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        contact: this.state.applicant,
+        isWho: "applicant"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        contact: this.state.guardian,
+        isWho: "guardian"
       }));
     }
   }]);
@@ -81303,11 +81331,8 @@ function (_Component) {
     _classCallCheck(this, Contact);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Contact).call(this, props));
-    var applicant = _this.props.applicant == 'NA' ? 'NA' : _this.props.applicant;
-    console.log("Applicant: " + applicant);
-    _this.state = {
-      defaultCountry: 'CAN'
-    };
+    var contact = _this.props.contact == 'NA' ? 'NA' : _this.props.contact;
+    _this.state = {};
     _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -81330,19 +81355,43 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
         className: "border border-dark rounded p-3 my-3 shadow",
-        id: "Applicant"
+        id: this.props.isWho
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", {
         className: "w-50 pl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-address-card text-info awsomeFonts"
-      }), "  Personal Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), "  ", this.props.isWho, " Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         hidden: true,
         name: "id",
         id: "id",
         value: "",
         readOnly: true
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }), this.props.isWho == 'applicant' ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form",
+        "data-toggle": "tooltip",
+        title: "Guardian- Applicant Family Relationship"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-info-circle text-dark"
+      }), "\xA0 Relation:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        name: "guardian_relation",
+        id: "guardian_relation",
+        className: "form-control",
+        defaultValue: ""
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        disabled: true
+      }, "Please select one of the below options"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "father"
+      }, "Father"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "mother"
+      }, "Mother"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "legal_guardian"
+      }, "Legal Guardian"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
         title: "firstName",
         setValue: this.setValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -81385,9 +81434,12 @@ function (_Component) {
         name: "country",
         id: "country",
         className: "form-control countries",
-        defaultValue: this.state.defaultCountry,
+        defaultValue: "",
         onChange: this.handleChange
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        disabled: true
+      }, "Please select a country from the list"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group my-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group-prepend"
