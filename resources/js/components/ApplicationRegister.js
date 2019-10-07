@@ -7,6 +7,7 @@ import $ from "jquery";
 import Contact from './simpleComponents/Contact';
 import Scout from './simpleComponents/ScoutPage';
 import Source from './simpleComponents/Source';
+import Event from './simpleComponents/Event';
 
 export default class ApplicationRegister extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ export default class ApplicationRegister extends Component {
             scout_id: '',
             source_id: '',
             source_note: '',
+            event_id: '',
             value: [],
             applicant: '',
             applicant_fname: '',
@@ -58,6 +60,7 @@ export default class ApplicationRegister extends Component {
         this.setScoutId = this.setScoutId.bind(this);
         this.setSourceNote = this.setSourceNote.bind(this);
         this.setSource = this.setSource.bind(this);
+        this.setEvent = this.setEvent.bind(this);
     }
 
     resetModal() {
@@ -65,7 +68,6 @@ export default class ApplicationRegister extends Component {
     }
 
     retrieveid(ID) {
-
         if (this.state.applicantChecked) {
             this.setState({ applicant: ID });
 
@@ -158,6 +160,11 @@ export default class ApplicationRegister extends Component {
         this.setState({ source_id: source });
     }
 
+    setEvent(id) {
+        console.log("Value: " + id);
+        this.setState({ event_id: id });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -170,20 +177,15 @@ export default class ApplicationRegister extends Component {
                 formDisplay={this.state.guardianChecked}
                 formEnabled={this.state.guardianEnabled}
                 isWho="guardian" />
-            {this.state.hideContactSearch ? (
-                "") : (
-                    <SearchContact setInputs={this.getInfo} />
-                )
-            } {this.state.hideModal ? (
-                "") : (
-                    <ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />
-                )
-            }
+            {this.state.hideContactSearch ? ("") : (<SearchContact setInputs={this.getInfo} />)}
+            {this.state.hideModal ? ("") : (<ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />)}
+
             <form action="/registerApplication" encType="multipart/form-data" method="POST">
                 <Contact contact={this.state.applicant} isWho='applicant' />
                 <Contact contact={this.state.guardian} isWho='guardian' />
                 <Scout isScouted={this.state.applicantIsScouted} getOffice={this.setScoutOffice} getScout={this.setScoutId} />
                 <Source setSourceNote={this.setSourceNote} setSource={this.setSource} />
+                <Event setEventId={this.setEvent} />
             </form>
         </div>
         );
