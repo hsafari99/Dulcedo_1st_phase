@@ -80775,6 +80775,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./simpleComponents/Contact */ "./resources/js/components/simpleComponents/Contact.js");
+/* harmony import */ var _simpleComponents_ScoutPage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./simpleComponents/ScoutPage */ "./resources/js/components/simpleComponents/ScoutPage.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -80803,6 +80804,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var ApplicationRegister =
 /*#__PURE__*/
 function (_Component) {
@@ -80817,8 +80819,11 @@ function (_Component) {
     _this.state = {
       applicantChecked: false,
       guardianChecked: false,
+      applicantIsScouted: false,
       hideContactSearch: true,
       hideModal: true,
+      office_id: '',
+      scout_id: '',
       value: [],
       applicant: '',
       applicant_fname: '',
@@ -80851,6 +80856,8 @@ function (_Component) {
     _this.getInfo = _this.getInfo.bind(_assertThisInitialized(_this));
     _this.retrieveid = _this.retrieveid.bind(_assertThisInitialized(_this));
     _this.resetModal = _this.resetModal.bind(_assertThisInitialized(_this));
+    _this.setScoutOffice = _this.setScoutOffice.bind(_assertThisInitialized(_this));
+    _this.setScoutId = _this.setScoutId.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -80963,6 +80970,20 @@ function (_Component) {
       }
     }
   }, {
+    key: "setScoutOffice",
+    value: function setScoutOffice(office) {
+      this.setState({
+        office_id: office
+      });
+    }
+  }, {
+    key: "setScoutId",
+    value: function setScoutId(scoutId) {
+      this.setState({
+        scout_id: scoutId
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -80983,13 +81004,21 @@ function (_Component) {
         result: this.state.value,
         getid: this.retrieveid,
         hideModal: this.resetModal
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        action: "/registerApplication",
+        encType: "multipart/form-data",
+        method: "POST"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
         contact: this.state.applicant,
         isWho: "applicant"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_6__["default"], {
         contact: this.state.guardian,
         isWho: "guardian"
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_ScoutPage__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        isScouted: this.state.applicantIsScouted,
+        getOffice: this.setScoutOffice,
+        getScout: this.setScoutId
+      })));
     }
   }]);
 
@@ -81000,7 +81029,7 @@ function (_Component) {
 
 if (document.getElementById("AppRegister")) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ApplicationRegister, null), document.getElementById("AppRegister"));
-} //     <ContactModal firstName={this.state.firstName} lastName={this.state.lastName} email={this.state.email} hiding={this.state.showModal} />
+}
 
 /***/ }),
 
@@ -81616,6 +81645,240 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ModalResult);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/ScoutData.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/ScoutData.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var ScoutPage =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ScoutPage, _Component);
+
+  function ScoutPage(props) {
+    var _this;
+
+    _classCallCheck(this, ScoutPage);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ScoutPage).call(this, props));
+    _this.state = {};
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.getScout = _this.getScout.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ScoutPage, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.props.office(event.target.value);
+    }
+  }, {
+    key: "getScout",
+    value: function getScout(event) {
+      this.props.scoutId(event.target.value);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1 scoutedBy"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Office:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "office",
+        id: "office",
+        onChange: this.handleChange,
+        defaultValue: ""
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        disabled: true
+      }, "Please select the scout office"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "Montreal office"
+      }, "Montreal Office"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1 scoutedBy"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Scouted By:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        className: "form-control",
+        name: "scouted",
+        id: "scouted",
+        defaultValue: "",
+        onChange: this.getScout
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        value: "",
+        disabled: true
+      }, "Please select the scout..."), this.props.list.map(function (scout) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          value: scout._id,
+          key: scout._id
+        }, scout.firstname, " ", scout.lastname);
+      }))));
+    }
+  }]);
+
+  return ScoutPage;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ScoutPage);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/ScoutPage.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/ScoutPage.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _ScoutData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ScoutData */ "./resources/js/components/simpleComponents/ScoutData.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var ScoutPage =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(ScoutPage, _Component);
+
+  function ScoutPage(props) {
+    var _this;
+
+    _classCallCheck(this, ScoutPage);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ScoutPage).call(this, props));
+    _this.state = {
+      isScouted: _this.props.isScouted,
+      scoutList: []
+    };
+    _this.getOffice = _this.getOffice.bind(_assertThisInitialized(_this));
+    _this.getScoutId = _this.getScoutId.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ScoutPage, [{
+    key: "getOffice",
+    value: function getOffice(office) {
+      this.props.getOffice(office);
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/getScoutList",
+        method: 'POST',
+        data: {
+          office_id: office
+        },
+        success: function (result) {
+          var test = JSON.parse(result);
+          this.setState({
+            scoutList: test
+          });
+        }.bind(this)
+      });
+    }
+  }, {
+    key: "getScoutId",
+    value: function getScoutId(id) {
+      this.props.getScout(id);
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange() {
+      this.setState(function (state, props) {
+        return {
+          isScouted: !state.isScouted
+        };
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
+        className: "border border-dark rounded p-3 my-3 shadow",
+        id: "scoutInfo"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", {
+        className: "w-50 pl-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-address-book text-success awsomeFonts"
+      }), "Scout Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        htmlFor: "ifScouted",
+        className: "pl-4 showPointer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        className: "form-check-input",
+        id: "ifScouted",
+        onChange: this.handleChange,
+        checked: this.state.isScouted
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "font-weight-bold text-success"
+      }, "Talent ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, "NOT"), " Scouted:")), this.state.isScouted ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ScoutData__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        office: this.getOffice,
+        scoutId: this.getScoutId,
+        list: this.state.scoutList
+      }));
+    }
+  }]);
+
+  return ScoutPage;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (ScoutPage);
 
 /***/ }),
 

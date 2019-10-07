@@ -126,7 +126,7 @@
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR GUARDIAN PERSONAL INFORMATION (could be populated by previous form) --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Guardian">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Guardian">
     <legend class="w-50 pl-2"><i class="fas fa-address-card text-info" style="font-size: 25px;"></i>  Guardian Information</legend>
     <input type="text" hidden name='gid' id="gid" class="form-control">
     <div class="input-group my-1">
@@ -197,11 +197,11 @@
       </div>
       <input type="date" name="gdob" id="gdob" class="form-control"/>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE SCOUT INFO --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fas fa-address-book text-success" style="font-size: 25px;"></i>  Scout Information</legend>
     <label style="cursor: pointer;" for="ifScouted" class="pl-4">
       <input type="checkbox" class="form-check-input" id="ifScouted" onchange="isScouted()">
@@ -226,7 +226,7 @@
         <option selected disabled>Please select the scout...</option>
       </select>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE SOURCE INFO --}}
