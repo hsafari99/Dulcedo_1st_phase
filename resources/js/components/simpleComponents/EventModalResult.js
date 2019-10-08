@@ -15,7 +15,7 @@ class EventModalResult extends Component {
 
         render() {
                 return (
-                        <button className="bg-info my-1 p-1 showPointer w-100 align-left" name={this.props.id} onClick={this.handleClick}>
+                        <button className="bg-info my-1 p-1 showPointer w-100 align-left eventClicked" name={this.props.id} onClick={this.handleClick}>
                                 <span
                                         className="font-weight-bold text-dark">
                                         Event Name:&nbsp;

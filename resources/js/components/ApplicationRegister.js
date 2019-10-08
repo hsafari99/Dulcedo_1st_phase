@@ -61,6 +61,7 @@ export default class ApplicationRegister extends Component {
         this.setSourceNote = this.setSourceNote.bind(this);
         this.setSource = this.setSource.bind(this);
         this.setEvent = this.setEvent.bind(this);
+        this.resetEvent = this.resetEvent.bind(this);
     }
 
     resetModal() {
@@ -164,6 +165,10 @@ export default class ApplicationRegister extends Component {
         this.setState({ event_id: id });
     }
 
+    resetEvent() {
+        this.setState({ event_id: '' });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -177,14 +182,14 @@ export default class ApplicationRegister extends Component {
                 formEnabled={this.state.guardianEnabled}
                 isWho="guardian" />
             {this.state.hideContactSearch ? ("") : (<SearchContact setInputs={this.getInfo} />)}
-            {this.state.hideModal ? ("") : (<ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} />)}
+            {this.state.hideModal ? ("") : (<ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} showWhat='contact' />)}
 
             <form action="/registerApplication" encType="multipart/form-data" method="POST">
                 <Contact contact={this.state.applicant} isWho='applicant' />
                 <Contact contact={this.state.guardian} isWho='guardian' />
                 <Scout isScouted={this.state.applicantIsScouted} getOffice={this.setScoutOffice} getScout={this.setScoutId} />
                 <Source setSourceNote={this.setSourceNote} setSource={this.setSource} />
-                <Event setEventId={this.setEvent} />
+                <Event setEventId={this.setEvent} hideAlert={this.hideAlert} id={this.state.event_id} resetEvent={this.resetEvent} />
             </form>
         </div>
         );

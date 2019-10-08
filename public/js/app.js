@@ -80868,6 +80868,7 @@ function (_Component) {
     _this.setSourceNote = _this.setSourceNote.bind(_assertThisInitialized(_this));
     _this.setSource = _this.setSource.bind(_assertThisInitialized(_this));
     _this.setEvent = _this.setEvent.bind(_assertThisInitialized(_this));
+    _this.resetEvent = _this.resetEvent.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -81015,6 +81016,13 @@ function (_Component) {
       });
     }
   }, {
+    key: "resetEvent",
+    value: function resetEvent() {
+      this.setState({
+        event_id: ''
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -81034,7 +81042,8 @@ function (_Component) {
       }), this.state.hideModal ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
         result: this.state.value,
         getid: this.retrieveid,
-        hideModal: this.resetModal
+        hideModal: this.resetModal,
+        showWhat: "contact"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         action: "/registerApplication",
         encType: "multipart/form-data",
@@ -81053,7 +81062,10 @@ function (_Component) {
         setSourceNote: this.setSourceNote,
         setSource: this.setSource
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Event__WEBPACK_IMPORTED_MODULE_9__["default"], {
-        setEventId: this.setEvent
+        setEventId: this.setEvent,
+        hideAlert: this.hideAlert,
+        id: this.state.event_id,
+        resetEvent: this.resetEvent
       })));
     }
   }]);
@@ -81203,7 +81215,8 @@ function (_Component) {
   _createClass(ContactModal, [{
     key: "close",
     value: function close() {
-      this.props.hideModal(); // this.setState({ showModal: false });
+      this.props.hideModal(); //this.props.getid('');
+      // this.setState({ showModal: false });
     } // retrieveContactId(event) {
     //     console.log(event.target.name);
     // }
@@ -81547,8 +81560,9 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Input */ "./resources/js/components/simpleComponents/Input.js");
-/* harmony import */ var _ContactModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../ContactModal */ "./resources/js/components/ContactModal.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
+/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Input */ "./resources/js/components/simpleComponents/Input.js");
+/* harmony import */ var _ContactModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../ContactModal */ "./resources/js/components/ContactModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -81571,6 +81585,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Event =
 /*#__PURE__*/
 function (_Component) {
@@ -81586,7 +81601,8 @@ function (_Component) {
       search: '',
       eventResult: [],
       hideModal: true,
-      enabled: true
+      isclicked: false,
+      placeHolder: "Please search the event by name to find the ID..."
     };
     _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
     _this.handleSearch = _this.handleSearch.bind(_assertThisInitialized(_this));
@@ -81633,17 +81649,18 @@ function (_Component) {
     key: "handleChange",
     value: function handleChange() {
       this.setState({
-        enabled: true
-      });
-      this.setState({
         search: ''
       });
+      this.props.resetEvent();
     }
   }, {
     key: "resetModal",
     value: function resetModal() {
       this.setState({
         hideModal: true
+      });
+      this.setState({
+        search: ''
       });
     }
   }, {
@@ -81664,10 +81681,11 @@ function (_Component) {
         className: "w-50 pl-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-calendar-alt text-danger awsomeFonts"
-      }), "\xA0 Event Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      }), "\xA0 Event Information"), this.props.id == '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input__WEBPACK_IMPORTED_MODULE_2__["default"], {
         title: "event",
         setValue: this.setValue,
-        placeholder: "Please search the event by name to find the ID..."
+        placeholder: this.state.placeHolder,
+        id: this.props.id
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group my-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -81675,19 +81693,24 @@ function (_Component) {
         onClick: this.handleSearch
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
         className: "fas fa-search text-danger awsomeFonts"
-      }), "Find Event")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), "Find Event"))) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "text-success p-2 bg-light"
+      }, "Event\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "font-weight-bold text-danger"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, this.props.id)), "\xA0added successfully!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group my-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        htmlFor: "loadContact",
+        htmlFor: "chkbox",
         className: "pl-4 showPointer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         className: "form-check-input",
         id: "chkbox",
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        checked: this.state.isclicked
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bold text-secondary"
-      }, "Search Again"))), this.state.hideModal ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, "Search Again"))), this.state.hideModal ? "" : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
         result: this.state.eventResult,
         getid: this.retrieveid,
         hideModal: this.resetModal,
@@ -81759,7 +81782,7 @@ function (_Component) {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "bg-info my-1 p-1 showPointer w-100 align-left",
+        className: "bg-info my-1 p-1 showPointer w-100 align-left eventClicked",
         name: this.props.id,
         onClick: this.handleClick
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -81820,9 +81843,11 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Input).call(this, props));
     _this.state = {
-      value: ''
+      value: _this.props.id ? _this.props.id : ''
     };
-    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this)); // console.log("FROM INPUT placeholder: " + this.props.placeholder);
+    // console.log("FROM INPUT id: " + this.props.id);
+
     return _this;
   }
 
@@ -81848,7 +81873,6 @@ function (_Component) {
         className: "form-control",
         id: this.props.title,
         name: this.props.title,
-        value: this.state.value,
         onChange: this.handleChange,
         placeholder: this.props.placeholder ? this.props.placeholder : ''
       }));

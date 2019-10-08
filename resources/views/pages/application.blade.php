@@ -250,7 +250,7 @@
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE EVENT INFO --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fas fa-calendar-alt text-danger" style="font-size: 25px;"></i>  Event Information</legend>
     <div class="input-group my-1">
       <div class="input-group-prepend">
@@ -269,7 +269,7 @@
         </span>
       </label>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE PHYSICAL and SHAPE INFO --}}
@@ -588,6 +588,8 @@ $('document').ready(function(){
   getSources();
   closeModal();
   getQuestions();
+  $('#chkbox').on('change', activate());
+  $('.eventClicked').on('click', addEvent(this));
 });
 
 function showresult(){
@@ -891,6 +893,7 @@ function eventSearchs(){
 
 //This function will add the eventId to the form through the selected event in the modal and by AJAX
 function addEvent(e){
+  {{-- console.log(e.target); --}}
   $('#event').val(e.id);
   $('#event').prop("disabled", false);
   $('#eventSearch').hide();
@@ -898,7 +901,7 @@ function addEvent(e){
 
 //This function is for searching again the event. It will remove the previous event and activate the event search 
 function activate(){
-  $('#event').prop("disabled", false);
+  $('#event').prop("disabled", true);
   $('#event').val("");
   $('#chkbox').prop("checked", false);
 }
