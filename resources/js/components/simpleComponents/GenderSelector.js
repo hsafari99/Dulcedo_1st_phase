@@ -5,9 +5,13 @@ class GenderSelector extends Component {
                 super(props);
                 this.state = {
                 }
+                this.handleChange = this.handleChange.bind(this);
         }
 
 
+        handleChange(event) {
+                this.props.setGender(event.target.value);
+        }
 
         render() {
                 return (
@@ -26,7 +30,8 @@ class GenderSelector extends Component {
                                                         className="form-check-input"
                                                         id="male"
                                                         name="gender"
-                                                        value="m" />
+                                                        value="m"
+                                                        onChange={this.handleChange} />
                                                 <span
                                                         className="font-weight-bold text-secondary">
                                                         Male
@@ -38,7 +43,9 @@ class GenderSelector extends Component {
                                                         className="form-check-input"
                                                         id="female"
                                                         name="gender"
-                                                        value="f" />
+                                                        value="f"
+                                                        onChange={this.handleChange}
+                                                />
                                                 <span
                                                         className="font-weight-bold text-secondary">
                                                         Female
@@ -50,7 +57,8 @@ class GenderSelector extends Component {
                                                         className="form-check-input"
                                                         id="other"
                                                         name="gender"
-                                                        value="NA" />
+                                                        value="NA"
+                                                        onChange={this.handleChange} />
                                                 <span
                                                         className="font-weight-bold text-secondary">
                                                         Other

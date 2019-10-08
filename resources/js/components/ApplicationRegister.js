@@ -29,6 +29,19 @@ export default class ApplicationRegister extends Component {
             source_note: '',
             event_id: '',
             measureOffice: '',
+            gender: '',
+            eyeColor: '',
+            hairColor: '',
+            waist: 0,
+            bust: 0,
+            hips: 0,
+            neck: 0,
+            sleeve: 0,
+            dress: 0,
+            shoe: 0,
+            inseam: 0,
+            ft: 0,
+            inch: 0,
             value: [],
             applicant: '',
             applicant_fname: '',
@@ -69,6 +82,12 @@ export default class ApplicationRegister extends Component {
         this.setEvent = this.setEvent.bind(this);
         this.resetEvent = this.resetEvent.bind(this);
         this.setOffice = this.setOffice.bind(this);
+        this.setGender = this.setGender.bind(this);
+        this.setEyeColor = this.setEyeColor.bind(this);
+        this.setHairColor = this.setHairColor.bind(this);
+        this.setFt = this.setFt.bind(this);
+        this.setInch = this.setInch.bind(this);
+        this.setNumberValue = this.setNumberValue.bind(this);
     }
 
     resetModal() {
@@ -180,6 +199,30 @@ export default class ApplicationRegister extends Component {
         this.setState({ measureOffice: office_id });
     }
 
+    setGender(gender) {
+        this.setState({ gender: gender });
+    }
+
+    setEyeColor(eyeColor) {
+        this.setState({ eyeColor: eyeColor })
+    }
+
+    setHairColor(hairColor) {
+        this.setState({ hairColor: hairColor });
+    }
+
+    setFt(ft) {
+        this.setState({ ft: ft });
+    }
+
+    setInch(inch) {
+        this.setState({ inch: inch });
+    }
+
+    setNumberValue(title, value) {
+        this.setState({ [title]: value });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -202,7 +245,14 @@ export default class ApplicationRegister extends Component {
                 <Source setSourceNote={this.setSourceNote} setSource={this.setSource} />
                 <Event setEventId={this.setEvent} hideAlert={this.hideAlert} id={this.state.event_id} resetEvent={this.resetEvent} />
                 <BodyInfo
-                    setOffice={this.setOffice} />
+                    setOffice={this.setOffice}
+                    setGender={this.setGender}
+                    setEyeColor={this.setEyeColor}
+                    setHairColor={this.setHairColor}
+                    setFt={this.setFt}
+                    setInch={this.setInch}
+                    setNumberValue={this.setNumberValue}
+                />
             </form>
         </div>
         );

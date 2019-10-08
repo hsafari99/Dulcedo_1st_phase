@@ -5,9 +5,12 @@ class EyeColorSelector extends Component {
                 super(props);
                 this.state = {
                 }
+                this.setEyeColor = this.setEyeColor.bind(this);
         }
 
-
+        setEyeColor(event) {
+                this.props.setEyeColor(event.target.value);
+        }
 
         render() {
                 return (
@@ -24,7 +27,8 @@ class EyeColorSelector extends Component {
                                         name="eye_color"
                                         className="form-control"
                                         list="eye_colors"
-                                        placeholder="Please select the eye color from the list or add your own..." />
+                                        placeholder="Please select the eye color from the list or add your own..."
+                                        onChange={this.setEyeColor} />
                                 <datalist id="eye_colors">
                                         <option value="Blue" />>
                                                         <option value="Brown" />

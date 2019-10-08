@@ -13,10 +13,40 @@ class BodyInfo extends Component {
                 this.state = {
                 }
                 this.setOffice = this.setOffice.bind(this);
+                this.setGender = this.setGender.bind(this);
+                this.setEyeColor = this.setEyeColor.bind(this);
+                this.setHairColor = this.setHairColor.bind(this);
+                this.setFt = this.setFt.bind(this);
+                this.setInch = this.setInch.bind(this);
+                this.setNumberValue = this.setNumberValue.bind(this);
         }
 
         setOffice(office_id) {
                 this.props.setOffice(office_id);
+        }
+
+        setGender(gender) {
+                this.props.setGender(gender);
+        }
+
+        setEyeColor(eyeColor) {
+                this.props.setEyeColor(eyeColor);
+        }
+
+        setHairColor(hairColor) {
+                this.props.setHairColor(hairColor)
+        }
+
+        setFt(ft) {
+                this.props.setFt(ft);
+        }
+
+        setInch(inch) {
+                this.props.setInch(inch);
+        }
+
+        setNumberValue(title, value) {
+                this.props.setNumberValue(title, value);
         }
 
         render() {
@@ -31,18 +61,50 @@ class BodyInfo extends Component {
                                 </legend>
 
                                 <OfficeSelctor setOffice={this.setOffice} />
-                                <GenderSelector />
-                                <EyeColorSelector />
-                                <HairColorSelector />
-                                <HeightSelector />
-                                <NumberInput title='waist' placeholder="Please enter the size in inches" withToolTip={true} />
-                                <NumberInput title='bust' placeholder="Please enter the size in inches" withToolTip={true} />
-                                <NumberInput title='hips' placeholder="Please enter the size in inches" withToolTip={true} />
-                                <NumberInput title='neck' placeholder="Please enter the size in inches" withToolTip={true} />
-                                <NumberInput title='sleeve' placeholder="Please enter the size in inches" withToolTip={true} />
-                                <NumberInput title='dress' placeholder="Please enter the Canadian base sizes..." withToolTip={false} />
-                                <NumberInput title='shoe' placeholder="Please enter the Canadian base sizes..." withToolTip={false} />
-                                <NumberInput title='inseam' placeholder="Please enter the size in inches" withToolTip={true} />
+                                <GenderSelector setGender={this.setGender} />
+                                <EyeColorSelector setEyeColor={this.setEyeColor} />
+                                <HairColorSelector setHairColor={this.setHairColor} />
+                                <HeightSelector setFt={this.setFt} setInch={this.setInch} />
+                                <NumberInput
+                                        title='waist'
+                                        placeholder="Please enter the size in inches"
+                                        withToolTip={true}
+                                        setNumberValue={this.setNumberValue} />
+                                <NumberInput
+                                        title='bust'
+                                        placeholder="Please enter the size in inches"
+                                        withToolTip={true}
+                                        setNumberValue={this.setNumberValue} />
+                                <NumberInput
+                                        title='hips'
+                                        placeholder="Please enter the size in inches"
+                                        withToolTip={true}
+                                        setNumberValue={this.setNumberValue} />
+                                <NumberInput
+                                        title='neck'
+                                        placeholder="Please enter the size in inches"
+                                        withToolTip={true}
+                                        setNumberValue={this.setNumberValue} />
+                                <NumberInput
+                                        title='sleeve'
+                                        placeholder="Please enter the size in inches"
+                                        withToolTip={true}
+                                        setNumberValue={this.setNumberValue} />
+                                <NumberInput
+                                        title='dress'
+                                        placeholder="Please enter the Canadian base sizes..."
+                                        withToolTip={false} setNumberValue
+                                        ={this.setNumberValue} />
+                                <NumberInput
+                                        title='shoe'
+                                        placeholder="Please enter the Canadian base sizes..."
+                                        withToolTip={false}
+                                        setNumberValue={this.setNumberValue} />
+                                <NumberInput
+                                        title='inseam'
+                                        placeholder="Please enter the size in inches"
+                                        withToolTip={true}
+                                        setNumberValue={this.setNumberValue} />
                         </fieldset>
                 );
         }

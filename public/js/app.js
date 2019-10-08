@@ -80834,6 +80834,19 @@ function (_Component) {
       source_note: '',
       event_id: '',
       measureOffice: '',
+      gender: '',
+      eyeColor: '',
+      hairColor: '',
+      waist: 0,
+      bust: 0,
+      hips: 0,
+      neck: 0,
+      sleeve: 0,
+      dress: 0,
+      shoe: 0,
+      inseam: 0,
+      ft: 0,
+      inch: 0,
       value: [],
       applicant: '',
       applicant_fname: '',
@@ -80873,6 +80886,12 @@ function (_Component) {
     _this.setEvent = _this.setEvent.bind(_assertThisInitialized(_this));
     _this.resetEvent = _this.resetEvent.bind(_assertThisInitialized(_this));
     _this.setOffice = _this.setOffice.bind(_assertThisInitialized(_this));
+    _this.setGender = _this.setGender.bind(_assertThisInitialized(_this));
+    _this.setEyeColor = _this.setEyeColor.bind(_assertThisInitialized(_this));
+    _this.setHairColor = _this.setHairColor.bind(_assertThisInitialized(_this));
+    _this.setFt = _this.setFt.bind(_assertThisInitialized(_this));
+    _this.setInch = _this.setInch.bind(_assertThisInitialized(_this));
+    _this.setNumberValue = _this.setNumberValue.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -81034,6 +81053,46 @@ function (_Component) {
       });
     }
   }, {
+    key: "setGender",
+    value: function setGender(gender) {
+      this.setState({
+        gender: gender
+      });
+    }
+  }, {
+    key: "setEyeColor",
+    value: function setEyeColor(eyeColor) {
+      this.setState({
+        eyeColor: eyeColor
+      });
+    }
+  }, {
+    key: "setHairColor",
+    value: function setHairColor(hairColor) {
+      this.setState({
+        hairColor: hairColor
+      });
+    }
+  }, {
+    key: "setFt",
+    value: function setFt(ft) {
+      this.setState({
+        ft: ft
+      });
+    }
+  }, {
+    key: "setInch",
+    value: function setInch(inch) {
+      this.setState({
+        inch: inch
+      });
+    }
+  }, {
+    key: "setNumberValue",
+    value: function setNumberValue(title, value) {
+      this.setState(_defineProperty({}, title, value));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -81078,7 +81137,13 @@ function (_Component) {
         id: this.state.event_id,
         resetEvent: this.resetEvent
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_BodyInfo__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        setOffice: this.setOffice
+        setOffice: this.setOffice,
+        setGender: this.setGender,
+        setEyeColor: this.setEyeColor,
+        setHairColor: this.setHairColor,
+        setFt: this.setFt,
+        setInch: this.setInch,
+        setNumberValue: this.setNumberValue
       })));
     }
   }]);
@@ -81150,6 +81215,12 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(BodyInfo).call(this, props));
     _this.state = {};
     _this.setOffice = _this.setOffice.bind(_assertThisInitialized(_this));
+    _this.setGender = _this.setGender.bind(_assertThisInitialized(_this));
+    _this.setEyeColor = _this.setEyeColor.bind(_assertThisInitialized(_this));
+    _this.setHairColor = _this.setHairColor.bind(_assertThisInitialized(_this));
+    _this.setFt = _this.setFt.bind(_assertThisInitialized(_this));
+    _this.setInch = _this.setInch.bind(_assertThisInitialized(_this));
+    _this.setNumberValue = _this.setNumberValue.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -81157,6 +81228,36 @@ function (_Component) {
     key: "setOffice",
     value: function setOffice(office_id) {
       this.props.setOffice(office_id);
+    }
+  }, {
+    key: "setGender",
+    value: function setGender(gender) {
+      this.props.setGender(gender);
+    }
+  }, {
+    key: "setEyeColor",
+    value: function setEyeColor(eyeColor) {
+      this.props.setEyeColor(eyeColor);
+    }
+  }, {
+    key: "setHairColor",
+    value: function setHairColor(hairColor) {
+      this.props.setHairColor(hairColor);
+    }
+  }, {
+    key: "setFt",
+    value: function setFt(ft) {
+      this.props.setFt(ft);
+    }
+  }, {
+    key: "setInch",
+    value: function setInch(inch) {
+      this.props.setInch(inch);
+    }
+  }, {
+    key: "setNumberValue",
+    value: function setNumberValue(title, value) {
+      this.props.setNumberValue(title, value);
     }
   }, {
     key: "render",
@@ -81170,38 +81271,55 @@ function (_Component) {
         className: "fas fa-id-card-alt text-info awsomeFonts"
       }), "\xA0Physical Information"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_OfficeSelctor__WEBPACK_IMPORTED_MODULE_1__["default"], {
         setOffice: this.setOffice
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_GenderSelector__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_EyeColorSelector__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_HairColorSelector__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_HeightSelector__WEBPACK_IMPORTED_MODULE_5__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_GenderSelector__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        setGender: this.setGender
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_EyeColorSelector__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        setEyeColor: this.setEyeColor
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_HairColorSelector__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        setHairColor: this.setHairColor
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_HeightSelector__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        setFt: this.setFt,
+        setInch: this.setInch
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "waist",
         placeholder: "Please enter the size in inches",
-        withToolTip: true
+        withToolTip: true,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "bust",
         placeholder: "Please enter the size in inches",
-        withToolTip: true
+        withToolTip: true,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "hips",
         placeholder: "Please enter the size in inches",
-        withToolTip: true
+        withToolTip: true,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "neck",
         placeholder: "Please enter the size in inches",
-        withToolTip: true
+        withToolTip: true,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "sleeve",
         placeholder: "Please enter the size in inches",
-        withToolTip: true
+        withToolTip: true,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "dress",
         placeholder: "Please enter the Canadian base sizes...",
-        withToolTip: false
+        withToolTip: false,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "shoe",
         placeholder: "Please enter the Canadian base sizes...",
-        withToolTip: false
+        withToolTip: false,
+        setNumberValue: this.setNumberValue
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_NumberInput__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: "inseam",
         placeholder: "Please enter the size in inches",
-        withToolTip: true
+        withToolTip: true,
+        setNumberValue: this.setNumberValue
       }));
     }
   }]);
@@ -81953,9 +82071,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -81975,10 +82093,16 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EyeColorSelector).call(this, props));
     _this.state = {};
+    _this.setEyeColor = _this.setEyeColor.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(EyeColorSelector, [{
+    key: "setEyeColor",
+    value: function setEyeColor(event) {
+      this.props.setEyeColor(event.target.value);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -81992,7 +82116,8 @@ function (_Component) {
         name: "eye_color",
         className: "form-control",
         list: "eye_colors",
-        placeholder: "Please select the eye color from the list or add your own..."
+        placeholder: "Please select the eye color from the list or add your own...",
+        onChange: this.setEyeColor
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("datalist", {
         id: "eye_colors"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -82041,9 +82166,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -82063,10 +82188,16 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GenderSelector).call(this, props));
     _this.state = {};
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(GenderSelector, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      this.props.setGender(event.target.value);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -82085,7 +82216,8 @@ function (_Component) {
         className: "form-check-input",
         id: "male",
         name: "gender",
-        value: "m"
+        value: "m",
+        onChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bold text-secondary"
       }, "Male")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -82096,7 +82228,8 @@ function (_Component) {
         className: "form-check-input",
         id: "female",
         name: "gender",
-        value: "f"
+        value: "f",
+        onChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bold text-secondary"
       }, "Female")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
@@ -82107,7 +82240,8 @@ function (_Component) {
         className: "form-check-input",
         id: "other",
         name: "gender",
-        value: "NA"
+        value: "NA",
+        onChange: this.handleChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "font-weight-bold text-secondary"
       }, "Other"))));
@@ -82142,9 +82276,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -82164,10 +82298,16 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HairColorSelector).call(this, props));
     _this.state = {};
+    _this.setHairColor = _this.setHairColor.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(HairColorSelector, [{
+    key: "setHairColor",
+    value: function setHairColor(event) {
+      this.props.setHairColor(event.target.value);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -82181,7 +82321,8 @@ function (_Component) {
         name: "hair_color",
         list: "hair_colors",
         className: "form-control",
-        placeholder: "Please search the hair color from the list or add your own..."
+        placeholder: "Please search the hair color from the list or add your own...",
+        onChange: this.setHairColor
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("datalist", {
         id: "hair_colors"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -82228,9 +82369,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -82250,10 +82391,22 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HeightSelector).call(this, props));
     _this.state = {};
+    _this.handleFtChange = _this.handleFtChange.bind(_assertThisInitialized(_this));
+    _this.handleInchChange = _this.handleInchChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(HeightSelector, [{
+    key: "handleFtChange",
+    value: function handleFtChange(event) {
+      this.props.setFt(parseFloat(event.target.value));
+    }
+  }, {
+    key: "handleInchChange",
+    value: function handleInchChange(event) {
+      this.props.setInch(parseFloat(event.target.value));
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -82271,7 +82424,8 @@ function (_Component) {
         className: "form-control",
         name: "height_feet",
         id: "height_feet",
-        defaultValue: ""
+        defaultValue: "",
+        onChange: this.handleFtChange
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "",
         disabled: true
@@ -82294,8 +82448,9 @@ function (_Component) {
         className: "form-control",
         name: "height_inches",
         id: "height_inches",
-        defaultValue: ""
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+        defaultValue: "",
+        onChange: this.handleInchChange
+      }, ">", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "",
         disabled: true
       }, "Select Inches"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
@@ -82634,9 +82789,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -82657,12 +82812,32 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(NumberInput).call(this, props));
     _this.state = {
       classname: _this.props.withToolTip ? 'input-group-prepend showPointer' : 'input-group-prepend',
-      hasOnClick: _this.props.withToolTip ? 'cmToInches("waist")' : ''
+      hasOnClick: _this.props.withToolTip ? 'cmToInches("waist")' : '',
+      value: ''
     };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(NumberInput, [{
+    key: "handleChange",
+    value: function handleChange(event) {
+      if (event.target.value) {
+        this.setState({
+          value: parseFloat(event.target.value)
+        });
+        this.props.setNumberValue(this.props.title, parseFloat(event.target.value));
+      } else {}
+    }
+  }, {
+    key: "setValue",
+    value: function setValue() {
+      this.setState({
+        value: parseFloat(event.target.value)
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -82681,7 +82856,9 @@ function (_Component) {
         type: "number",
         name: this.props.title,
         className: "form-control",
-        placeholder: this.props.placeholder
+        placeholder: this.props.placeholder,
+        onChange: this.handleChange,
+        value: this.state.value
       }));
     }
   }]);

@@ -6,10 +6,24 @@ class NumberInput extends Component {
                 this.state = {
                         classname: (this.props.withToolTip) ? 'input-group-prepend showPointer' : 'input-group-prepend',
                         hasOnClick: (this.props.withToolTip) ? 'cmToInches("waist")' : '',
+                        value: '',
+                }
+                this.handleChange = this.handleChange.bind(this);
+                this.setValue = this.setValue.bind(this);
+        }
+
+        handleChange(event) {
+                if (event.target.value) {
+                        this.setState({ value: parseFloat(event.target.value) });
+                        this.props.setNumberValue(this.props.title, parseFloat(event.target.value));
+                } else {
+
                 }
         }
 
-
+        setValue() {
+                this.setState({ value: parseFloat(event.target.value) });
+        }
 
         render() {
                 return (
@@ -33,7 +47,10 @@ class NumberInput extends Component {
                                         type="number"
                                         name={this.props.title}
                                         className="form-control"
-                                        placeholder={this.props.placeholder} />
+                                        placeholder={this.props.placeholder}
+                                        onChange={this.handleChange}
+                                        value={this.state.value}
+                                />
                         </div>
                 );
         }

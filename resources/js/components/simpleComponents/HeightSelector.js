@@ -5,9 +5,17 @@ class HeightSelector extends Component {
                 super(props);
                 this.state = {
                 }
+                this.handleFtChange = this.handleFtChange.bind(this);
+                this.handleInchChange = this.handleInchChange.bind(this);
         }
 
+        handleFtChange(event) {
+                this.props.setFt(parseFloat(event.target.value));
+        }
 
+        handleInchChange(event) {
+                this.props.setInch(parseFloat(event.target.value));
+        }
 
         render() {
                 return (
@@ -28,7 +36,8 @@ class HeightSelector extends Component {
                                         className="form-control"
                                         name="height_feet"
                                         id="height_feet"
-                                        defaultValue="">
+                                        defaultValue=""
+                                        onChange={this.handleFtChange}>
                                         <option value="" disabled>Select Feet</option>
                                         <option value="3" id='3ft'>3 feet</option>
                                         <option value="4" id='4ft'>4 feet</option>
@@ -40,7 +49,8 @@ class HeightSelector extends Component {
                                         className="form-control"
                                         name="height_inches"
                                         id="height_inches"
-                                        defaultValue="">
+                                        defaultValue=""
+                                        onChange={this.handleInchChange}>>
                                         <option value="" disabled>Select Inches</option>
                                         <option value="0" id='004in'>0 inch</option>
                                         <option value="0.25" id='014in'>&nbsp;&nbsp;&nbsp;&nbsp; 1/4 inch</option>

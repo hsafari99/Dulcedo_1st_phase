@@ -5,9 +5,12 @@ class HairColorSelector extends Component {
                 super(props);
                 this.state = {
                 }
+                this.setHairColor = this.setHairColor.bind(this);
         }
 
-
+        setHairColor(event) {
+                this.props.setHairColor(event.target.value);
+        }
 
         render() {
                 return (
@@ -23,7 +26,8 @@ class HairColorSelector extends Component {
                                         name="hair_color"
                                         list="hair_colors"
                                         className="form-control"
-                                        placeholder="Please search the hair color from the list or add your own..." />
+                                        placeholder="Please search the hair color from the list or add your own..."
+                                        onChange={this.setHairColor} />
                                 <datalist id="hair_colors">
                                         <option value="Black" />
                                         <option value="Brown" />
