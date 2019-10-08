@@ -273,7 +273,7 @@
 
     {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE PHYSICAL and SHAPE INFO --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="scoutInfo">
     <legend class="w-50 pl-2"><i class="fas fa-id-card-alt text-info" style="font-size: 25px;"></i>  Physical Information</legend>
     
     <div class="input-group my-1">
@@ -478,7 +478,7 @@
       <input type="number" name="inseam" class="form-control" placeholder="Please enter the size in inches">
     </div> 
 
-  </fieldset>
+  </fieldset> --}}
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE SOCIAL MEDIAS APPLICANT IS ACTIVE ON --}}

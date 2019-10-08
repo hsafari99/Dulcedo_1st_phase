@@ -11,6 +11,7 @@ class BodyInfo extends Component {
         constructor(props) {
                 super(props);
                 this.state = {
+                        hideModal: true,
                 }
                 this.setOffice = this.setOffice.bind(this);
                 this.setGender = this.setGender.bind(this);
@@ -19,6 +20,7 @@ class BodyInfo extends Component {
                 this.setFt = this.setFt.bind(this);
                 this.setInch = this.setInch.bind(this);
                 this.setNumberValue = this.setNumberValue.bind(this);
+                this.showModal = this.showModal.bind(this);
         }
 
         setOffice(office_id) {
@@ -49,6 +51,13 @@ class BodyInfo extends Component {
                 this.props.setNumberValue(title, value);
         }
 
+        showModal(title) {
+
+                if (title != 'dress' && title != 'shoe') {
+                        this.setState({ hideModal: false });
+                }
+        }
+
         render() {
                 return (
                         <fieldset
@@ -69,42 +78,50 @@ class BodyInfo extends Component {
                                         title='waist'
                                         placeholder="Please enter the size in inches"
                                         withToolTip={true}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='bust'
                                         placeholder="Please enter the size in inches"
                                         withToolTip={true}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='hips'
                                         placeholder="Please enter the size in inches"
                                         withToolTip={true}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='neck'
                                         placeholder="Please enter the size in inches"
                                         withToolTip={true}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='sleeve'
                                         placeholder="Please enter the size in inches"
                                         withToolTip={true}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='dress'
                                         placeholder="Please enter the Canadian base sizes..."
                                         withToolTip={false} setNumberValue
-                                        ={this.setNumberValue} />
+                                        ={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='shoe'
                                         placeholder="Please enter the Canadian base sizes..."
                                         withToolTip={false}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                                 <NumberInput
                                         title='inseam'
                                         placeholder="Please enter the size in inches"
                                         withToolTip={true}
-                                        setNumberValue={this.setNumberValue} />
+                                        setNumberValue={this.setNumberValue}
+                                        showModal={this.showModal} />
                         </fieldset>
                 );
         }
