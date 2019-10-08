@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import $ from "jquery";
+
+import BodyInfo from "./BodyInfo";
 import ContactChecker from "./ContactChecker";
 import ContactModal from "./ContactModal";
 import SearchContact from "./searchContact";
-import $ from "jquery";
+
 import Contact from './simpleComponents/Contact';
+import Event from './simpleComponents/Event';
 import Scout from './simpleComponents/ScoutPage';
 import Source from './simpleComponents/Source';
-import Event from './simpleComponents/Event';
+
+
 
 export default class ApplicationRegister extends Component {
     constructor(props) {
@@ -23,6 +28,7 @@ export default class ApplicationRegister extends Component {
             source_id: '',
             source_note: '',
             event_id: '',
+            measureOffice: '',
             value: [],
             applicant: '',
             applicant_fname: '',
@@ -62,6 +68,7 @@ export default class ApplicationRegister extends Component {
         this.setSource = this.setSource.bind(this);
         this.setEvent = this.setEvent.bind(this);
         this.resetEvent = this.resetEvent.bind(this);
+        this.setOffice = this.setOffice.bind(this);
     }
 
     resetModal() {
@@ -169,6 +176,10 @@ export default class ApplicationRegister extends Component {
         this.setState({ event_id: '' });
     }
 
+    setOffice(office_id) {
+        this.setState({ measureOffice: office_id });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -190,6 +201,8 @@ export default class ApplicationRegister extends Component {
                 <Scout isScouted={this.state.applicantIsScouted} getOffice={this.setScoutOffice} getScout={this.setScoutId} />
                 <Source setSourceNote={this.setSourceNote} setSource={this.setSource} />
                 <Event setEventId={this.setEvent} hideAlert={this.hideAlert} id={this.state.event_id} resetEvent={this.resetEvent} />
+                <BodyInfo
+                    setOffice={this.setOffice} />
             </form>
         </div>
         );
