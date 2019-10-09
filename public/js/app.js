@@ -82368,10 +82368,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/simpleComponents/HeightSelector.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/components/simpleComponents/HeightSelector.js ***!
-  \********************************************************************/
+/***/ "./resources/js/components/simpleComponents/HeightModal.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/HeightModal.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82379,6 +82379,7 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82399,6 +82400,112 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+var HeightModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(HeightModal, _Component);
+
+  function HeightModal(props) {
+    var _this;
+
+    _classCallCheck(this, HeightModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(HeightModal).call(this, props));
+    _this.state = {};
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    _this.convertcmToInches = _this.convertcmToInches.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(HeightModal, [{
+    key: "handleClose",
+    value: function handleClose() {
+      this.props.hideModal();
+    }
+  }, {
+    key: "convertcmToInches",
+    value: function convertcmToInches() {
+      var cm = parseFloat(document.getElementById("cmNumber").value);
+      var ft = Math.floor(cm / 30.48);
+      var inch = Math.floor((cm - ft * 30.48) / 2.54);
+      var remainder = Math.floor((cm - (ft * 30.48 + inch * 2.54)) / 2.54 * 4);
+      this.props.setFt(ft);
+      this.props.setInch(inch, remainder);
+      this.handleClose();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+        show: true,
+        onHide: this.handleClose
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Header, {
+        closeButton: true,
+        className: "bg-info text-dark"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Title, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title"
+      }, "Height converter"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Body, {
+        className: "modal-body bg-light"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Height in Cm:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "cmNumber",
+        type: "number",
+        name: "cmNumber",
+        className: "form-control",
+        placeholder: "Please enter the height in centi meters..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn btn-info w-100 my-2",
+        onClick: this.convertcmToInches
+      }, "Convert"))));
+    }
+  }]);
+
+  return HeightModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (HeightModal);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/HeightSelector.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/HeightSelector.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _HeightModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeightModal */ "./resources/js/components/simpleComponents/HeightModal.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
 var HeightSelector =
 /*#__PURE__*/
 function (_Component) {
@@ -82410,9 +82517,15 @@ function (_Component) {
     _classCallCheck(this, HeightSelector);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HeightSelector).call(this, props));
-    _this.state = {};
+    _this.state = {
+      hideModal: true
+    };
     _this.handleFtChange = _this.handleFtChange.bind(_assertThisInitialized(_this));
     _this.handleInchChange = _this.handleInchChange.bind(_assertThisInitialized(_this));
+    _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
+    _this.hideModal = _this.hideModal.bind(_assertThisInitialized(_this));
+    _this.setFt = _this.setFt.bind(_assertThisInitialized(_this));
+    _this.setInch = _this.setInch.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -82427,13 +82540,42 @@ function (_Component) {
       this.props.setInch(parseFloat(event.target.value));
     }
   }, {
+    key: "showModal",
+    value: function showModal() {
+      this.setState({
+        hideModal: false
+      });
+    }
+  }, {
+    key: "hideModal",
+    value: function hideModal() {
+      this.setState({
+        hideModal: true
+      });
+    }
+  }, {
+    key: "setFt",
+    value: function setFt(ft) {
+      var id = ft + 'ft';
+      document.getElementById(id).selected = 'selected';
+      this.props.setFt(ft);
+    }
+  }, {
+    key: "setInch",
+    value: function setInch(inch, remainder) {
+      var id = inch.toString() + remainder.toString() + '4in';
+      var inches = parseInt(inch) + parseFloat((remainder / 4).toFixed(2));
+      document.getElementById(id).selected = 'selected';
+      this.props.setInch(inches);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group my-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group-prepend showPointer",
-        onClick: "convertLength()"
+        onClick: this.showModal
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "input-group-text d-block new_talent_subscription_form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -82617,7 +82759,11 @@ function (_Component) {
       }, "\xA0\xA0\xA0\xA0 11 1/2 inch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "11.75",
         id: "1134in"
-      }, "\xA0\xA0\xA0\xA0 11 3/4 inch")));
+      }, "\xA0\xA0\xA0\xA0 11 3/4 inch")), this.state.hideModal ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeightModal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        hideModal: this.hideModal,
+        setFt: this.setFt,
+        setInch: this.setInch
+      }));
     }
   }]);
 
