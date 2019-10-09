@@ -4,9 +4,11 @@ class Input extends Component {
         constructor(props) {
                 super(props);
                 this.state = {
-                        value: ''
+                        value: this.props.id ? this.props.id : '',
                 }
                 this.handleChange = this.handleChange.bind(this);
+                // console.log("FROM INPUT placeholder: " + this.props.placeholder);
+                // console.log("FROM INPUT id: " + this.props.id);
         }
 
         handleChange(event) {
@@ -25,7 +27,6 @@ class Input extends Component {
                                         className="form-control"
                                         id={this.props.title}
                                         name={this.props.title}
-                                        value={this.state.value}
                                         onChange={this.handleChange}
                                         placeholder={(this.props.placeholder) ? this.props.placeholder : ''}
                                 />

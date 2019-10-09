@@ -17,6 +17,7 @@ class ContactModal extends Component {
 
     close() {
         this.props.hideModal();
+        //this.props.getid('');
         // this.setState({ showModal: false });
     }
 

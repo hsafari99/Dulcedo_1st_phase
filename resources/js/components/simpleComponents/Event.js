@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import { Alert } from "react-bootstrap";
 import Input from './Input';
 import ContactModal from './../ContactModal';
 
@@ -10,7 +11,8 @@ class Event extends Component {
                         search: '',
                         eventResult: [],
                         hideModal: true,
-                        enabled: true,
+                        isclicked: false,
+                        placeHolder: "Please search the event by name to find the ID...",
                 }
                 this.setValue = this.setValue.bind(this);
                 this.handleSearch = this.handleSearch.bind(this);
@@ -43,12 +45,13 @@ class Event extends Component {
         }
 
         handleChange() {
-                this.setState({ enabled: true });
                 this.setState({ search: '' });
+                this.props.resetEvent();
         }
 
         resetModal() {
                 this.setState({ hideModal: true });
+                this.setState({ search: '' });
         }
 
         retrieveid(id) {
@@ -65,25 +68,43 @@ class Event extends Component {
                                         <i className="fas fa-calendar-alt text-danger awsomeFonts"></i>
                                         &nbsp; Event Information
                                 </legend>
-                                <Input
-                                        title='event'
-                                        setValue={this.setValue}
-                                        placeholder="Please search the event by name to find the ID..." />
+
+                                {this.props.id == '' ? (
+                                        <div>
+                                                <Input
+                                                        title='event'
+                                                        setValue={this.setValue}
+                                                        placeholder={this.state.placeHolder}
+                                                        id={this.props.id}
+                                                />
+                                                <div className="input-group my-1">
+                                                        <span
+                                                                className="btn btn-info w-100"
+                                                                onClick={this.handleSearch}>
+                                                                <i className="fas fa-search text-danger awsomeFonts"></i>
+                                                                Find Event
+                                                        </span>
+                                                </div>
+                                        </div>
+                                ) : (
+                                                <span
+                                                        className='text-success p-2 bg-light'>
+                                                        Event&nbsp;
+                                                        <span
+                                                                className='font-weight-bold text-danger'>
+                                                                <u>{this.props.id}</u>
+                                                        </span>
+                                                        &nbsp;added successfully!
+                                                </span>
+                                        )}
                                 <div className="input-group my-1">
-                                        <span
-                                                className="btn btn-info w-100"
-                                                onClick={this.handleSearch}>
-                                                <i className="fas fa-search text-danger awsomeFonts"></i>
-                                                Find Event
-                                        </span>
-                                </div>
-                                <div className="input-group my-1">
-                                        <label htmlFor="loadContact" className="pl-4 showPointer">
+                                        <label htmlFor="chkbox" className="pl-4 showPointer">
                                                 <input
                                                         type="checkbox"
                                                         className="form-check-input"
                                                         id="chkbox"
-                                                        onChange={this.handleChange} />
+                                                        onChange={this.handleChange}
+                                                        checked={this.state.isclicked} />
                                                 <span className="font-weight-bold text-secondary">
                                                         Search Again
                                                 </span>
