@@ -1,12 +1,18 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import HeightModal from './HeightModal';
 
 class HeightSelector extends Component {
         constructor(props) {
                 super(props);
                 this.state = {
+                        hideModal: true,
                 }
                 this.handleFtChange = this.handleFtChange.bind(this);
                 this.handleInchChange = this.handleInchChange.bind(this);
+                this.showModal = this.showModal.bind(this);
+                this.hideModal = this.hideModal.bind(this);
+                this.setFt = this.setFt.bind(this);
+                this.setInch = this.setInch.bind(this);
         }
 
         handleFtChange(event) {
@@ -17,12 +23,33 @@ class HeightSelector extends Component {
                 this.props.setInch(parseFloat(event.target.value));
         }
 
+        showModal() {
+                this.setState({ hideModal: false });
+        }
+
+        hideModal() {
+                this.setState({ hideModal: true });
+        }
+
+        setFt(ft) {
+                let id = ft + 'ft';
+                document.getElementById(id).selected = 'selected';
+                this.props.setFt(ft);
+        }
+
+        setInch(inch, remainder) {
+                let id = inch.toString() + remainder.toString() + '4in';
+                let inches = parseInt(inch) + parseFloat((remainder / 4).toFixed(2));
+                document.getElementById(id).selected = 'selected';
+                this.props.setInch(inches);
+        }
+
         render() {
                 return (
                         <div className="input-group my-1">
                                 <div
                                         className="input-group-prepend showPointer"
-                                        onClick="convertLength()">
+                                        onClick={this.showModal}>
                                         <span
                                                 className="input-group-text d-block new_talent_subscription_form">
                                                 <i className="fas fa-info-circle text-dark"
@@ -101,6 +128,9 @@ class HeightSelector extends Component {
                                         <option value="11.5" id='1124in'>&nbsp;&nbsp;&nbsp;&nbsp; 11 1/2 inch</option>
                                         <option value="11.75" id='1134in'>&nbsp;&nbsp;&nbsp;&nbsp; 11 3/4 inch</option>
                                 </select>
+                                {(this.state.hideModal) ? '' : (
+                                        <HeightModal hideModal={this.hideModal} setFt={this.setFt} setInch={this.setInch} />
+                                )}
                         </div>
                 );
         }

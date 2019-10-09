@@ -80779,6 +80779,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _simpleComponents_Event__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./simpleComponents/Event */ "./resources/js/components/simpleComponents/Event.js");
 /* harmony import */ var _simpleComponents_ScoutPage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./simpleComponents/ScoutPage */ "./resources/js/components/simpleComponents/ScoutPage.js");
 /* harmony import */ var _simpleComponents_Source__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./simpleComponents/Source */ "./resources/js/components/simpleComponents/Source.js");
+/* harmony import */ var _simpleComponents_SocialMedias__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./simpleComponents/SocialMedias */ "./resources/js/components/simpleComponents/SocialMedias.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -80798,6 +80799,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -80847,6 +80849,7 @@ function (_Component) {
       inseam: 0,
       ft: 0,
       inch: 0,
+      networks: [],
       value: [],
       applicant: '',
       applicant_fname: '',
@@ -80892,6 +80895,7 @@ function (_Component) {
     _this.setFt = _this.setFt.bind(_assertThisInitialized(_this));
     _this.setInch = _this.setInch.bind(_assertThisInitialized(_this));
     _this.setNumberValue = _this.setNumberValue.bind(_assertThisInitialized(_this));
+    _this.recordSocialMedias = _this.recordSocialMedias.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -81093,6 +81097,14 @@ function (_Component) {
       this.setState(_defineProperty({}, title, value));
     }
   }, {
+    key: "recordSocialMedias",
+    value: function recordSocialMedias(networks) {
+      console.log(network);
+      this.setState({
+        networks: networks
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ContactChecker__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -81119,7 +81131,7 @@ function (_Component) {
         encType: "multipart/form-data",
         method: "POST"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_7__["default"], {
-        contact: this.state.applicant,
+        ontact: this.state.applicant,
         isWho: "applicant"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_7__["default"], {
         contact: this.state.guardian,
@@ -81144,6 +81156,8 @@ function (_Component) {
         setFt: this.setFt,
         setInch: this.setInch,
         setNumberValue: this.setNumberValue
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_SocialMedias__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        recordSocialMedias: this.recordSocialMedias
       })));
     }
   }]);
@@ -82368,10 +82382,10 @@ function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/simpleComponents/HeightSelector.js":
-/*!********************************************************************!*\
-  !*** ./resources/js/components/simpleComponents/HeightSelector.js ***!
-  \********************************************************************/
+/***/ "./resources/js/components/simpleComponents/HeightModal.js":
+/*!*****************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/HeightModal.js ***!
+  \*****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82379,6 +82393,7 @@ function (_Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -82399,6 +82414,112 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+var HeightModal =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(HeightModal, _Component);
+
+  function HeightModal(props) {
+    var _this;
+
+    _classCallCheck(this, HeightModal);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(HeightModal).call(this, props));
+    _this.state = {};
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    _this.convertcmToInches = _this.convertcmToInches.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(HeightModal, [{
+    key: "handleClose",
+    value: function handleClose() {
+      this.props.hideModal();
+    }
+  }, {
+    key: "convertcmToInches",
+    value: function convertcmToInches() {
+      var cm = parseFloat(document.getElementById("cmNumber").value);
+      var ft = Math.floor(cm / 30.48);
+      var inch = Math.floor((cm - ft * 30.48) / 2.54);
+      var remainder = Math.floor((cm - (ft * 30.48 + inch * 2.54)) / 2.54 * 4);
+      this.props.setFt(ft);
+      this.props.setInch(inch, remainder);
+      this.handleClose();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
+        show: true,
+        onHide: this.handleClose
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Header, {
+        closeButton: true,
+        className: "bg-info text-dark"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Title, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title"
+      }, "Height converter"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Body, {
+        className: "modal-body bg-light"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Height in Cm:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "cmNumber",
+        type: "number",
+        name: "cmNumber",
+        className: "form-control",
+        placeholder: "Please enter the height in centi meters..."
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "btn btn-info w-100 my-2",
+        onClick: this.convertcmToInches
+      }, "Convert"))));
+    }
+  }]);
+
+  return HeightModal;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (HeightModal);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/HeightSelector.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/HeightSelector.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _HeightModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeightModal */ "./resources/js/components/simpleComponents/HeightModal.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
 var HeightSelector =
 /*#__PURE__*/
 function (_Component) {
@@ -82410,9 +82531,15 @@ function (_Component) {
     _classCallCheck(this, HeightSelector);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HeightSelector).call(this, props));
-    _this.state = {};
+    _this.state = {
+      hideModal: true
+    };
     _this.handleFtChange = _this.handleFtChange.bind(_assertThisInitialized(_this));
     _this.handleInchChange = _this.handleInchChange.bind(_assertThisInitialized(_this));
+    _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
+    _this.hideModal = _this.hideModal.bind(_assertThisInitialized(_this));
+    _this.setFt = _this.setFt.bind(_assertThisInitialized(_this));
+    _this.setInch = _this.setInch.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -82427,13 +82554,42 @@ function (_Component) {
       this.props.setInch(parseFloat(event.target.value));
     }
   }, {
+    key: "showModal",
+    value: function showModal() {
+      this.setState({
+        hideModal: false
+      });
+    }
+  }, {
+    key: "hideModal",
+    value: function hideModal() {
+      this.setState({
+        hideModal: true
+      });
+    }
+  }, {
+    key: "setFt",
+    value: function setFt(ft) {
+      var id = ft + 'ft';
+      document.getElementById(id).selected = 'selected';
+      this.props.setFt(ft);
+    }
+  }, {
+    key: "setInch",
+    value: function setInch(inch, remainder) {
+      var id = inch.toString() + remainder.toString() + '4in';
+      var inches = parseInt(inch) + parseFloat((remainder / 4).toFixed(2));
+      document.getElementById(id).selected = 'selected';
+      this.props.setInch(inches);
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group my-1"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group-prepend showPointer",
-        onClick: "convertLength()"
+        onClick: this.showModal
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "input-group-text d-block new_talent_subscription_form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
@@ -82617,7 +82773,11 @@ function (_Component) {
       }, "\xA0\xA0\xA0\xA0 11 1/2 inch"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "11.75",
         id: "1134in"
-      }, "\xA0\xA0\xA0\xA0 11 3/4 inch")));
+      }, "\xA0\xA0\xA0\xA0 11 3/4 inch")), this.state.hideModal ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_HeightModal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        hideModal: this.hideModal,
+        setFt: this.setFt,
+        setInch: this.setInch
+      }));
     }
   }]);
 
@@ -82785,6 +82945,121 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ModalResult);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/Network.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/Network.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var Network =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Network, _Component);
+
+  function Network(props) {
+    var _this;
+
+    _classCallCheck(this, Network);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Network).call(this, props));
+    _this.state = {
+      network: '',
+      username: ''
+    };
+    _this.removeMe = _this.removeMe.bind(_assertThisInitialized(_this));
+    _this.setNetwork = _this.setNetwork.bind(_assertThisInitialized(_this));
+    _this.setUsername = _this.setUsername.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Network, [{
+    key: "removeMe",
+    value: function removeMe() {
+      this.props.removeMe(this.props.id);
+    }
+  }, {
+    key: "setNetwork",
+    value: function setNetwork(event) {
+      this.setState({
+        network: event.target.value
+      });
+      this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
+    }
+  }, {
+    key: "setUsername",
+    value: function setUsername(event) {
+      this.setState({
+        username: event.target.value
+      });
+      this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var media = 'media' + this.props.id;
+      var username = 'username' + this.props.id;
+      var network = 'network' + this.props.id;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        id: network
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "p-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "w-100 pt-2",
+        id: media,
+        onChange: this.setNetwork
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "p-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        className: "w-100 pt-2",
+        id: username,
+        onChange: this.setUsername
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+        className: "p-0"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        name: this.props.id,
+        className: "btn btn-danger w-100",
+        onClick: this.removeMe
+      }, "Remove")));
+    }
+  }]);
+
+  return Network;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Network);
 
 /***/ }),
 
@@ -83238,6 +83513,181 @@ function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ScoutPage);
+
+/***/ }),
+
+/***/ "./resources/js/components/simpleComponents/SocialMedias.js":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/simpleComponents/SocialMedias.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Network__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Network */ "./resources/js/components/simpleComponents/Network.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var networkCounter = 0;
+
+var SocialMedias =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(SocialMedias, _Component);
+
+  function SocialMedias(props) {
+    var _this;
+
+    _classCallCheck(this, SocialMedias);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SocialMedias).call(this, props));
+    _this.state = {
+      networks: [],
+      rows: []
+    };
+    _this.addNetwork = _this.addNetwork.bind(_assertThisInitialized(_this));
+    _this.removeMe = _this.removeMe.bind(_assertThisInitialized(_this));
+    _this.recordSocialMedias = _this.recordSocialMedias.bind(_assertThisInitialized(_this));
+    _this.setSocialMedia = _this.setSocialMedia.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(SocialMedias, [{
+    key: "addNetwork",
+    value: function addNetwork() {
+      var newRows = this.state.rows;
+      newRows.push(networkCounter++);
+      this.setState({
+        rows: newRows
+      });
+    }
+  }, {
+    key: "removeMe",
+    value: function removeMe(id) {
+      var network = 'network' + id;
+      document.getElementById(network).style.display = "none";
+      var rows = this.state.rows;
+      var networks = this.state.networks;
+      networks.map(function (network, index) {
+        if (network.id == id) {
+          delete networks[index];
+        }
+      });
+      delete rows[id];
+      this.setState({
+        rows: rows
+      });
+      this.setState({
+        networks: networks
+      });
+    }
+  }, {
+    key: "recordSocialMedias",
+    value: function recordSocialMedias() {
+      console.log("under recording...");
+      var networks = [];
+      this.state.networks.map(function (network, index) {
+        console.log("In row loop");
+
+        if (network.id && network.network && network.username) {
+          console.log("In If");
+          networks.push({
+            network: network.network,
+            username: network.username
+          });
+          console.log("MEDIA: " + network.network);
+          console.log("USERNAME: " + network.username);
+        }
+      });
+      this.props.recordSocialMedias(networks);
+    }
+  }, {
+    key: "setSocialMedia",
+    value: function setSocialMedia(id, network, username) {
+      var oldNetworks = this.state.networks;
+      oldNetworks.push({
+        id: id,
+        network: network,
+        username: username
+      });
+      this.setState({
+        networks: oldNetworks
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
+        className: "border border-dark rounded p-3 my-3 shadow",
+        id: "socialMedia"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("legend", {
+        className: "w-50 pl-2"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-thumbs-up text-success awsomeFonts"
+      }), "Social Medias"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group-prepend"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "input-group-text d-block new_talent_subscription_form"
+      }, "Networks:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        id: "addNetwork",
+        className: "form-control btn btn-warning showPointer",
+        onClick: this.addNetwork
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "far fa-plus-square text-danger awsomeFonts"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "input-group my-1 text-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        className: "table table-striped table-bordered table-hover",
+        id: "network"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+        className: "table-info"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "username"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Action"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", {
+        id: "networkList"
+      }, this.state.rows.map(function (row, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Network__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          id: index,
+          key: index,
+          removeMe: _this2.removeMe,
+          setSocialMedia: _this2.setSocialMedia
+        });
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "w-100 btn btn-success",
+        onClick: this.recordSocialMedias
+      }, "Save the Social Medias"));
+    }
+  }]);
+
+  return SocialMedias;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (SocialMedias);
 
 /***/ }),
 
