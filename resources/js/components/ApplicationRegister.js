@@ -11,6 +11,7 @@ import Contact from './simpleComponents/Contact';
 import Event from './simpleComponents/Event';
 import Scout from './simpleComponents/ScoutPage';
 import Source from './simpleComponents/Source';
+import SocialMedias from './simpleComponents/SocialMedias';
 
 
 
@@ -42,6 +43,7 @@ export default class ApplicationRegister extends Component {
             inseam: 0,
             ft: 0,
             inch: 0,
+            networks: [],
             value: [],
             applicant: '',
             applicant_fname: '',
@@ -88,6 +90,7 @@ export default class ApplicationRegister extends Component {
         this.setFt = this.setFt.bind(this);
         this.setInch = this.setInch.bind(this);
         this.setNumberValue = this.setNumberValue.bind(this);
+        this.recordSocialMedias = this.recordSocialMedias.bind(this);
     }
 
     resetModal() {
@@ -223,6 +226,11 @@ export default class ApplicationRegister extends Component {
         this.setState({ [title]: value });
     }
 
+    recordSocialMedias(networks) {
+        console.log(network);
+        this.setState({ networks: networks });
+    }
+
     render() {
         return (<div>
             <ContactChecker key="applicant"
@@ -238,12 +246,28 @@ export default class ApplicationRegister extends Component {
             {this.state.hideContactSearch ? ("") : (<SearchContact setInputs={this.getInfo} />)}
             {this.state.hideModal ? ("") : (<ContactModal result={this.state.value} getid={this.retrieveid} hideModal={this.resetModal} showWhat='contact' />)}
 
-            <form action="/registerApplication" encType="multipart/form-data" method="POST">
-                <Contact contact={this.state.applicant} isWho='applicant' />
-                <Contact contact={this.state.guardian} isWho='guardian' />
-                <Scout isScouted={this.state.applicantIsScouted} getOffice={this.setScoutOffice} getScout={this.setScoutId} />
-                <Source setSourceNote={this.setSourceNote} setSource={this.setSource} />
-                <Event setEventId={this.setEvent} hideAlert={this.hideAlert} id={this.state.event_id} resetEvent={this.resetEvent} />
+            <form
+                action="/registerApplication"
+                encType="multipart/form-data"
+                method="POST">
+                <Contact
+                    ontact={this.state.applicant}
+                    isWho='applicant' />
+                <Contact
+                    contact={this.state.guardian}
+                    isWho='guardian' />
+                <Scout
+                    isScouted={this.state.applicantIsScouted}
+                    getOffice={this.setScoutOffice}
+                    getScout={this.setScoutId} />
+                <Source
+                    setSourceNote={this.setSourceNote}
+                    setSource={this.setSource} />
+                <Event
+                    setEventId={this.setEvent}
+                    hideAlert={this.hideAlert}
+                    id={this.state.event_id}
+                    resetEvent={this.resetEvent} />
                 <BodyInfo
                     setOffice={this.setOffice}
                     setGender={this.setGender}
@@ -251,8 +275,8 @@ export default class ApplicationRegister extends Component {
                     setHairColor={this.setHairColor}
                     setFt={this.setFt}
                     setInch={this.setInch}
-                    setNumberValue={this.setNumberValue}
-                />
+                    setNumberValue={this.setNumberValue} />
+                <SocialMedias recordSocialMedias={this.recordSocialMedias} />
             </form>
         </div>
         );
