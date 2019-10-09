@@ -13,14 +13,13 @@ class NumberInput extends Component {
                 this.setValue = this.setValue.bind(this);
                 this.hideModal = this.hideModal.bind(this);
                 this.showModal = this.showModal.bind(this);
+                this.setInch = this.setInch.bind(this);
         }
 
         handleChange(event) {
                 if (event.target.value) {
                         this.setState({ value: parseFloat(event.target.value) });
                         this.props.setNumberValue(this.props.title, parseFloat(event.target.value));
-                } else {
-
                 }
         }
 
@@ -33,9 +32,14 @@ class NumberInput extends Component {
         }
 
         showModal() {
-                if (event.target.name != 'dress' && event.target.name != 'shoe') {
-                        this.props.showModal(this.props.title);
+                if (this.props.title != 'dress' && this.props.title != 'shoe') {
+                        this.setState({ hideModal: false });
                 }
+        }
+
+        setInch(inch) {
+                this.setState({ value: inch });
+                this.props.setNumberValue(this.props.title, inch);
         }
 
         render() {
@@ -67,7 +71,10 @@ class NumberInput extends Component {
                                         onChange={this.handleChange}
                                         value={this.state.value}
                                 />
-                                <CmToInchesModal hideModal={this.state.hideModal} hideModal={this.hideModal} />
+                                {(this.state.hideModal) ? '' : (
+                                        <CmToInchesModal hideModal={this.hideModal} setInch={this.setInch} />
+                                )}
+
                         </div>
                 );
         }

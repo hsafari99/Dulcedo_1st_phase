@@ -5,19 +5,28 @@ class CmToInchesModal extends Component {
         constructor(props) {
                 super(props);
                 this.state = {
-                        showModal: this.props.hideModal,
                 }
-
+                this.handleClose = this.handleClose.bind(this);
+                this.convertcmToInches = this.convertcmToInches.bind(this);
         }
 
         handleClose() {
                 this.props.hideModal();
         }
 
+        convertcmToInches() {
+                console.log("Input Value: " + document.getElementById("cmNumber").value);
+                let cm = parseFloat(document.getElementById("cmNumber").value);
+                let inch = (cm / 2.54).toFixed(2);
+
+                this.props.setInch(inch);
+                this.handleClose();
+        }
+
         render() {
                 return (
-                        <Modal show={!this.state.showModal} onHide={this.handleClose}>
-                                <Modal.Header closeButton>
+                        <Modal show={true} onHide={this.handleClose}>
+                                <Modal.Header closeButton className="bg-info text-dark">
                                         <Modal.Title>
                                                 <h5
                                                         className="modal-title">
@@ -37,15 +46,16 @@ class CmToInchesModal extends Component {
                                                                                 </span>
                                                 </div>
                                                 <input
+                                                        id="cmNumber"
                                                         type="number"
                                                         name="cmNumber"
                                                         className="form-control"
-                                                        placeholder="Please enter the length in centi meters..."
-                                                        onchange="convertcmToInches()" />
+                                                        placeholder="Please enter the length in centi meters..." />
                                                 <span
-                                                        className="btn btn-info w-100 my-2">
+                                                        className="btn btn-info w-100 my-2"
+                                                        onClick={this.convertcmToInches}>
                                                         Convert
-                                                                        </span>
+                                                </span>
                                         </div>
                                 </Modal.Body>
                         </Modal>

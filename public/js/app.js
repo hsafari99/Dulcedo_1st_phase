@@ -82802,8 +82802,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cmToInchesModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cmToInchesModal */ "./resources/js/components/simpleComponents/cmToInchesModal.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -82843,6 +82841,7 @@ function (_Component) {
     _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
     _this.hideModal = _this.hideModal.bind(_assertThisInitialized(_this));
     _this.showModal = _this.showModal.bind(_assertThisInitialized(_this));
+    _this.setInch = _this.setInch.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -82854,7 +82853,7 @@ function (_Component) {
           value: parseFloat(event.target.value)
         });
         this.props.setNumberValue(this.props.title, parseFloat(event.target.value));
-      } else {}
+      }
     }
   }, {
     key: "setValue",
@@ -82873,9 +82872,19 @@ function (_Component) {
   }, {
     key: "showModal",
     value: function showModal() {
-      if (event.target.name != 'dress' && event.target.name != 'shoe') {
-        this.props.showModal(this.props.title);
+      if (this.props.title != 'dress' && this.props.title != 'shoe') {
+        this.setState({
+          hideModal: false
+        });
       }
+    }
+  }, {
+    key: "setInch",
+    value: function setInch(inch) {
+      this.setState({
+        value: inch
+      });
+      this.props.setNumberValue(this.props.title, inch);
     }
   }, {
     key: "render",
@@ -82902,9 +82911,10 @@ function (_Component) {
         placeholder: this.props.placeholder,
         onChange: this.handleChange,
         value: this.state.value
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cmToInchesModal__WEBPACK_IMPORTED_MODULE_1__["default"], _defineProperty({
-        hideModal: this.state.hideModal
-      }, "hideModal", this.hideModal)));
+      }), this.state.hideModal ? '' : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_cmToInchesModal__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        hideModal: this.hideModal,
+        setInch: this.setInch
+      }));
     }
   }]);
 
@@ -83365,9 +83375,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -83387,9 +83397,9 @@ function (_Component) {
     _classCallCheck(this, CmToInchesModal);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CmToInchesModal).call(this, props));
-    _this.state = {
-      showModal: _this.props.hideModal
-    };
+    _this.state = {};
+    _this.handleClose = _this.handleClose.bind(_assertThisInitialized(_this));
+    _this.convertcmToInches = _this.convertcmToInches.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -83399,13 +83409,23 @@ function (_Component) {
       this.props.hideModal();
     }
   }, {
+    key: "convertcmToInches",
+    value: function convertcmToInches() {
+      console.log("Input Value: " + document.getElementById("cmNumber").value);
+      var cm = parseFloat(document.getElementById("cmNumber").value);
+      var inch = (cm / 2.54).toFixed(2);
+      this.props.setInch(inch);
+      this.handleClose();
+    }
+  }, {
     key: "render",
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"], {
-        show: !this.state.showModal,
+        show: true,
         onHide: this.handleClose
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Header, {
-        closeButton: true
+        closeButton: true,
+        className: "bg-info text-dark"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Title, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "modal-title"
       }, "Cm To Inches converter"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Modal"].Body, {
@@ -83417,13 +83437,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "input-group-text d-block new_talent_subscription_form"
       }, "Length in Cm:")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        id: "cmNumber",
         type: "number",
         name: "cmNumber",
         className: "form-control",
-        placeholder: "Please enter the length in centi meters...",
-        onchange: "convertcmToInches()"
+        placeholder: "Please enter the length in centi meters..."
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "btn btn-info w-100 my-2"
+        className: "btn btn-info w-100 my-2",
+        onClick: this.convertcmToInches
       }, "Convert"))));
     }
   }]);
