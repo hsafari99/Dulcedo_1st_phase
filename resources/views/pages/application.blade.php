@@ -503,7 +503,7 @@
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE APPLICANT ANSWERS TO CERTAIN QUESTIONS --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow">
     <legend class="w-50 pl-2"><i class="fas fa-question-circle text-dark" style="font-size: 25px;"></i>  Questions & Answers</legend>
     <div class="d-flex flex-row justify-content-between w-100">
       <div class=" my-auto">
@@ -534,7 +534,7 @@
       <span class="form-control btn btn-info" style="cursor:pointer;" onclick="addQuestion()"><i class="fas fa-hand-point-down text-dark" style="font-size:25px;"></i>Show Next Question</span>
     </div>
     <div class="input-group my-1" id="questionsBoard"></div>
-  </fieldset>
+  </fieldset> --}}
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE APPLICANT CITIZENSHIPS --}}

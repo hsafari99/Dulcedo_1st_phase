@@ -12,7 +12,7 @@ import Event from './simpleComponents/Event';
 import Scout from './simpleComponents/ScoutPage';
 import Source from './simpleComponents/Source';
 import SocialMedias from './simpleComponents/SocialMedias';
-
+import Answers from './simpleComponents/Answers';
 
 
 export default class ApplicationRegister extends Component {
@@ -91,6 +91,20 @@ export default class ApplicationRegister extends Component {
         this.setInch = this.setInch.bind(this);
         this.setNumberValue = this.setNumberValue.bind(this);
         this.recordSocialMedias = this.recordSocialMedias.bind(this);
+    }
+
+    componentDidMount() {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/getQuestions",
+            method: 'POST',
+            success: function (result) {
+                var test = JSON.parse(result);
+                this.setState({ questions: test });
+            }.bind(this)
+        });
     }
 
     resetModal() {
@@ -275,7 +289,10 @@ export default class ApplicationRegister extends Component {
                     setFt={this.setFt}
                     setInch={this.setInch}
                     setNumberValue={this.setNumberValue} />
-                <SocialMedias recordSocialMedias={this.recordSocialMedias} />
+                <SocialMedias
+                    recordSocialMedias={this.recordSocialMedias} />
+                <Answers
+                    questions={this.state.questions} />
             </form>
         </div>
         );
