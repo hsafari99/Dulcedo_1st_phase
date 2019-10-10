@@ -20,10 +20,19 @@ class SocialMedias extends Component {
 
         addNetwork() {
                 let newRows = this.state.rows;
+                let newNetworks = this.state.networks;
 
-                newRows.push(networkCounter++);
+                newRows.push(networkCounter);
+                newNetworks.push({
+                        id: networkCounter,
+                        network: '',
+                        username: '',
+
+                });
 
                 this.setState({ rows: newRows });
+                this.setState({ networks: newNetworks });
+                networkCounter++;
         }
 
         removeMe(id) {
@@ -32,11 +41,8 @@ class SocialMedias extends Component {
 
                 let rows = this.state.rows;
                 let networks = this.state.networks;
-                networks.map((network, index) => {
-                        if (network.id == id) {
-                                delete networks[index];
-                        }
-                });
+
+                delete networks[id];
                 delete rows[id];
                 this.setState({ rows: rows });
                 this.setState({ networks: networks });
@@ -47,7 +53,7 @@ class SocialMedias extends Component {
                 let networks = [];
                 this.state.networks.map((network, index) => {
                         console.log("In row loop");
-                        if (network.id && network.network && network.username) {
+                        if (network && network.network && network.username) {
                                 console.log("In If");
                                 networks.push({
                                         network: network.network,
@@ -62,13 +68,22 @@ class SocialMedias extends Component {
         }
 
         setSocialMedia(id, network, username) {
+                console.log("id: " + id, "networks: " + network, "username: " + username);
                 let oldNetworks = this.state.networks;
 
-                oldNetworks.push({
-                        id: id,
-                        network: network,
-                        username: username
-                });
+                if (oldNetworks.length < id) {
+                        oldNetworks.push({
+                                id: id,
+                                network: network,
+                                username: username
+                        });
+                } else {
+                        oldNetworks[id] = {
+                                id: id,
+                                network: network,
+                                username: username
+                        }
+                }
 
                 this.setState({ networks: oldNetworks });
         }

@@ -83579,10 +83579,20 @@ function (_Component) {
     key: "addNetwork",
     value: function addNetwork() {
       var newRows = this.state.rows;
-      newRows.push(networkCounter++);
+      var newNetworks = this.state.networks;
+      newRows.push(networkCounter);
+      newNetworks.push({
+        id: networkCounter,
+        network: '',
+        username: ''
+      });
       this.setState({
         rows: newRows
       });
+      this.setState({
+        networks: newNetworks
+      });
+      networkCounter++;
     }
   }, {
     key: "removeMe",
@@ -83591,11 +83601,7 @@ function (_Component) {
       document.getElementById(network).style.display = "none";
       var rows = this.state.rows;
       var networks = this.state.networks;
-      networks.map(function (network, index) {
-        if (network.id == id) {
-          delete networks[index];
-        }
-      });
+      delete networks[id];
       delete rows[id];
       this.setState({
         rows: rows
@@ -83612,7 +83618,7 @@ function (_Component) {
       this.state.networks.map(function (network, index) {
         console.log("In row loop");
 
-        if (network.id && network.network && network.username) {
+        if (network && network.network && network.username) {
           console.log("In If");
           networks.push({
             network: network.network,
@@ -83627,12 +83633,23 @@ function (_Component) {
   }, {
     key: "setSocialMedia",
     value: function setSocialMedia(id, network, username) {
+      console.log("id: " + id, "networks: " + network, "username: " + username);
       var oldNetworks = this.state.networks;
-      oldNetworks.push({
-        id: id,
-        network: network,
-        username: username
-      });
+
+      if (oldNetworks.length < id) {
+        oldNetworks.push({
+          id: id,
+          network: network,
+          username: username
+        });
+      } else {
+        oldNetworks[id] = {
+          id: id,
+          network: network,
+          username: username
+        };
+      }
+
       this.setState({
         networks: oldNetworks
       });
