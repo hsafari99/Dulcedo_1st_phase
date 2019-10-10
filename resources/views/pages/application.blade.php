@@ -482,7 +482,7 @@
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE SOCIAL MEDIAS APPLICANT IS ACTIVE ON --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow">
     <legend class="w-50 pl-2"><i class="fas fa-thumbs-up text-success" style="font-size: 25px;"></i>  Social Medias</legend>
     <div class="input-group my-1">
       <div class="input-group-prepend">
@@ -499,7 +499,7 @@
         </tr>
       </table>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE APPLICANT ANSWERS TO CERTAIN QUESTIONS --}}
