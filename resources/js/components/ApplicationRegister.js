@@ -227,7 +227,6 @@ export default class ApplicationRegister extends Component {
     }
 
     recordSocialMedias(networks) {
-        console.log(network);
         this.setState({ networks: networks });
     }
 

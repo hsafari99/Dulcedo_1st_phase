@@ -81099,7 +81099,6 @@ function (_Component) {
   }, {
     key: "recordSocialMedias",
     value: function recordSocialMedias(networks) {
-      console.log(network);
       this.setState({
         networks: networks
       });
@@ -83000,6 +82999,7 @@ function (_Component) {
     _this.removeMe = _this.removeMe.bind(_assertThisInitialized(_this));
     _this.setNetwork = _this.setNetwork.bind(_assertThisInitialized(_this));
     _this.setUsername = _this.setUsername.bind(_assertThisInitialized(_this));
+    _this.finalizeMe = _this.finalizeMe.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -83013,16 +83013,25 @@ function (_Component) {
     value: function setNetwork(event) {
       this.setState({
         network: event.target.value
-      });
-      this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
+      }); // this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
     }
   }, {
     key: "setUsername",
     value: function setUsername(event) {
       this.setState({
         username: event.target.value
-      });
-      this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
+      }); //this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
+    }
+  }, {
+    key: "finalizeMe",
+    value: function finalizeMe() {
+      if (this.state.network && this.state.username) {
+        this.props.setSocialMedia(this.props.id, this.state.network, this.state.username);
+        var media = 'media' + this.props.id;
+        var username = 'username' + this.props.id;
+        var network1 = document.getElementById(media).disabled = true;
+        var username1 = document.getElementById(username).disabled = true;
+      }
     }
   }, {
     key: "render",
@@ -83031,28 +83040,39 @@ function (_Component) {
       var username = 'username' + this.props.id;
       var network = 'network' + this.props.id;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-        id: network
+        id: network,
+        className: "vertical-align-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "p-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "w-100 pt-2",
         id: media,
-        onChange: this.setNetwork
+        onChange: this.setNetwork,
+        value: this.state.network
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
         className: "p-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         className: "w-100 pt-2",
         id: username,
-        onChange: this.setUsername
+        onChange: this.setUsername,
+        value: this.state.username
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
-        className: "p-0"
+        className: "p-0 row m-0"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         name: this.props.id,
-        className: "btn btn-danger w-100",
+        className: "p-0 m-0 btn col showPointer awsomeButton",
         onClick: this.removeMe
-      }, "Remove")));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-times text-danger font-weight-bold"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        name: this.props.id,
+        className: "p-0 m-0 btn col showPointer awsomeButton",
+        onClick: this.finalizeMe
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-check text-success font-weight-bold"
+      }))));
     }
   }]);
 
@@ -83613,19 +83633,13 @@ function (_Component) {
   }, {
     key: "recordSocialMedias",
     value: function recordSocialMedias() {
-      console.log("under recording...");
       var networks = [];
       this.state.networks.map(function (network, index) {
-        console.log("In row loop");
-
         if (network && network.network && network.username) {
-          console.log("In If");
           networks.push({
             network: network.network,
             username: network.username
           });
-          console.log("MEDIA: " + network.network);
-          console.log("USERNAME: " + network.username);
         }
       });
       this.props.recordSocialMedias(networks);
@@ -83633,7 +83647,6 @@ function (_Component) {
   }, {
     key: "setSocialMedia",
     value: function setSocialMedia(id, network, username) {
-      console.log("id: " + id, "networks: " + network, "username: " + username);
       var oldNetworks = this.state.networks;
 
       if (oldNetworks.length < id) {

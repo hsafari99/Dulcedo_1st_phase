@@ -49,26 +49,19 @@ class SocialMedias extends Component {
         }
 
         recordSocialMedias() {
-                console.log("under recording...");
                 let networks = [];
                 this.state.networks.map((network, index) => {
-                        console.log("In row loop");
                         if (network && network.network && network.username) {
-                                console.log("In If");
                                 networks.push({
                                         network: network.network,
                                         username: network.username,
                                 });
-                                console.log("MEDIA: " + network.network);
-                                console.log("USERNAME: " + network.username);
                         }
                 });
-
                 this.props.recordSocialMedias(networks);
         }
 
         setSocialMedia(id, network, username) {
-                console.log("id: " + id, "networks: " + network, "username: " + username);
                 let oldNetworks = this.state.networks;
 
                 if (oldNetworks.length < id) {

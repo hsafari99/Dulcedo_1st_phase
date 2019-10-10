@@ -86,6 +86,13 @@ h1, h2, h3, h4, h5 {
 .awsomeFonts{
     font-size: 25px;
 }
+.awsomeButton{
+    font-size: 20px;
+}
+.awsomeButton:hover{
+    background-color: #CCC;
+}
+
 </style>
 <body>
     <div id="app">
