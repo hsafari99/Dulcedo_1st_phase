@@ -6,8 +6,6 @@
 @endsection
 
 @section('content')
-<div id="AppRegister"></div>
-{{-- showing the errors in the alert --}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -17,6 +15,10 @@
         </ul>
     </div>
 @endif
+
+<div id="AppRegister"></div>
+{{-- showing the errors in the alert --}}
+
 {{-- <label for="loadContact" class="pl-4 showPointer">
   <input type="checkbox" class="form-check-input" id="loadContact" onchange="loadContactSearch()">
     <span class="font-weight-bold text-danger">
@@ -58,8 +60,9 @@
 </div> --}}
 
 {{-- FORM REGISTRING THE APPLICATION (MAIN FORM) --}}
-<form action="/registerApplication" enctype="multipart/form-data" method="POST">
-  @csrf
+{{-- <form action="/registerApplication" enctype="multipart/form-data" method="POST">
+@csrf
+</form> --}}
   {{-- ============================================================================ --}}
   {{-- FIELD FOR APPLICANT PERSONAL INFORMATION (could be populated by previous form) --}}
   {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow" id="Applicant">
@@ -538,7 +541,7 @@
 
   {{-- ============================================================================ --}}
   {{-- FIELD FOR SETTING THE APPLICANT CITIZENSHIPS --}}
-  <fieldset class="border border-dark rounded p-3 my-3 shadow">
+  {{-- <fieldset class="border border-dark rounded p-3 my-3 shadow">
     <legend class="w-50 pl-2"><i class="fas fa-globe-americas text-success" style="font-size: 25px;"></i>&nbsp &nbsp  Citizenships</legend>
     <label> Please select max. 3 countries you have citizenship or work permit</label>
     <div class="input-group my-1">
@@ -555,18 +558,18 @@
         <option disabled selected>Country 3</option>
       </select>
     </div>
-  </fieldset>
+  </fieldset> --}}
 
   {{-- ============================================================================ --}}
   {{-- SECTION FOR PUTTING ANY COMMENT --}}
-  <div class="input-group my-1">
+  {{-- <div class="input-group my-1">
       <div class="input-group-prepend align-middle">
         <span class="input-group-text d-block new_talent_subscription_form">Remarks:</span>
       </div>
       <textarea type="text" name="notes"class="form-control"></textarea>
-  </div>
+  </div> --}}
 
-  <div class="input-group my-1">
+  {{-- <div class="input-group my-1">
     <input type="submit" value="APPLICATION SUBMIT" class="btn btn-success w-100">
   </div>
 </form>
@@ -584,12 +587,12 @@ var language = 'english';
 
 
 $('document').ready(function(){
-  getCountries();
+  {{-- getCountries();
   getSources();
   closeModal();
   getQuestions();
   $('#chkbox').on('change', activate());
-  $('.eventClicked').on('click', addEvent(this));
+  $('.eventClicked').on('click', addEvent(this)); --}}
 });
 
 function showresult(){

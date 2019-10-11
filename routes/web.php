@@ -34,3 +34,5 @@
     Route::post('/getEvents', 'applicationController@getEvents');
     Route::post('/getQuestions', 'applicationController@getQuestions');
 
+    Route::post('/test', 'applicationController@test');
+

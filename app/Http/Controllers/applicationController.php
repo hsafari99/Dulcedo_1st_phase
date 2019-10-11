@@ -407,7 +407,9 @@ class applicationController extends Controller
         }
 
         $can_work_in = 'yes';
-        $note = $request->input('notes');          
+        $note = $request->input('notes'); 
+        
+        dd($errors->all());
     }
 
     //This function will return the contact information based on the receive contact_id from AJAX request.
@@ -455,5 +457,9 @@ class applicationController extends Controller
     public function updateContact(string $contact_id, Array $updatedInfo){
         Contact::where("_id", $contact_id)
                 ->update($updatedInfo);
+    }
+
+    public function test(){
+        dd($errors->all());
     }
 }

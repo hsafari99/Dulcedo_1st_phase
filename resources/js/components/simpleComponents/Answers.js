@@ -9,6 +9,8 @@ class Answers extends Component {
                 this.state = {
                         language: 'english',
                         index: 0,
+                        setFocus: false,
+                        responses: [],
                 }
         }
 
@@ -23,6 +25,34 @@ class Answers extends Component {
 
         setQuestionNo(index) {
                 this.setState({ index: index });
+        }
+
+        goToEnd() {
+                this.setState({ setFocus: true });
+        }
+
+        passResponses(question_id, response) {
+                let newResponses = this.state.responses;
+                newResponses.map((response, index) => {
+                        if (response.question_id == question_id) {
+                                newResponses.splice(index, 1);
+                        }
+                });
+                newResponses.push(
+                        {
+                                question_id: question_id,
+                                answer: response,
+                        }
+                );
+
+                this.setState({ responses: newResponses });
+        }
+
+        passAllResponses() {
+                console.log("clicked successfully");
+                if (this.state.responses.length == this.props.questions.length && this.props.questions) {
+                        this.props.passResponses(this.state.responses);
+                }
         }
 
         render() {
@@ -72,7 +102,7 @@ class Answers extends Component {
                                         <div>
                                                 <span
                                                         className="btn btn-dark showPointer"
-                                                        onClick={this.goToEnd}>
+                                                        onClick={this.goToEnd.bind(this)}>
                                                         <i
                                                                 className="fas fa-fast-forward text-light awsomeFonts">
                                                         </i>&nbsp; End</span>
@@ -94,9 +124,13 @@ class Answers extends Component {
                                                                 question.en :
                                                                 question.fr}
                                                         setQuestionNo={this.setQuestionNo.bind(this)}
+                                                        requestFocus={this.state.setFocus}
+                                                        passResponse={this.passResponses.bind(this)}
+                                                        receivedSuccessfully={this.props.receivedSuccessfully}
                                                 />) :
                                                 ('')
                                         }
+                                        <span className="btn btn-dark w-100" onClick={this.passAllResponses.bind(this)}>Save All The responses</span>
                                 </div>
                         </fieldset>
                 );
