@@ -90,9 +90,9 @@ class Countries extends Component {
                                                         value=''>
                                                         {(this.state.language == 'english') ? 'Country 1' : 'Pays 1'}
                                                 </option>
-                                                {(this.props.countries) ?
+                                                {(this.props.countriesList) ?
                                                         (
-                                                                this.props.countries.map((country, index) =>
+                                                                this.props.countriesList.map((country, index) =>
                                                                         <option
                                                                                 key={index}
                                                                                 value={country._id}>
@@ -114,7 +114,7 @@ class Countries extends Component {
                                                         disabled value=''>
                                                         {(this.state.language == 'english') ? 'Country 2' : 'Pays 2'}
                                                 </option>
-                                                {(this.props.countries) ? (this.props.countries.map((country, index) =>
+                                                {(this.props.countriesList) ? (this.props.countriesList.map((country, index) =>
                                                         <option
                                                                 key={index}
                                                                 value={country._id} >
@@ -138,7 +138,7 @@ class Countries extends Component {
                                                         value=''>
                                                         {(this.state.language == 'english') ? 'Country 3' : 'Pays 3'}
                                                 </option>
-                                                {(this.props.countries) ? (this.props.countries.map((country, index) =>
+                                                {(this.props.countriesList) ? (this.props.countriesList.map((country, index) =>
                                                         <option
                                                                 key={index}
                                                                 value={country._id}>
@@ -156,7 +156,7 @@ class Countries extends Component {
                                         onClick={this.submitCitizenships.bind(this)}>
                                         Submit your Citizenships
                                         </span>
-                        </fieldset >
+                        </fieldset>
                 );
         }
 }

@@ -40,7 +40,7 @@ class Source extends Component {
                                                 defaultValue=''
                                                 onChange={this.getSource}>
                                                 <option value='' disabled>Please select the source...</option>
-                                                {this.state.list.map(source => <option value={source._id}>{source.en}</option>)}
+                                                {this.props.sourceList.map((source, index) => <option key={index} value={source._id}>{source.en}</option>)}
                                         </select>
                                 </div>
                                 <div className="input-group my-1">

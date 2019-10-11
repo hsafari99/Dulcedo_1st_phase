@@ -80889,7 +80889,8 @@ function (_Component) {
       reponsesReceived: false,
       countries: [],
       submittedCountries: [],
-      notes: ''
+      notes: '',
+      sourceList: []
     }; // this.changeStatus = this.changeStatus.bind(this);
     // this.disableOther = this.disableOther.bind(this);
     // this.handleChange = this.handleChange.bind(this);
@@ -80940,6 +80941,19 @@ function (_Component) {
           var tests = JSON.parse(result);
           this.setState({
             countries: tests
+          });
+        }.bind(this)
+      });
+      jquery__WEBPACK_IMPORTED_MODULE_2___default.a.ajax({
+        headers: {
+          'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_2___default()('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/getSources",
+        method: 'POST',
+        success: function (result) {
+          var sourceList = JSON.parse(result);
+          this.setState({
+            sourceList: sourceList
           });
         }.bind(this)
       }); // $.ajax({
@@ -81014,7 +81028,7 @@ function (_Component) {
             applicantChecked: !state.applicantChecked
           };
         });
-        this.disableOther(component).bind(this);
+        this.disableOther(component);
       }
 
       if (component == "guardian") {
@@ -81187,17 +81201,23 @@ function (_Component) {
   }, {
     key: "submitApplication",
     value: function submitApplication(e) {
-      return true; // e.preventDefault();
-      // $.ajax({
-      //     headers: {
-      //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      //     },
-      //     url: "/getCountries",
-      //     method: 'POST',
-      //     success: function (result) {
-      //         console.log("Token: " + $('meta[name="csrf-token"]').attr('content'));
-      //     }
-      // });
+      e.preventDefault();
+      jquery__WEBPACK_IMPORTED_MODULE_2___default.a.ajax({
+        headers: {
+          'X-CSRF-TOKEN': jquery__WEBPACK_IMPORTED_MODULE_2___default()('meta[name="csrf-token"]').attr('content')
+        },
+        url: "/registerApplication",
+        method: 'POST',
+        success: function success(data) {
+          console.log("From Success: " + data.errors);
+        },
+        error: function error(data) {
+          if (data.status === 422) {
+            var results = JSON.parse(data.responseText);
+            console.log("Errors: " + JSON.stringify(results.errors));
+          }
+        }
+      });
     }
   }, {
     key: "render",
@@ -81241,6 +81261,7 @@ function (_Component) {
         getOffice: this.setScoutOffice.bind(this),
         getScout: this.setScoutId.bind(this)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Source__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        sourceList: this.state.sourceList,
         setSourceNote: this.setSourceNote.bind(this),
         setSource: this.setSource.bind(this)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Event__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -82263,7 +82284,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         disabled: true,
         value: ""
-      }, this.state.language == 'english' ? 'Country 1' : 'Pays 1'), this.props.countries ? this.props.countries.map(function (country, index) {
+      }, this.state.language == 'english' ? 'Country 1' : 'Pays 1'), this.props.countriesList ? this.props.countriesList.map(function (country, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
           value: country._id
@@ -82277,7 +82298,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         disabled: true,
         value: ""
-      }, this.state.language == 'english' ? 'Country 2' : 'Pays 2'), this.props.countries ? this.props.countries.map(function (country, index) {
+      }, this.state.language == 'english' ? 'Country 2' : 'Pays 2'), this.props.countriesList ? this.props.countriesList.map(function (country, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
           value: country._id
@@ -82291,7 +82312,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         disabled: true,
         value: ""
-      }, this.state.language == 'english' ? 'Country 3' : 'Pays 3'), this.props.countries ? this.props.countries.map(function (country, index) {
+      }, this.state.language == 'english' ? 'Country 3' : 'Pays 3'), this.props.countriesList ? this.props.countriesList.map(function (country, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
           value: country._id
@@ -84455,8 +84476,9 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "",
         disabled: true
-      }, "Please select the source..."), this.state.list.map(function (source) {
+      }, "Please select the source..."), this.props.sourceList.map(function (source, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
           value: source._id
         }, source.en);
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
