@@ -72,7 +72,25 @@ class applicationController extends Controller
     //folder with the contact name
     public function registerApplication(applicationValidator $request)
     {   
+        //I have found this way too but i did not test it.
+        //======================================================
+        //$validator = \Validator::make($request->all(), [
+        //'footballername' => 'required',
+        //'club' => 'required',
+        //'country' => 'required',
+        //]);
+        
+        //if ($validator->fails())
+        // {
+        //     return response()->json(['errors'=>$validator->errors()->all()]);
+        // }
+        // return response()->json(['success'=>'Record is successfully added']);
+
         $validated = $request->validated();
+        if ($validated->fails()) {
+            echo (json_encode($validated->getMessageBag()->toArray()));
+        }else{
+
         $scout_id = $request->input('scouted');
         $step_id = (isset($scout_id) && !empty($scout_id))? 'SCT' : 'APP';
         $source_id = $request->input('source');
@@ -408,8 +426,7 @@ class applicationController extends Controller
 
         $can_work_in = 'yes';
         $note = $request->input('notes'); 
-        
-        dd($errors->all());
+    }
     }
 
     //This function will return the contact information based on the receive contact_id from AJAX request.

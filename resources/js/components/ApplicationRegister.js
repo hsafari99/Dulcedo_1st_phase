@@ -80,6 +80,7 @@ export default class ApplicationRegister extends Component {
             countries: [],
             submittedCountries: [],
             notes: '',
+            sourceList: [],
         };
 
         // this.changeStatus = this.changeStatus.bind(this);
@@ -126,6 +127,18 @@ export default class ApplicationRegister extends Component {
             success: function (result) {
                 var tests = JSON.parse(result);
                 this.setState({ countries: tests });
+            }.bind(this)
+        });
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/getSources",
+            method: 'POST',
+            success: function (result) {
+                var sourceList = JSON.parse(result);
+                this.setState({ sourceList: sourceList });
             }.bind(this)
         });
 
@@ -190,7 +203,7 @@ export default class ApplicationRegister extends Component {
             this.setState((state, props) => ({
                 applicantChecked: !state.applicantChecked
             }));
-            this.disableOther(component).bind(this);
+            this.disableOther(component);
         }
         if (component == "guardian") {
             this.setState((state, props) => ({
@@ -301,18 +314,23 @@ export default class ApplicationRegister extends Component {
     }
 
     submitApplication(e) {
-        return true;
-        // e.preventDefault();
-        // $.ajax({
-        //     headers: {
-        //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //     },
-        //     url: "/getCountries",
-        //     method: 'POST',
-        //     success: function (result) {
-        //         console.log("Token: " + $('meta[name="csrf-token"]').attr('content'));
-        //     }
-        // });
+        e.preventDefault();
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/registerApplication",
+            method: 'POST',
+            success: function (data) {
+                console.log("From Success: " + data.errors);
+            },
+            error: function (data) {
+                if (data.status === 422) {
+                    let results = JSON.parse(data.responseText);
+                    console.log("Errors: " + JSON.stringify(results.errors));
+                }
+            }
+        });
     }
 
     render() {
@@ -357,6 +375,7 @@ export default class ApplicationRegister extends Component {
                     getOffice={this.setScoutOffice.bind(this)}
                     getScout={this.setScoutId.bind(this)} />
                 <Source
+                    sourceList={this.state.sourceList}
                     setSourceNote={this.setSourceNote.bind(this)}
                     setSource={this.setSource.bind(this)} />
                 <Event
