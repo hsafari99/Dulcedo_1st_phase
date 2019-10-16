@@ -81252,10 +81252,12 @@ function (_Component) {
         value: jquery__WEBPACK_IMPORTED_MODULE_2___default()('meta[name="csrf-token"]').attr('content')
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_7__["default"], {
         ontact: this.state.applicant,
-        isWho: "applicant"
+        isWho: "applicant",
+        countriesList: this.state.countries
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_Contact__WEBPACK_IMPORTED_MODULE_7__["default"], {
         contact: this.state.guardian,
-        isWho: "guardian"
+        isWho: "guardian",
+        countriesList: this.state.countries
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_simpleComponents_ScoutPage__WEBPACK_IMPORTED_MODULE_9__["default"], {
         isScouted: this.state.applicantIsScouted,
         getOffice: this.setScoutOffice.bind(this),
@@ -82038,6 +82040,8 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("fieldset", {
         className: "border border-dark rounded p-3 my-3 shadow",
         id: this.props.isWho
@@ -82124,7 +82128,12 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
         value: "",
         disabled: true
-      }, "Please select a country from the list"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Please select a country from the list"), this.props.countriesList ? this.props.countriesList.map(function (country, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: country._id
+        }, _this2.state.language == 'english' ? country.en : country.fr);
+      }) : '')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group pt-2"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group-prepend"

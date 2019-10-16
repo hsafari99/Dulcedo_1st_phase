@@ -87,7 +87,22 @@ class Contact extends Component {
                                                 className="form-control countries"
                                                 defaultValue=''
                                                 onChange={this.handleChange}>
-                                                <option value='' disabled>Please select a country from the list</option>
+                                                <option
+                                                        value=''
+                                                        disabled>
+                                                        Please select a country from the list
+                                                        </option>
+                                                {(this.props.countriesList) ? (this.props.countriesList.map((country, index) =>
+                                                        <option
+                                                                key={index}
+                                                                value={country._id}>
+                                                                {(this.state.language == 'english') ? country.en : country.fr}
+                                                        </option>)
+                                                ) :
+                                                        (
+                                                                ''
+                                                        )
+                                                }
                                         </select>
                                 </div>
                                 <div className="input-group pt-2">

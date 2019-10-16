@@ -366,10 +366,12 @@ export default class ApplicationRegister extends Component {
                 <input type="hidden" name="_token" value={$('meta[name="csrf-token"]').attr('content')} />
                 <Contact
                     ontact={this.state.applicant}
-                    isWho='applicant' />
+                    isWho='applicant'
+                    countriesList={this.state.countries} />
                 <Contact
                     contact={this.state.guardian}
-                    isWho='guardian' />
+                    isWho='guardian'
+                    countriesList={this.state.countries} />
                 <Scout
                     isScouted={this.state.applicantIsScouted}
                     getOffice={this.setScoutOffice.bind(this)}

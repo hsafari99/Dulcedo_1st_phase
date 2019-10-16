@@ -34,5 +34,8 @@
     Route::post('/getEvents', 'applicationController@getEvents');
     Route::post('/getQuestions', 'applicationController@getQuestions');
 
+    Route::get('/form', 'talentSubmitForm@show');
+    Route::post('/form_submit', 'talentSubmitForm@formSubmitionProcessing');
+
     //Route::post('/test', 'applicationController@test');
 
